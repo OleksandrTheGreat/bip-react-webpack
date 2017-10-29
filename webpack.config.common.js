@@ -82,7 +82,7 @@ var
 
     getResolve = function() {
         return {
-            extensions: [".ts", ".js", ".css", ".scss", ".html"],
+            extensions: [".ts", ".tsx", ".js", ".css", ".scss", ".html"],
             modules: [
                 path.resolve(__dirname, 'node_modules')
             ],
