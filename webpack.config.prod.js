@@ -1,6 +1,7 @@
 const common = require('./webpack.config.common.js');
 const CopyPlugin = require('xwebpack/CopyPlugin.js');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const DeletePlugin = require('xwebpack/DeletePlugin.js');
+//const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var
@@ -29,14 +30,20 @@ var
             to: common.folders.css + '/bootstrap.min.css'
         }),
         new CopyPlugin({
+            from: common.folders.js + '/app.css',
+            to: common.folders.css + '/app.css',
+            move: true
+        }),
+        new DeletePlugin(common.folders.js + '/app.css.map'),
+        new CopyPlugin({
             from: common.folders.build + '/index.html',
             to: common.folders.bin + '/index.html'
         }),
-        // new HtmlWebpackPlugin(),
-        // new ExtractTextPlugin({
-        //   filename: 'index.css',
-        //   allChunks: true
-        // })
+        //new HtmlWebpackPlugin(),
+        new ExtractTextPlugin({
+          filename: 'app.css',
+          allChunks: true
+        })
     ],
 
     rules = [
@@ -51,27 +58,27 @@ var
         //   test: /\.html$/,
         //   use: 'html-loader'
         // },
-        // {
-        //   test: /\.s?css$/,
-        //   use: ExtractTextPlugin.extract({
-        //     fallback: 'to-string-loader',
-        //     use: [
-        //       {
-        //         loader: 'css-loader',
-        //         options: {
-        //           sourceMap: true,
-        //           importLoaders: true
-        //         }
-        //       },
-        //       {
-        //         loader: 'sass-loader',
-        //         options: {
-        //           sourceMap: true
-        //         }
-        //       }
-        //     ]
-        //   })
-        // },
+        {
+          test: /\.s?css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'to-string-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  sourceMap: true,
+                  importLoaders: true
+                }
+              },
+              {
+                loader: 'sass-loader',
+                options: {
+                  sourceMap: true
+                }
+              }
+            ]
+          })
+        },
         // {
         //   test: /\.(gif|png|jpe?g|svg)$/i,
         //   use: [
@@ -90,7 +97,10 @@ var
     ];
 
 module.exports = {
-    entry: common.getEntry(),
+    entry: common.getEntry([
+        common.folders.build + '/index.tsx',
+        common.folders.build + '/index.scss'
+    ]),
     output: common.getOutput(),
     module: common.getModule({ tsconfig: tsconfig, rules: rules }),
     resolve: common.getResolve(),

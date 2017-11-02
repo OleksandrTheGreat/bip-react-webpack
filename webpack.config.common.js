@@ -51,7 +51,7 @@ var
     getOutput = function() {
         return {
             filename: package.main || 'index.js',
-            path: folders.bin,
+            path: folders.js,
             library: package.name || 'unknown',
             libraryTarget: "umd"
         };
@@ -103,10 +103,10 @@ var
     getPlugins = function(settings) {
 
         var plugins = [
-            new DTSBundlePlugin({
-                targetDirPath: folders.build,
-                dtsBundlePath: folders.bin + '/index.d.ts'
-            })
+            // new DTSBundlePlugin({
+            //     targetDirPath: folders.build,
+            //     dtsBundlePath: folders.js + '/app.d.ts'
+            // })
         ];
 
         if (!(settings && settings.copyPackageJson === false)) {

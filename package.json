@@ -2,7 +2,7 @@
   "name": "bip-react-webpack",
   "version": "1.0.0",
   "description": "Balance in Pocket React+Webpack implementation",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "webpack --config webpack.config.prod.js --progress",
     "build:watch": "webpack --config webpack.config.prod.watch.js --progress",
