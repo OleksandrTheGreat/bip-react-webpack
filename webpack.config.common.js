@@ -69,16 +69,7 @@ var
                 enforce: "pre",
                 test: /\.jsx?$/,
                 loader: "source-map-loader"
-            },
-            // {
-            //   test: /\.s?css$/,
-            //   use: [
-            //     "to-string-loader",
-            //     "style-loader",
-            //     "css-loader",
-            //     "sass-loader"
-            //   ]
-            // }
+            }
         ];
 
         if (settings && settings.rules)
