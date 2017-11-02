@@ -15,7 +15,17 @@ var
         src: path.resolve(__dirname, 'src'),
         dist: path.resolve(__dirname, outputDirName),
         build: path.resolve(__dirname, outputDirName + '/build'),
-        bin: path.resolve(__dirname, outputDirName + '/bin')
+        bin: path.resolve(__dirname, outputDirName + '/bin'),
+        js: path.resolve(__dirname, outputDirName + '/bin/js'),
+        css: path.resolve(__dirname, outputDirName + '/bin/css'),
+    },
+
+    createBinDir = function(name) {
+
+        let dirPath = folders.bin + "\\" + name;
+
+        console.log("create \"" + dirPath);
+        mkdir.sync(dirPath);
     },
 
     prepack = function() {
@@ -26,8 +36,8 @@ var
         console.log("copying \"" + folders.src + "\" to \"" + folders.build + "\"");
         copy.sync(folders.src, folders.build);
 
-        console.log("create \"" + folders.bin + "\\lib");
-        mkdir.sync(folders.bin + "/lib");
+        createBinDir('js');
+        createBinDir('css');
     },
 
     getEntry = function(entry) {

@@ -10,15 +10,23 @@ var
     plugins = [
         new CopyPlugin({
             from: common.folders.root + '/node_modules/react/umd/react.production.min.js',
-            to: common.folders.bin + '/lib/react.production.min.js'
+            to: common.folders.js + '/react.production.min.js'
         }),
         new CopyPlugin({
             from: common.folders.root + '/node_modules/react-dom/umd/react-dom.production.min.js',
-            to: common.folders.bin + '/lib/react-dom.production.min.js'
+            to: common.folders.js + '/react-dom.production.min.js'
         }),
         new CopyPlugin({
             from: common.folders.root + '/node_modules/react-router-dom/umd/react-router-dom.production.min.js',
-            to: common.folders.bin + '/lib/react-router-dom.production.min.js'
+            to: common.folders.js + '/react-router-dom.production.min.js'
+        }),
+        new CopyPlugin({
+            from: common.folders.root + '/node_modules/bootstrap/dist/js/bootstrap.min.js',
+            to: common.folders.js + '/bootstrap.min.js'
+        }),
+        new CopyPlugin({
+            from: common.folders.root + '/node_modules/bootstrap/dist/css/bootstrap.min.css',
+            to: common.folders.css + '/bootstrap.min.css'
         }),
         new CopyPlugin({
             from: common.folders.build + '/index.html',
