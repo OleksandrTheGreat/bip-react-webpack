@@ -5,19 +5,23 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var
 
-    tsconfig = "tsconfig.prod.json",
+    tsconfig = 'tsconfig.prod.json',
 
     plugins = [
         new CopyPlugin({
-            from: common.folders.root + "/node_modules/react/umd/react.production.min.js",
+            from: common.folders.root + '/node_modules/react/umd/react.production.min.js',
             to: common.folders.bin + '/lib/react.production.min.js'
         }),
         new CopyPlugin({
-            from: common.folders.root + "/node_modules/react-dom/umd/react-dom.production.min.js",
+            from: common.folders.root + '/node_modules/react-dom/umd/react-dom.production.min.js',
             to: common.folders.bin + '/lib/react-dom.production.min.js'
         }),
         new CopyPlugin({
-            from: common.folders.build + "/index.html",
+            from: common.folders.root + '/node_modules/react-router-dom/umd/react-router-dom.production.min.js',
+            to: common.folders.bin + '/lib/react-router-dom.production.min.js'
+        }),
+        new CopyPlugin({
+            from: common.folders.build + '/index.html',
             to: common.folders.bin + '/index.html'
         }),
         // new HtmlWebpackPlugin(),
@@ -37,22 +41,22 @@ var
         // },
         // {
         //   test: /\.html$/,
-        //   use: "html-loader"
+        //   use: 'html-loader'
         // },
         // {
         //   test: /\.s?css$/,
         //   use: ExtractTextPlugin.extract({
-        //     fallback: "to-string-loader",
+        //     fallback: 'to-string-loader',
         //     use: [
         //       {
-        //         loader: "css-loader",
+        //         loader: 'css-loader',
         //         options: {
         //           sourceMap: true,
         //           importLoaders: true
         //         }
         //       },
         //       {
-        //         loader: "sass-loader",
+        //         loader: 'sass-loader',
         //         options: {
         //           sourceMap: true
         //         }
@@ -64,7 +68,7 @@ var
         //   test: /\.(gif|png|jpe?g|svg)$/i,
         //   use: [
         //     'url-loader?name=/assets/images/[hash].[ext]',
-        //     'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
+        //     'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: '65-90', speed: 4}, mozjpeg: {quality: 65}}'
         //   ]
         // },
         // {
@@ -87,10 +91,10 @@ module.exports = {
         copyPackageJson: false
     }),
     externals: {
-        "react": "React",
-        "react-dom": "ReactDOM"
+        'react': 'React',
+        'react-dom': 'ReactDOM'
     },
-    devtool: "source-map",
+    devtool: 'source-map',
     bail: true,
     cache: false
 };
