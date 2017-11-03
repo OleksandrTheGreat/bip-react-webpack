@@ -43,7 +43,6 @@ var
     getEntry = function(entry) {
         return {
             app: folders.build + '/index.tsx',
-            vendors: folders.build + '/vendors.js',
             styles: folders.build + '/index.scss'
         }
     },

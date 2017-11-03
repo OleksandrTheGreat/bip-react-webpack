@@ -94,7 +94,10 @@ module.exports = {
     module: common.getModule({ tsconfig: tsconfig, rules: rules }),
     resolve: common.getResolve(),
     plugins: plugins,
-    externals: [],
+    externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM'
+    },
     devtool: 'source-map',
     bail: true,
     cache: false
