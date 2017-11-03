@@ -28,10 +28,13 @@ export class View extends React.Component<{},
   }
 
   render() {
+    
     const Page = this.state.page;
 
     return (
       <div className="app-view">
+        <button onClick={this.changePage}>CHANGE!</button>
+
         <Page/>
       </div>
     );

@@ -1,7 +1,6 @@
 const common = require('./webpack.config.common.js');
 const CopyPlugin = require('xwebpack/CopyPlugin.js');
 const DeletePlugin = require('xwebpack/DeletePlugin.js');
-//const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var
@@ -9,22 +8,6 @@ var
     tsconfig = 'tsconfig.prod.json',
 
     plugins = [
-        new CopyPlugin({
-            from: common.folders.root + '/node_modules/react/umd/react.production.min.js',
-            to: common.folders.js + '/react.production.min.js'
-        }),
-        new CopyPlugin({
-            from: common.folders.root + '/node_modules/react-dom/umd/react-dom.production.min.js',
-            to: common.folders.js + '/react-dom.production.min.js'
-        }),
-        new CopyPlugin({
-            from: common.folders.root + '/node_modules/react-router-dom/umd/react-router-dom.production.min.js',
-            to: common.folders.js + '/react-router-dom.production.min.js'
-        }),
-        new CopyPlugin({
-            from: common.folders.root + '/node_modules/bootstrap/dist/js/bootstrap.min.js',
-            to: common.folders.js + '/bootstrap.min.js'
-        }),
         new CopyPlugin({
             from: common.folders.root + '/node_modules/bootstrap/dist/css/bootstrap.min.css',
             to: common.folders.css + '/bootstrap.min.css'
@@ -34,12 +17,21 @@ var
             to: common.folders.css + '/app.css',
             move: true
         }),
+        new CopyPlugin({
+            from: common.folders.root + '/node_modules/jquery/dist/jquery.min.js',
+            to: common.folders.js + '/jquery.min.js'
+        }),
+        new CopyPlugin({
+            from: common.folders.root + '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+            to: common.folders.js + '/bootstrap.bundle.min.js'
+        }),
         new DeletePlugin(common.folders.js + '/app.css.map'),
+        new DeletePlugin(common.folders.js + '/styles.js'),
+        new DeletePlugin(common.folders.js + '/styles.js.map'),
         new CopyPlugin({
             from: common.folders.build + '/index.html',
             to: common.folders.bin + '/index.html'
         }),
-        //new HtmlWebpackPlugin(),
         new ExtractTextPlugin({
           filename: 'app.css',
           allChunks: true
@@ -97,10 +89,7 @@ var
     ];
 
 module.exports = {
-    entry: common.getEntry([
-        common.folders.build + '/index.tsx',
-        common.folders.build + '/index.scss'
-    ]),
+    entry: common.getEntry(),
     output: common.getOutput(),
     module: common.getModule({ tsconfig: tsconfig, rules: rules }),
     resolve: common.getResolve(),
@@ -108,10 +97,7 @@ module.exports = {
         plugins: plugins,
         copyPackageJson: false
     }),
-    externals: {
-        'react': 'React',
-        'react-dom': 'ReactDOM'
-    },
+    externals: [],
     devtool: 'source-map',
     bail: true,
     cache: false

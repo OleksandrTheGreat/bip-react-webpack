@@ -41,16 +41,16 @@ var
     },
 
     getEntry = function(entry) {
-
-        if (entry)
-            return entry;
-
-        return folders.build + '/index.tsx';
+        return {
+            app: folders.build + '/index.tsx',
+            vendors: folders.build + '/vendors.js',
+            styles: folders.build + '/index.scss'
+        }
     },
 
     getOutput = function() {
         return {
-            filename: package.main || 'index.js',
+            filename: '[name].js',
             path: folders.js,
             library: package.name || 'unknown',
             libraryTarget: "umd"
@@ -93,12 +93,7 @@ var
 
     getPlugins = function(settings) {
 
-        var plugins = [
-            // new DTSBundlePlugin({
-            //     targetDirPath: folders.build,
-            //     dtsBundlePath: folders.js + '/app.d.ts'
-            // })
-        ];
+        var plugins = [];
 
         if (!(settings && settings.copyPackageJson === false)) {
             plugins.push(
