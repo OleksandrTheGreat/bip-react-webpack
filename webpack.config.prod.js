@@ -93,10 +93,7 @@ module.exports = {
     output: common.getOutput(),
     module: common.getModule({ tsconfig: tsconfig, rules: rules }),
     resolve: common.getResolve(),
-    plugins: common.getPlugins({
-        plugins: plugins,
-        copyPackageJson: false
-    }),
+    plugins: plugins,
     externals: [],
     devtool: 'source-map',
     bail: true,

@@ -89,25 +89,6 @@ var
             ],
             descriptionFiles: ["package.json"]
         };
-    },
-
-    getPlugins = function(settings) {
-
-        var plugins = [];
-
-        if (!(settings && settings.copyPackageJson === false)) {
-            plugins.push(
-                new CopyPlugin({
-                    from: "./package.json",
-                    to: folders.bin + '/package.json'
-                }));
-        }
-
-        if (settings && settings.plugins)
-            for (var i = 0; i < settings.plugins.length; i++)
-                plugins.push(settings.plugins[i]);
-
-        return plugins;
     };
 
 prepack();
@@ -118,6 +99,5 @@ module.exports = {
     getEntry: getEntry,
     getOutput: getOutput,
     getModule: getModule,
-    getResolve: getResolve,
-    getPlugins: getPlugins
+    getResolve: getResolve
 };
