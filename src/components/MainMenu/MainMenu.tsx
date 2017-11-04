@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {i18n, bus} from '../../shared/services';
-import {ChangePage, ChangeLanguage} from '../../shared/commands';
+import {ChangePage, ChangeI18n} from '../../shared/commands';
 
 import {MenuItem} from '../MenuItem/MenuItem';
 import {AboutPage, HomePage, SettingsPage} from '../Pages';
@@ -24,11 +24,11 @@ export class MainMenu extends React.Component {
         />
         <MenuItem 
           title="EN" 
-          onClick={()=>{bus.Send(new ChangeLanguage("EN"))}}
+          onClick={()=>{bus.Send(new ChangeI18n(i18n.EN))}}
         />
         <MenuItem 
           title="UA" 
-          onClick={()=>{bus.Send(new ChangeLanguage("UA"))}}
+          onClick={()=>{bus.Send(new ChangeI18n(i18n.UA))}}
         />
       </div>
     );

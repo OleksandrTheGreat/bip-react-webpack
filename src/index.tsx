@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import { bus, i18n } from './shared/services';
-import { StartApplication, ChangeLanguage } from './shared/commands';
+import { StartApplication, ChangeI18n } from './shared/commands';
 import { App } from './components/App/App';
 
 const render = () => {
@@ -12,10 +12,9 @@ const render = () => {
   );
 };
 
-bus.Handle(StartApplication, render);
-bus.Handle(ChangeLanguage, (message: ChangeLanguage)=>{
-  i18n.current = i18n[message.name];
+bus.Handle(ChangeI18n, (message: ChangeI18n)=>{
+  i18n.current = message.lang;
   render();
 });
 
-bus.SendAsync(new StartApplication());
+render();
