@@ -48,9 +48,9 @@
   "dependencies": {
     "@types/react": "^16.0.18",
     "@types/react-dom": "^16.0.2",
+    "abus": "../abus/dist/bin",
     "astate": "../astate/dist/bin",
     "bootstrap": "^4.0.0-beta.2",
-    "dependor": "../dependor/dist/bin",
     "jquery": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",

@@ -1,6 +1,10 @@
 import * as React from 'react';
+
+import {i18n, bus} from '../../shared/services';
+import {ChangePage, ChangeLanguage} from '../../shared/commands';
+
 import {MenuItem} from '../MenuItem/MenuItem';
-import {i18n} from '../../i18n/i18n';
+import {AboutPage, HomePage, SettingsPage} from '../Pages';
 
 export class MainMenu extends React.Component {
   render() {
@@ -8,15 +12,23 @@ export class MainMenu extends React.Component {
       <div className="main-menu">
         <MenuItem 
           title={i18n.current.menu.home} 
-          onClick={()=>{alert(1)}}
+          onClick={()=>{bus.Send(new ChangePage(HomePage))}}
         />
         <MenuItem 
           title={i18n.current.menu.settings} 
-          onClick={()=>{alert(2)}}
+          onClick={()=>{bus.Send(new ChangePage(SettingsPage))}}
         />
         <MenuItem 
           title={i18n.current.menu.about} 
-          onClick={()=>{alert(3)}}
+          onClick={()=>{bus.Send(new ChangePage(AboutPage))}}
+        />
+        <MenuItem 
+          title="EN" 
+          onClick={()=>{bus.Send(new ChangeLanguage("EN"))}}
+        />
+        <MenuItem 
+          title="UA" 
+          onClick={()=>{bus.Send(new ChangeLanguage("UA"))}}
         />
       </div>
     );
