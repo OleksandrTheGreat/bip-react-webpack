@@ -1,9 +1,10 @@
 import * as React from 'react';
 
-import {bus} from '../../shared/services';
+import {bus, state} from '../../shared/services';
 import {ChangePage} from '../../shared/commands';
 
 import {HomePage} from './Home/HomePage';
+import { PageChanged } from '../../shared/events';
 
 export class View extends React.Component<
 {
@@ -20,17 +21,23 @@ export class View extends React.Component<
     };
 
     bus.Handle(ChangePage, (message: ChangePage) => {
+
+      state.page.current = message.page;
+      
       this.setState({
         page: message.page
-      });
+      });      
     });
   }
 
   render() {
+
     const Page = this.state.page;
 
+    bus.SendAsync(new PageChanged(this.state.page));
+
     return (
-      <div className="app-view">
+      <div className="app-view container">
         <Page/>
       </div>
     );

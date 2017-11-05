@@ -11,7 +11,14 @@ const i18n = {
 
 i18n.current = i18n.EN;
 
+const state = {
+  page: {
+    current: null
+  }
+};
+
 export {
   bus,
-  i18n
+  i18n,
+  state
 }
