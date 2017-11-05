@@ -37,7 +37,7 @@ export class View extends React.Component<
     bus.SendAsync(new PageChanged(this.state.page));
 
     return (
-      <div className="app-view container">
+      <div className="container">
         <Page/>
       </div>
     );

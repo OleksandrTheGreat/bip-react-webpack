@@ -30,7 +30,7 @@ export class MenuItemList extends React.Component<
 
   render() {
     return (
-      <div className="collapse navbar-collapse" id="navbarSopportedContent">
+      <div className="collapse navbar-collapse" id="navbar">
         <ul className="navbar-nav mr-auto">
           <MenuItem
             title={i18n.current.menu.home}
