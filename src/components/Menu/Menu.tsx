@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import {MenuBrandIcon} from './MenuBrandIcon';
 import {MenuToggleButton} from './MenuToggleButton';
-import {MenuItemList} from './MenuItemList';
+import {Nav} from './Nav';
+import {LanguageBar} from './LanguageBar';
 
 export class Menu extends React.Component {
   render() {
@@ -10,7 +11,10 @@ export class Menu extends React.Component {
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
         <MenuBrandIcon/>
         <MenuToggleButton/>
-        <MenuItemList />        
+        <div className="collapse navbar-collapse" id="navbar">
+          <Nav />
+          <LanguageBar />
+        </div>
       </nav>
     );
   }
