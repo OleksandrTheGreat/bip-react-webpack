@@ -3,6 +3,8 @@ import * as React from 'react';
 import {i18n, bus, state} from '../../shared/services';
 
 import {MenuItem} from './MenuItem';
+import {LanguageBar} from './LanguageBar';
+
 import {ChangePage, ChangeLanguage} from '../../shared/commands';
 import {PageChanged} from '../../shared/events';
 
@@ -44,15 +46,8 @@ export class MenuItemList extends React.Component<
             title={i18n.current.menu.about}
             onClick={() => {bus.Send(new ChangePage(AboutPage))}}
             isActive={this.state.currentPage === AboutPage}/>
-          <MenuItem
-            title="EN"
-            onClick={() => {bus.Send(new ChangeLanguage(i18n.EN))}}
-            isActive={false}/>
-          <MenuItem
-            title="UA"
-            onClick={() => {bus.Send(new ChangeLanguage(i18n.UA))}}
-            isActive={false}/>
         </ul>
+        <LanguageBar />
       </div>
     );
   }
