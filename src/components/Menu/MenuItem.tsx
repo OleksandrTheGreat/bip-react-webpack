@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export class MenuItem extends React.Component < {
-  title : string,
+  title : any,
   onClick : (e : any) => any,
   isActive : boolean
 } > {

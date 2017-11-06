@@ -71,21 +71,21 @@ var
             ]
           })
         },
-        // {
-        //   test: /\.(gif|png|jpe?g|svg)$/i,
-        //   use: [
-        //     'url-loader?name=/assets/images/[hash].[ext]',
-        //     'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: '65-90', speed: 4}, mozjpeg: {quality: 65}}'
-        //   ]
-        // },
-        // {
-        //   test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        //   use: 'url-loader?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]'
-        // },
-        // {
-        //   test: /\.(ttf|eot|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        //   use: 'url-loader?name=/assets/fonts/[name].[ext]'
-        // }
+        {
+          test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'url-loader?name=/assets/images/[hash].[ext]',
+            'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
+          ]
+        },
+        {
+          test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: 'url-loader?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]'
+        },
+        {
+          test: /\.(ttf|eot|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          use: 'url-loader?name=/assets/fonts/[name].[ext]'
+        }
     ];
 
 module.exports = {
