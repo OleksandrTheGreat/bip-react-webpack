@@ -4,6 +4,6 @@ export class ChangePage {
   constructor(public page : any) {}
 }
 
-export class ChangeI18n {
-  constructor(public lang : Ii18n) {}
+export class ChangeLanguage {
+  constructor(public i18n : Ii18n) {}
 }
