@@ -1,2 +1,11 @@
-.app {
+@media (min-width: 576px) {
+  .visible-sm {
+    display: none;
+  }  
+}
+
+@media (max-width: 575px) {
+  .hidden-sm {
+    display: none;
+  }  
 }
