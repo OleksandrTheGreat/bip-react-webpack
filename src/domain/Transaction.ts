@@ -3,13 +3,13 @@ import { Currency } from "./Currency";
 
 export class Transaction {
   constructor(
-    id: string,
-    from: Account,
-    to: Account,
-    currency: Currency,
-    sum: number,
-    rate: number = null,
-    description: string = null,
-    isDeleted: boolean = false
+    public id: string,
+    public from: Account,
+    public to: Account,
+    public currency: Currency,
+    public sum: number,
+    public rate: number = null,
+    public description: string = null,
+    public isDeleted: boolean = false
   ) {}
 }

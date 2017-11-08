@@ -2,10 +2,13 @@ import { Currency } from "./Currency";
 
 export class Account {
   constructor(
-    id: string,
-    name: string,
-    currency: Currency,
-    desctiption: string = null,
-    isDeleted: boolean = false
+    public id: string,
+    public name: string,
+    public currency: Currency,
+    public balance: number,
+    public desctiption: string = null,
+    public showOnHomePage: boolean = false,
+    public useInBalance: boolean = true,
+    public isDeleted: boolean = false
   ) {}
 }

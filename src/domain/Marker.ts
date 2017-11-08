@@ -5,9 +5,9 @@ export enum MarkerCategory {
 
 export class Marker {
   constructor(
-    id: string,
-    category: MarkerCategory,
-    name: string,
-    isDeleted: boolean = false
+    public id: string,
+    public category: MarkerCategory,
+    public name: string,
+    public isDeleted: boolean = false
   ) {}
 }
