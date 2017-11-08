@@ -13,11 +13,6 @@ var
             to: common.folders.css + '/bootstrap.min.css'
         }),
         new CopyPlugin({
-            from: common.folders.js + '/app.css',
-            to: common.folders.css + '/app.css',
-            move: true
-        }),
-        new CopyPlugin({
             from: common.folders.root + '/node_modules/jquery/dist/jquery.min.js',
             to: common.folders.js + '/jquery.min.js'
         }),
@@ -25,15 +20,22 @@ var
             from: common.folders.root + '/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
             to: common.folders.js + '/bootstrap.bundle.min.js'
         }),
-        new DeletePlugin(common.folders.js + '/app.css.map'),
-        new DeletePlugin(common.folders.js + '/styles.js'),
-        new DeletePlugin(common.folders.js + '/styles.js.map'),
+        new CopyPlugin({
+          from: common.folders.bin + '/app.js',
+          to: common.folders.js + '/app.js',
+          move: true
+        }),
+        new CopyPlugin({
+          from: common.folders.bin + '/app.js.map',
+          to: common.folders.js + '/app.js.map',
+          move: true
+        }),
         new CopyPlugin({
             from: common.folders.build + '/index.html',
             to: common.folders.bin + '/index.html'
         }),
         new ExtractTextPlugin({
-          filename: 'app.css',
+          filename: './assets/css/app.css',
           allChunks: true
         })
     ],
@@ -74,17 +76,17 @@ var
         {
           test: /\.(gif|png|jpe?g|svg)$/i,
           use: [
-            'url-loader?name=/assets/images/[hash].[ext]',
+            'file-loader?name=./assets/images/[hash].[ext]',
             'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
           ]
         },
         {
           test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          use: 'url-loader?limit=10000&mimetype=application/font-woff&name=/assets/fonts/[name].[ext]'
+          use: 'file-loader?limit=10000&mimetype=application/font-woff&name=./assets/fonts/[name].[ext]'
         },
         {
           test: /\.(ttf|eot|otf|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-          use: 'url-loader?name=/assets/fonts/[name].[ext]'
+          use: 'file-loader?name=./assets/fonts/[name].[ext]'
         }
     ];
 

@@ -7,6 +7,8 @@ import {ChangeLanguage} from './shared/commands';
 import {App} from './components/App/App';
 import {HomePage} from './components/Pages/index';
 
+const css = require('./index.scss');
+
 state.page.current = HomePage;
 
 const render = () => {

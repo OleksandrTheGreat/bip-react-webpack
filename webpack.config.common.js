@@ -16,14 +16,11 @@ var
         dist: path.resolve(__dirname, outputDirName),
         build: path.resolve(__dirname, outputDirName + '/build'),
         bin: path.resolve(__dirname, outputDirName + '/bin'),
-        js: path.resolve(__dirname, outputDirName + '/bin/js'),
-        css: path.resolve(__dirname, outputDirName + '/bin/css'),
+        js: path.resolve(__dirname, outputDirName + '/bin/lib'),
+        css: path.resolve(__dirname, outputDirName + '/bin/assets/css'),
     },
 
-    createBinDir = function(name) {
-
-        let dirPath = folders.bin + "\\" + name;
-
+    createDir = function(dirPath) {
         console.log("create \"" + dirPath);
         mkdir.sync(dirPath);
     },
@@ -36,21 +33,18 @@ var
         console.log("copying \"" + folders.src + "\" to \"" + folders.build + "\"");
         copy.sync(folders.src, folders.build);
 
-        createBinDir('js');
-        createBinDir('css');
+        createDir(folders.js);
+        createDir(folders.css);
     },
 
     getEntry = function(entry) {
-        return {
-            app: folders.build + '/index.tsx',
-            styles: folders.build + '/index.scss'
-        }
+        return folders.build + '/index.tsx';
     },
 
     getOutput = function() {
         return {
-            filename: '[name].js',
-            path: folders.js,
+            filename: 'app.js',
+            path: folders.bin,
             library: package.name || 'unknown',
             libraryTarget: "umd"
         };
