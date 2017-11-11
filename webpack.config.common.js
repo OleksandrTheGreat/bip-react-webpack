@@ -38,7 +38,7 @@ var
     },
 
     getEntry = function(entry) {
-        return folders.build + '/index.tsx';
+        return folders.build + '/main.ts';
     },
 
     getOutput = function() {
