@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import {bus, i18n, state} from './shared/services';
+import {bus, state} from './shared/services';
 import {ChangeLanguage} from './shared/commands';
 
 import {App} from './components/App/App';
@@ -18,7 +18,7 @@ const render = () => {
 };
 
 bus.Handle(ChangeLanguage, (message : ChangeLanguage) => {
-  i18n.current = message.i18n;
+  state.i18n = message.i18n;
   render();
 });
 

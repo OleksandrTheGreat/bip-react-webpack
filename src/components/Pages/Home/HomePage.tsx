@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {i18n} from '../../../shared/services';
+import {state} from '../../../shared/services';
 
 export class HomePage extends React.Component {
 
   render() {
     return (
-      <div>{i18n.current.menu.home}</div>
+      <div>{state.i18n.menu.home}</div>
     );
   }
 }
