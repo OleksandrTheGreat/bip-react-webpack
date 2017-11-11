@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {state} from '../../shared/services';
+import {state} from '../../shared';
 
 export class MenuBrandIcon extends React.Component {
   render() {

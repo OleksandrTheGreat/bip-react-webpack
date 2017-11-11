@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {bus, i18n} from '../../shared/services';
+import {bus, i18n} from '../../shared';
 
 import {MenuItem} from './MenuItem';
 import {ChangeLanguage} from '../../shared/commands';

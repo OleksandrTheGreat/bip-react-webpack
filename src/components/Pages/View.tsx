@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {bus, state} from '../../shared/services';
+import {bus, state} from '../../shared';
 import {ChangePage} from '../../shared/commands';
 
 import {HomePage} from './Home/HomePage';
