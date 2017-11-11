@@ -77,7 +77,7 @@ var
           test: /\.(gif|png|jpe?g|svg)$/i,
           use: [
             'file-loader?name=./assets/images/[hash].[ext]',
-            'image-webpack-loader?{optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
+            'image-webpack-loader?{ gifsicle: {optimizationLevel: 7, interlaced: false}, pngquant:{quality: "65-90", speed: 4}, mozjpeg: {quality: 65}}'
           ]
         },
         {
