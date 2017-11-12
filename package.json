@@ -41,6 +41,8 @@
     "sourcemap": "^0.1.0",
     "style-loader": "^0.18.2",
     "to-string-loader": "^1.1.5",
+    "tslint": "^5.8.0",
+    "tslint-loader": "^3.5.3",
     "typescript": "^2.5.3",
     "url-loader": "^0.6.2",
     "webpack": "^2.6.1",

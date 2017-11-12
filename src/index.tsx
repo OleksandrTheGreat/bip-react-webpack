@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import {bus, state} from './shared/services';
+import {bus, state} from './shared';
 import {ChangeLanguage} from './shared/commands';
 
 import {App} from './components/App/App';
