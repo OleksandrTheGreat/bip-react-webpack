@@ -41,13 +41,13 @@ var
     ],
 
     rules = [
-        // {
-        //   test: /\.ts$/,
-        //   loader: 'tslint-loader',
-        //   options: {
-        //     configFileName: tsconfig
-        //   }
-        // },
+        {
+          test: /\.tsx?$/,
+          loader: 'tslint-loader',
+          options: {
+            configFileName: tsconfig
+          }
+        },
         // {
         //   test: /\.html$/,
         //   use: 'html-loader'
