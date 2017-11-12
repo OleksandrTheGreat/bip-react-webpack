@@ -5,5 +5,6 @@ export class Currency {
     public precision: number = 2,
     public description: string= null,
     public isDeleted: boolean = false
-  ) {}
+  ) {
+  }
 }

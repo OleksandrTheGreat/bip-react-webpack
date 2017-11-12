@@ -1,6 +1,7 @@
 export enum MarkerCategory {
   account = 0,
-  transaction = 1
+  transaction,
+  currency
 }
 
 export class Marker {
@@ -9,5 +10,6 @@ export class Marker {
     public category: MarkerCategory,
     public name: string,
     public isDeleted: boolean = false
-  ) {}
+  ) {
+  }
 }

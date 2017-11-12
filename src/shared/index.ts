@@ -1,5 +1,6 @@
 import { ABus } from 'abus';
 import { Ii18n, i18nEN, i18nUA } from '../i18n/i18n';
+import {db} from './db';
 
 const bus = new ABus();
 
@@ -18,5 +19,6 @@ const state = {
 export {
   bus,
   i18n,
-  state
+  state,
+  db
 }

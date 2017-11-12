@@ -1,4 +1,4 @@
-import { Ii18n } from "../i18n/i18n";
+import { Ii18n } from '../i18n/i18n';
 
 export class ChangePage {
   constructor(public page : any) {}
