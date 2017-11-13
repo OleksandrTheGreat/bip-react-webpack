@@ -11,3 +11,8 @@ export class i18nEN implements Ii18n {
 export class i18nUA implements Ii18n {
   menu = new i18nMenuUA();
 }
+
+export const i18n = {
+  EN: new i18nEN(),
+  UA: new i18nUA()
+};

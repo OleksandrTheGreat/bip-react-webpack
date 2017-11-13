@@ -29,7 +29,7 @@ let upgradeAccount = (db : IDBDatabase) => {
   store.add(new Account(GUID.New(), 'Income', uahId, 0));
 };
 
-export const db = new IndexedDBAdapter('BiP', 1, (db : IDBDatabase) => {
+export const db = new IndexedDBAdapter('BiP2', 1, (db : IDBDatabase) => {
   upgradeCurrency(db);
   upgradeAccount(db);
 });
