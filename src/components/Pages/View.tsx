@@ -22,6 +22,7 @@ export class View extends React.Component<
 
     bus.Handle(ChangePage, (message: ChangePage) => {
 
+      state.page.previous = state.page.current;
       state.page.current = message.page;
       
       this.setState({

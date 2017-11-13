@@ -11,7 +11,8 @@ const i18n = {
 
 const state = {
   page: {
-    current: null
+    current: null,
+    previous: null
   },
   i18n: i18n.EN
 };
