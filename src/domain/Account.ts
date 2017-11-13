@@ -1,10 +1,10 @@
-import { Currency } from './Currency';
+import {Currency} from './Currency';
 
 export class Account {
   constructor(
-    public id: string,
+    public id: Guid,
     public name: string,
-    public currencyId: string,
+    public currencyId: Guid,
     public balance: number,
     public desctiption: string = null,
     public showOnHomePage: boolean = false,

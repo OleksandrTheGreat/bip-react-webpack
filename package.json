@@ -54,11 +54,11 @@
     "@types/react": "^16.0.18",
     "@types/react-dom": "^16.0.2",
     "abus": "../abus/dist/bin",
-    "astate": "../astate/dist/bin",
     "bootstrap": "^4.0.0-beta.2",
     "jquery": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "xtypescript": "../xtypescript/dist/bin"
   }
 }

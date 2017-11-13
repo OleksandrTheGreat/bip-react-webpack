@@ -6,7 +6,7 @@ export enum MarkerCategory {
 
 export class Marker {
   constructor(
-    public id: string,
+    public id: Guid,
     public category: MarkerCategory,
     public name: string,
     public isDeleted: boolean = false
