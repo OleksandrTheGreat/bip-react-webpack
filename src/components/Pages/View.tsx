@@ -6,12 +6,7 @@ import {ChangePage} from '../../shared/commands';
 import {HomePage} from './Home/HomePage';
 import { PageChanged } from '../../shared/events';
 
-export class View extends React.Component<
-{
-},
-{
-  page: any
-}> {
+export class View extends React.Component<{},{page: any}> {
 
   constructor(props){
     super(props);

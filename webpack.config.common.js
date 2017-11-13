@@ -18,6 +18,7 @@ var
         bin: path.resolve(__dirname, outputDirName + '/bin'),
         js: path.resolve(__dirname, outputDirName + '/bin/lib'),
         css: path.resolve(__dirname, outputDirName + '/bin/assets/css'),
+        fonts: path.resolve(__dirname, outputDirName + '/bin/assets/fonts')
     },
 
     createDir = function(dirPath) {

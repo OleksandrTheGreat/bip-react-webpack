@@ -13,6 +13,14 @@ var
             to: common.folders.css + '/bootstrap.min.css'
         }),
         new CopyPlugin({
+            from: common.folders.root + '/node_modules/font-awesome/fonts',
+            to: common.folders.fonts 
+        }),
+        new CopyPlugin({
+            from: common.folders.root + '/node_modules/font-awesome/css/font-awesome.min.css',
+            to: common.folders.css + '/font-awesome.min.css'
+        }),
+        new CopyPlugin({
             from: common.folders.root + '/node_modules/jquery/dist/jquery.min.js',
             to: common.folders.js + '/jquery.min.js'
         }),

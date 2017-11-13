@@ -30,18 +30,31 @@ export class Nav extends React.Component<
   }
 
   render() {
+
+    let homeTitle = <span>
+      <i className="fa fa-home"></i> {state.i18n.menu.home}
+    </span>
+
+    let settingsTitle = <span>
+      <i className="fa fa-cogs"></i> {state.i18n.menu.settings}
+    </span>
+
+    let aboutTitle = <span>
+      <i className="fa fa-info-circle"></i> {state.i18n.menu.about}
+    </span>
+
     return (
       <ul className="navbar-nav mr-auto">
         <MenuItem
-          title={state.i18n.menu.home}
+          title={homeTitle}
           onClick={() => {bus.Send(new ChangePage(HomePage))}}
           isActive={this.state.currentPage === HomePage}/>
         <MenuItem
-          title={state.i18n.menu.settings}
+          title={settingsTitle}
           onClick={() => {bus.Send(new ChangePage(SettingsPage))}}
           isActive={this.state.currentPage === SettingsPage}/>
         <MenuItem
-          title={state.i18n.menu.about}
+          title={aboutTitle}
           onClick={() => {bus.Send(new ChangePage(AboutPage))}}
           isActive={this.state.currentPage === AboutPage}/>
       </ul>
