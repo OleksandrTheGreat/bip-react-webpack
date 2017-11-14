@@ -1,8 +1,8 @@
-export interface IIndexedDBAdapter {
+export interface IIDBAdapter {
   get() : Promise < IDBDatabase >;
 }
 
-export class IndexedDBAdapter implements IIndexedDBAdapter {
+export class IDBAdapter implements IIDBAdapter {
 
   private _db : IDBDatabase = null;
   private _name : string = null;

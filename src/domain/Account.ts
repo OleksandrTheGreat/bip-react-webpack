@@ -2,9 +2,9 @@ import {Currency} from './Currency';
 
 export class Account {
   constructor(
-    public id: Guid,
+    public id: AAGUID,
     public name: string,
-    public currencyId: Guid,
+    public currencyId: AAGUID,
     public balance: number = 0,
     public desctiption: string = null,
     public showOnHomePage: boolean = false,

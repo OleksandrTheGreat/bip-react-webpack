@@ -3,10 +3,10 @@ import { Currency } from './Currency';
 
 export class Transaction {
   constructor(
-    public id: Guid,
-    public fromAccountId: Guid,
-    public toAccountId: Guid,
-    public currencyId: Guid,
+    public id: AAGUID,
+    public fromAccountId: AAGUID,
+    public toAccountId: AAGUID,
+    public currencyId: AAGUID,
     public sum: number,
     public rate: number = null,
     public description: string = null,

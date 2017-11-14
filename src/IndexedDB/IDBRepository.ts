@@ -1,17 +1,20 @@
-import {IndexedDBAdapter} from './IndexedDBAdapter';
-import {resolve} from 'dns';
+import {IIDBAdapter} from './IDBAdapter';
 
-export class IndexedDBRepository {
+export interface IIDBRepository {
+  query < T > (storeName : string, query : (obj : T) => boolean) : Promise < Array < T > >;
+}
 
-  private _idbAdapter : IndexedDBAdapter;
+export class IDBRepository implements IIDBRepository {
 
-  constructor(private idbAdapter : IndexedDBAdapter) {
+  private _idbAdapter : IIDBAdapter;
+
+  constructor(private idbAdapter : IIDBAdapter) {
     this._idbAdapter = idbAdapter;
   }
 
   query < T > (storeName : string, query : (obj : T) => boolean = null) : Promise < Array < T > > {
 
-    return new Promise < Array < T > > ((resolve, reject) => {
+    return new Promise < Array < T > > ((resolve) => {
 
       this
         ._idbAdapter

@@ -1,18 +1,19 @@
 import * as React from 'react';
 import {state, idbAdapter} from '../../../shared';
 import {Account} from '../../../domain';
-import {IndexedDBRepository} from '../../../indexedDB/IndexedDBRepository';
+import {IHomePageService, HomePageService} from '../../../services/HomePageService';
+import { IDBRepository } from '../../../IndexedDB/IDBRepository';
 
 export class HomePage extends React.Component < {}, {
   accounts: Array < Account >
 } > {
 
-  private _repository: IndexedDBRepository;
+  private _service: IHomePageService;
 
   constructor() {
     super();
 
-    this._repository = new IndexedDBRepository(idbAdapter);
+    this._service = new HomePageService(new IDBRepository(idbAdapter));
 
     this.state = {
       accounts: []
@@ -32,26 +33,26 @@ export class HomePage extends React.Component < {}, {
 
   private refreshAccounts() {
 
-    this._repository.query<Account>('Account', (account: Account): boolean => {
-      return !account.isDeleted && account.showOnHomePage;
-    })
-    .then((accounts: Array<Account>) => {
-      this.setState((state) => {
-        return {
-          ...state,
-          accounts: accounts.sort((a, b)=>{
-            
-            if(a.showOrder > b.showOrder)
-              return 1;
-            
-            if(a.showOrder < b.showOrder)
-              return -1;
-            
-            return 0;
-          })
-        }
+    this
+      ._service
+      .getDashboardAccounts()
+      .then((accounts : Array < Account >) => {
+        this.setState((state) => {
+          return {
+            ...state,
+            accounts: accounts.sort((a, b) => {
+
+              if (a.showOrder > b.showOrder) 
+                return 1;
+              
+              if (a.showOrder < b.showOrder) 
+                return -1;
+              
+              return 0;
+            })
+          }
+        });
       });
-    });
   }
 
   private renderAccountItems(accounts : Array < Account >) {
