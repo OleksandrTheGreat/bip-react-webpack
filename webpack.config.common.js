@@ -1,13 +1,7 @@
 const path = require('path');
 const package = require('./package.json');
-const rmdir = require('xfs/rmdir.js');
-const mkdir = require('xfs/mkdir.js');
-const copy = require('xfs/copy.js');
-const DTSBundlePlugin = require('xwebpack/DTSBundlePlugin.js');
-const CopyPlugin = require('xwebpack/CopyPlugin.js');
 
 var
-
     outputDirName = 'dist',
 
     folders = {
@@ -19,23 +13,6 @@ var
         js: path.resolve(__dirname, outputDirName + '/bin/lib'),
         css: path.resolve(__dirname, outputDirName + '/bin/assets/css'),
         fonts: path.resolve(__dirname, outputDirName + '/bin/assets/fonts')
-    },
-
-    createDir = function(dirPath) {
-        console.log("create \"" + dirPath);
-        mkdir.sync(dirPath);
-    },
-
-    prepack = function() {
-
-        console.log("removing \"" + folders.dist + "\"");
-        rmdir.sync(folders.dist);
-
-        console.log("copying \"" + folders.src + "\" to \"" + folders.build + "\"");
-        copy.sync(folders.src, folders.build);
-
-        createDir(folders.js);
-        createDir(folders.css);
     },
 
     getEntry = function(entry) {
@@ -84,8 +61,6 @@ var
             descriptionFiles: ["package.json"]
         };
     };
-
-prepack();
 
 module.exports = {
     package: package,

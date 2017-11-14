@@ -1,4 +1,10 @@
 const common = require('./webpack.config.common.js');
+
+const rmdir = require('xfs/rmdir.js');
+const mkdir = require('xfs/mkdir.js');
+const copy = require('xfs/copy.js');
+
+const BeforeBuildPlugin = require('xwebpack/BeforeBuildPlugin.js');
 const CopyPlugin = require('xwebpack/CopyPlugin.js');
 const DeletePlugin = require('xwebpack/DeletePlugin.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -6,8 +12,23 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var
 
     tsconfig = 'tsconfig.prod.json',
+    
+    createDir = function(dirPath) {
+      console.log("create \"" + dirPath);
+      mkdir.sync(dirPath);
+    },
 
     plugins = [
+        new BeforeBuildPlugin(function() {
+            console.log("removing \"" + common.folders.dist + "\"");
+            rmdir.sync(common.folders.dist);
+    
+            console.log("copying \"" + common.folders.src + "\" to \"" + common.folders.build + "\"");
+            copy.sync(common.folders.src, common.folders.build);
+    
+            createDir(common.folders.js);
+            createDir(common.folders.css);
+        }),
         new CopyPlugin({
             from: common.folders.root + '/node_modules/bootstrap/dist/css/bootstrap.min.css',
             to: common.folders.css + '/bootstrap.min.css'
