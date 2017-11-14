@@ -5,9 +5,9 @@ export class Account {
     public id: Guid,
     public name: string,
     public currencyId: Guid,
-    public balance: number,
+    public balance: number = 0,
     public desctiption: string = null,
-    public showOnHomePage: boolean = true,
+    public showOnHomePage: boolean = false,
     public showOrder: number = 0,
     public useInBalance: boolean = true,
     public isDeleted: boolean = false
