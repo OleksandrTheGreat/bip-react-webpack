@@ -48,9 +48,9 @@
     "typescript": "^2.5.3",
     "url-loader": "^0.6.2",
     "webpack": "^2.6.1",
-    "xfs": "../xfs",
-    "xjasmine": "../xjasmine",
-    "xwebpack": "../xwebpack"
+    "xfs": "https://github.com/OleksandrTheGreat/xfs.git",
+    "xjasmine": "https://github.com/OleksandrTheGreat/xjasmine.git",
+    "xwebpack": "https://github.com/OleksandrTheGreat/xwebpack.git"
   },
   "dependencies": {
     "@types/react": "^16.0.18",
@@ -61,6 +61,6 @@
     "jquery": "^3.2.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
-    "xtypescript": "../xtypescript/dist/bin"
+    "xtypescript": "https://github.com/OleksandrTheGreat/xtypescript.git"
   }
 }
