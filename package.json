@@ -7,7 +7,8 @@
     "build": "webpack --config webpack.config.prod.js --progress",
     "build:watch": "webpack --config webpack.config.prod.watch.js --progress",
     "test": "karma start",
-    "test:watch": "karma start --no-single-run --auto-watch"
+    "test:watch": "karma start --no-single-run --auto-watch",
+    "deploy": "npm run build && node utils/deploy.js"
   },
   "keywords": [
     "balance",
