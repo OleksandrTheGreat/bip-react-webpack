@@ -10,7 +10,12 @@ export class IDBAdapter implements IIDBAdapter {
   private _upgradeHandler : (db : IDBDatabase) => void = null;
   private _errorHandler : (event : any) => void = null;
 
-  constructor(name : string, version : number = 1, upgradeHandler : (db : IDBDatabase) => void = null, errorHandler : (event : Event) => void = null) {
+  constructor(
+    name : string, 
+    version : number = 1, 
+    upgradeHandler : (db : IDBDatabase) => void = null, 
+    errorHandler : (event : Event) => void = null
+  ) {
     this._name = name;
     this._version = version;
     this._upgradeHandler = upgradeHandler;
