@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {Account} from '../../../domain';
+import { AccountModel } from '../../../models/AccountModel';
 
-export class HomePageAccountItem extends React.Component<{account: Account}> {
+export class HomePageAccountItem extends React.Component<{account: AccountModel}> {
 
   render() {
     return (
@@ -10,7 +10,7 @@ export class HomePageAccountItem extends React.Component<{account: Account}> {
           {this.props.account.name}
         </div>
         <div className="col">
-          {this.props.account.balance} {this.props.account.currencyId}
+          {this.props.account.balance} {this.props.account.currency}
         </div>
       </div>
     );

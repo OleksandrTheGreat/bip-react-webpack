@@ -31,4 +31,8 @@ export class TestIDBRepository implements IIDBRepository {
         resolve(result);
       });
     }
+
+    getById<T>(storeName: string, id: string): Promise<T> {
+      throw new Error("Method not implemented.");
+    }
   }

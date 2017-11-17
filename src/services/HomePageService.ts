@@ -1,8 +1,9 @@
-import {Account} from '../domain/Account';
+import {Account, Currency} from '../domain';
 import {IIDBRepository} from '../IndexedDB/IDBRepository';
+import {AccountModel} from '../models/AccountModel';
 
 export interface IHomePageService {
-  getDashboardAccounts(): Promise<Array<Account>>
+  getDashboardAccounts(): Promise<Array<AccountModel>>
 }
 
 export class HomePageService implements IHomePageService {
@@ -13,9 +14,9 @@ export class HomePageService implements IHomePageService {
     this._repository = repository;
   }
 
-  getDashboardAccounts(): Promise<Account[]> {
+  getDashboardAccounts(): Promise<AccountModel[]> {
 
-    return new Promise<Account[]>((resolve)=>{
+    return new Promise<AccountModel[]>((resolve, reject)=>{
 
       this._repository.query<Account>('Account', (account) => {
         return !account.isDeleted && account.showOnHomePage;
@@ -33,8 +34,40 @@ export class HomePageService implements IHomePageService {
           return 0;
         });
 
-        resolve(result);
-      });
+        this._mapToAccountModel(result).then(models => {
+          resolve(models);
+        })
+        .catch(e => {reject(e);});
+      })
+      .catch(e => {reject(e);});
     });
+  }
+
+  private _mapToAccountModel(accounts: Account[]): Promise<AccountModel[]> {
+
+    return new Promise<AccountModel[]>((resolve, reject)=>{
+
+      this
+        ._getCurrencyList()
+        .then(currencyList => {
+
+          let result = accounts.map(account => {
+            return new AccountModel(
+              account.id, 
+              account.name, 
+              account.balance, 
+              currencyList.filter(x=>x.id === account.currencyId)[0].name,
+              account.showOrder
+            )
+          })
+
+          resolve(result);
+        })
+        .catch(e => {reject(e);});
+    });
+  }
+
+  private _getCurrencyList(): Promise<Currency[]> {
+    return this._repository.query<Currency>('Currency', null);
   }
 }
