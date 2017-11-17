@@ -1,10 +1,12 @@
-export class Currency {
+import { Entity } from "./Entity";
+
+export class Currency  extends Entity {
   constructor(
-    public id: AAGUID,
+    id: AAGUID,
     public name: string,
     public precision: number = 2,
-    public description: string= null,
-    public isDeleted: boolean = false
+    public description: string= null
   ) {
+    super(id);
   }
 }

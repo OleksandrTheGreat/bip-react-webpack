@@ -1,15 +1,17 @@
+import { Entity } from "./Entity";
+
 export enum MarkerCategory {
   account = 0,
   transaction,
   currency
 }
 
-export class Marker {
+export class Marker  extends Entity {
   constructor(
-    public id: AAGUID,
+    id: AAGUID,
     public category: MarkerCategory,
-    public name: string,
-    public isDeleted: boolean = false
+    public name: string
   ) {
+    super(id);
   }
 }

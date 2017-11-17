@@ -1,16 +1,17 @@
 import { Account } from './Account';
 import { Currency } from './Currency';
+import { Entity } from './Entity';
 
-export class Transaction {
+export class Transaction  extends Entity {
   constructor(
-    public id: AAGUID,
+    id: AAGUID,
     public fromAccountId: AAGUID,
     public toAccountId: AAGUID,
-    public currencyId: AAGUID,
-    public sum: number,
+    public sumFrom: number,
+    public sumTo: number,
     public rate: number = null,
-    public description: string = null,
-    public isDeleted: boolean = false
+    public description: string = null
   ) {
+    super(id);
   }
 }
