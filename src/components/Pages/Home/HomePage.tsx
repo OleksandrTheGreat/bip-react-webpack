@@ -1,11 +1,12 @@
 import * as React from 'react';
-import {state, idbAdapter} from '../../../shared';
+import {ioc} from '../../../shared';
 import {Account} from '../../../domain';
-import {IHomePageService, HomePageService} from '../../../services/HomePageService';
-import { IDBRepository } from '../../../IndexedDB/IDBRepository';
+import {IHomePageService} from '../../../services/HomePageService';
+
+import {HomePageAccountList} from './HomePageAccountList';
 
 export class HomePage extends React.Component < {}, {
-  accounts: Array < Account >
+  accounts: Account[]
 } > {
 
   private _service: IHomePageService;
@@ -13,7 +14,7 @@ export class HomePage extends React.Component < {}, {
   constructor() {
     super();
 
-    this._service = new HomePageService(new IDBRepository(idbAdapter));
+    this._service = ioc.IHomePageService.resoleve();
 
     this.state = {
       accounts: []
@@ -23,11 +24,8 @@ export class HomePage extends React.Component < {}, {
   }
 
   render() {
-
     return (
-      <ul>
-        {this.renderAccountItems(this.state.accounts)}
-      </ul>
+      <HomePageAccountList list={this.state.accounts} />
     );
   }
 
@@ -36,7 +34,7 @@ export class HomePage extends React.Component < {}, {
     this
       ._service
       .getDashboardAccounts()
-      .then((accounts : Array < Account >) => {
+      .then((accounts : Account[]) => {
         this.setState((state) => {
           return {
             ...state,
@@ -53,21 +51,5 @@ export class HomePage extends React.Component < {}, {
           }
         });
       });
-  }
-
-  private renderAccountItems(accounts : Array < Account >) {
-
-    let items = [];
-    let i = 0;
-    let len = accounts.length;
-
-    for (i = 0; i < len; i++) 
-      items.push(this.renderAccountItem(this.state.accounts[i]));
-    
-    return items;
-  }
-
-  private renderAccountItem(account : Account) {
-    return <li key={account.id}>{account.name}</li>;
   }
 }

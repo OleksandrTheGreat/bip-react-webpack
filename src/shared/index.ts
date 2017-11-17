@@ -1,6 +1,6 @@
 import {ABus} from 'abus';
 import {i18n} from '../i18n/i18n';
-import {idbAdapter} from './db';
+import {ioc} from './ioc';
 
 const bus = new ABus();
 
@@ -16,5 +16,5 @@ export {
   bus,
   i18n,
   state,
-  idbAdapter
+  ioc
 }
