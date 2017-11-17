@@ -8,10 +8,13 @@ describe('HomePageService', () => {
 
   it('should return only active "showOnHomePage" accounts', () => {
 
+    let deletedAccount = new Account('1', '1', '1', 0, null, true);
+    deletedAccount.isDeleted = true;
+
     service = new HomePageService(new TestIDBRepository({
       Account: [
         new Account('1', '1', '1', 0, null, true),
-        new Account('1', '1', '1', 0, null, true, null, null, true),
+        deletedAccount,
         new Account('1', '1', '1')
       ]
     }));
