@@ -5,11 +5,11 @@ export class HomePageAccountItem extends React.Component<{account: AccountModel}
 
   render() {
     return (
-      <div className="row" key={this.props.account.id}>
-        <div className="col">
+      <div className="row">
+        <div className="col-sm-6">
           {this.props.account.name}
         </div>
-        <div className="col">
+        <div className="col-sm-6 text-right text-nowrap">
           {this.props.account.balance} {this.props.account.currency}
         </div>
       </div>

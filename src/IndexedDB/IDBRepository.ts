@@ -2,6 +2,7 @@ import {IIDBAdapter} from './IDBAdapter';
 
 export interface IIDBRepository {
   query < T > (storeName : string, query : (obj : T) => boolean) : Promise < Array < T > >;
+  getById < T > (storeName : string, id : AAGUID) : Promise < T >;
 }
 
 export class IDBRepository implements IIDBRepository {
@@ -12,9 +13,9 @@ export class IDBRepository implements IIDBRepository {
     this._idbAdapter = idbAdapter;
   }
 
-  query < T > (storeName : string, query : (obj : T) => boolean = null) : Promise < Array < T > > {
+  query < T > (storeName : string, query : (obj : T) => boolean) : Promise < Array < T > > {
 
-    return new Promise < Array < T > > ((resolve) => {
+    return new Promise < Array < T > > ((resolve, reject) => {
 
       this
         ._idbAdapter
@@ -23,7 +24,7 @@ export class IDBRepository implements IIDBRepository {
 
           let result : Array < T > = [];
 
-          let request: IDBRequest = db
+          let request = db
             .transaction(storeName, 'readonly')
             .objectStore(storeName)
             .openCursor();
@@ -50,6 +51,32 @@ export class IDBRepository implements IIDBRepository {
 
             result.push(value);
             cursor.continue();
+          };
+
+          request.onerror = (e) => {
+            reject(e);
+          };
+        });
+    });
+  }
+
+  getById < T > (storeName : string, id : AAGUID) : Promise < T > {
+
+    return new Promise < T > ((resolve, reject) => {
+
+      this
+        ._idbAdapter
+        .get()
+        .then(db => {
+
+          let request = db.transaction(storeName, 'readonly').objectStore(storeName).get(id);
+
+          request.onsuccess = (e) => {
+            resolve(request.result);
+          };
+
+          request.onerror = (e) => {
+            reject(e);
           };
         });
     });

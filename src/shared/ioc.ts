@@ -3,7 +3,7 @@ import {IIDBRepository, IDBRepository} from '../IndexedDB/IDBRepository';
 
 import {idbAdapter} from './db';
 
-import { IHomePageService, HomePageService } from '../services/HomePageService';
+import {IHomePageService, HomePageService} from '../services/HomePageService';
 
 class iocRegistry < T > {
   constructor(public resolve : () => T) {}

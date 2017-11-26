@@ -59,7 +59,7 @@ export class HomePageService implements IHomePageService {
               currencyList.filter(x=>x.id === account.currencyId)[0].name,
               account.showOrder
             )
-          })
+          });
 
           resolve(result);
         })

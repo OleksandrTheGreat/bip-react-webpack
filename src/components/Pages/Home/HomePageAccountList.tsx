@@ -9,15 +9,10 @@ export class HomePageAccountList extends React.Component < {
 
   render() {
 
-    let items = [];
-    let i = 0;
-    let len = this.props.list.length;
-
-    for (i = 0; i < len; i++) 
-      items.push(<HomePageAccountItem account={this.props.list[i]}/>);
+    let items = this.props.list.map(x => <HomePageAccountItem account={x} key={x.id}/>);
     
     return (
-      <div className="container-fluid">
+      <div className="container-fluid account-list">
         {items}
       </div>
     );
