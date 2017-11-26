@@ -1,11 +1,11 @@
 import * as React from 'react';
-import {state} from '../../../shared';
+import { SettingsList } from './SettingsList';
 
 export class SettingsPage extends React.Component {
 
   render() {
     return (
-      <div>{state.i18n.menu.settings}</div>
+      <SettingsList />
     );
   }
 }
