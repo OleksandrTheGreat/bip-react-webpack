@@ -1,0 +1,11 @@
+export interface Ii18nCurrencyList {
+  title: string;
+}
+
+export class i18nCurrencyListEN implements Ii18nCurrencyList {
+  title = 'Currency list';  
+}
+
+export class i18nCurrencyListUA implements Ii18nCurrencyList {
+  title = 'Перелік валют';  
+}
