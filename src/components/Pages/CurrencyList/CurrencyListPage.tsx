@@ -12,7 +12,9 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   constructor() {
     super();
 
-    this._service = ioc.ICurrencyService.resolve();
+    this._service = ioc
+      .ICurrencyService
+      .resolve();
 
     this.state = {
       currencyList: []
@@ -34,13 +36,16 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   }
 
   private _refreshCurrency() {
-    this._service.getAll().then((currencyList)=>{
-      this.setState((state) => {
-        return {
-          ...state,
-          currencyList: currencyList
-        }
+    this
+      ._service
+      .getAll()
+      .then((currencyList) => {
+        this.setState((state) => {
+          return {
+            ...state,
+            currencyList: currencyList
+          }
+        });
       });
-    });
   }
 }

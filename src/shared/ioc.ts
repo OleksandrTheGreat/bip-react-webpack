@@ -5,6 +5,7 @@ import {idbAdapter} from './db';
 
 import {IHomePageService, HomePageService} from '../services/HomePageService';
 import {ICurrencyService, CurrencyService} from '../services/CurrencyService';
+import {IAccountService, AccountService} from '../services/AccountService';
 
 class iocRegistry < T > {
   constructor(public resolve : () => T) {}
@@ -25,7 +26,11 @@ const ioc = {
 
   ICurrencyService: new iocRegistry<ICurrencyService>(()=> {
     return new CurrencyService(ioc.IIDBRepository.resolve())
-  })
+  }),
+
+  IAccountService: new iocRegistry<IAccountService>(()=> {
+    return new AccountService(ioc.IIDBRepository.resolve())
+  }),
 };
 
 export {ioc}

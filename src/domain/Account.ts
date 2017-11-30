@@ -7,7 +7,7 @@ export class Account extends Entity {
     public name: string,
     public currencyId: AAGUID,
     public balance: number = 0,
-    public desctiption: string = null,
+    public description: string = null,
     public showOnHomePage: boolean = false,
     public showOrder: number = 0,
     public useInBalance: boolean = true
