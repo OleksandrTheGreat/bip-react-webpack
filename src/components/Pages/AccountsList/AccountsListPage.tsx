@@ -8,7 +8,7 @@ export class AccountsListPage extends React.Component {
     return (
       <div>
         <Header>
-          <i className="fa fa-money"></i> {state.i18n.accountsList.title}
+          <i className="fa header-icon fa-money"></i> {state.i18n.accountsList.title}
         </Header>
       </div>
     );

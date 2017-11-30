@@ -15,7 +15,7 @@ export class Header extends React.Component {
 
   render() {
     return (
-      <div className='container-fluid'>
+      <div className='container-fluid page-header'>
         <div className='row'>
           <div className='col'>
             <h6>{this.props.children}</h6>

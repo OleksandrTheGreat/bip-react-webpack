@@ -4,13 +4,13 @@ import {IIDBRepository, IDBRepository} from '../IndexedDB/IDBRepository';
 import {idbAdapter} from './db';
 
 import {IHomePageService, HomePageService} from '../services/HomePageService';
+import {ICurrencyService, CurrencyService} from '../services/CurrencyService';
 
 class iocRegistry < T > {
   constructor(public resolve : () => T) {}
 }
 
 const ioc = {
-
   IIDBAdapter: new iocRegistry<IIDBAdapter>(() => {
     return idbAdapter;
   }),
@@ -21,6 +21,10 @@ const ioc = {
 
   IHomePageService: new iocRegistry<IHomePageService>(()=>{
     return new HomePageService(ioc.IIDBRepository.resolve());
+  }),
+
+  ICurrencyService: new iocRegistry<ICurrencyService>(()=> {
+    return new CurrencyService(ioc.IIDBRepository.resolve())
   })
 };
 

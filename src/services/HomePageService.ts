@@ -18,9 +18,8 @@ export class HomePageService implements IHomePageService {
 
     return new Promise<AccountModel[]>((resolve, reject)=>{
 
-      this._repository.query<Account>('Account', (account) => {
-        return !account.isDeleted && account.showOnHomePage;
-      })
+      this._repository
+      .query<Account>('Account', account => !account.isDeleted && account.showOnHomePage)
       .then((accounts) => {
 
         let result = accounts.sort((a, b)=>{

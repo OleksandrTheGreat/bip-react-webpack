@@ -10,7 +10,7 @@ export class SettingsItem extends React.Component<
     return (
       <div className="row">
         <div className="col col-setting-title">
-            <i className={"fa settings-icon " + this.props.icon}></i> {this.props.title}
+            <i className={"fa title-icon " + this.props.icon}></i> {this.props.title}
         </div>
         <div className="col text-right">
           <button 

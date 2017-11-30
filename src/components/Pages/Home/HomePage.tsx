@@ -20,14 +20,14 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
       accounts: []
     };
 
-    this.refreshAccounts();
+    this._refreshAccounts();
   }
 
   render() {
     return (<HomePageAccountList list={this.state.accounts}/>);
   }
 
-  private refreshAccounts() {
+  private _refreshAccounts() {
 
     this
       ._service
@@ -36,16 +36,7 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
         this.setState((state) => {
           return {
             ...state,
-            accounts: accounts.sort((a, b) => {
-
-              if (a.showOrder > b.showOrder) 
-                return 1;
-              
-              if (a.showOrder < b.showOrder) 
-                return -1;
-              
-              return 0;
-            })
+            accounts: accounts
           }
         });
       });

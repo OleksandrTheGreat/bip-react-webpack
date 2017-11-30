@@ -34,10 +34,6 @@
 }
 
 .settings-list {
-  .fa.settings-icon {
-    width: 2em;
-    text-align: center;
-  }
   .col-setting-title {
     padding-top: 0.4em;
   }
@@ -45,4 +41,17 @@
 
 .btn {
   cursor: pointer;
+}
+
+.page-header {
+  margin-bottom: 1em;
+}
+
+.fa.title-icon {
+  width: 1.5em;
+  text-align: center;
+}
+
+.fa.header-icon {
+  margin-right: 0.34em;
 }

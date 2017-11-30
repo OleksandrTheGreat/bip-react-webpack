@@ -10,9 +10,9 @@ let upgradeCurrency = (db : IDBDatabase) => {
 
   store.createIndex('name', 'name', {unique: true});
 
-  store.add(new Currency(uahId, 'UAH'));
-  store.add(new Currency(GUID.New(), 'USD'));
-  store.add(new Currency(GUID.New(), 'EUR'));
+  store.add(new Currency(uahId, 'UAH', 2, 'Ukrainian Hryvnia'));
+  store.add(new Currency(GUID.New(), 'USD', 2, 'US Dollar'));
+  store.add(new Currency(GUID.New(), 'EUR', 2, 'Euro'));
 };
 
 let upgradeAccount = (db : IDBDatabase) => {
