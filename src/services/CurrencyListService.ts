@@ -1,11 +1,11 @@
 import {Currency} from "../domain";
 import {IIDBRepository} from "../IndexedDB/IDBRepository";
 
-export interface ICurrencyService {
+export interface ICurrencyListService {
   getAll() : Promise < Currency[] >
 }
 
-export class CurrencyService implements ICurrencyService {
+export class CurrencyListService implements ICurrencyListService {
 
   private _repository : IIDBRepository;
 

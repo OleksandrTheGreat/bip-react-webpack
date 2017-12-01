@@ -3,16 +3,16 @@ import {state, ioc} from '../../../shared';
 import {Header} from '../Header';
 import {Account} from '../../../domain';
 import {AccountsList} from './AccountsList';
-import {IAccountService} from "../../../services/AccountService";
+import {IAccountListService} from "../../../services/AccountListService";
 
 export class AccountsListPage extends React.Component < {}, {accounts: Account[]} > {
 
-  private _service: IAccountService;
+  private _service: IAccountListService;
 
   constructor() {
     super();
 
-    this._service = ioc.IAccountService.resolve();
+    this._service = ioc.IAccountListService.resolve();
 
     this.state = {
       accounts: []

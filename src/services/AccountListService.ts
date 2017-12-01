@@ -1,11 +1,11 @@
 import {Account} from "../domain";
 import {IIDBRepository} from "../IndexedDB/IDBRepository";
 
-export interface IAccountService {
+export interface IAccountListService {
   getAll() : Promise < Account[] >
 }
 
-export class AccountService implements IAccountService {
+export class AccountListService implements IAccountListService {
 
   private _repository : IIDBRepository;
 

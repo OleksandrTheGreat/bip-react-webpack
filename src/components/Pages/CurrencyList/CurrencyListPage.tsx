@@ -2,19 +2,17 @@ import * as React from 'react';
 import {state, ioc} from '../../../shared';
 import {Currency} from '../../../domain';
 import {Header} from '../Header';
-import {ICurrencyService} from '../../../services/CurrencyService';
+import {ICurrencyListService} from '../../../services/CurrencyListService';
 import {CurrencyList} from './CurrencyList';
 
 export class CurrencyListPage extends React.Component < {}, {currencyList: Currency[]} > {
 
-  private _service: ICurrencyService;
+  private _service: ICurrencyListService;
 
   constructor() {
     super();
 
-    this._service = ioc
-      .ICurrencyService
-      .resolve();
+    this._service = ioc.ICurrencyListService.resolve();
 
     this.state = {
       currencyList: []
