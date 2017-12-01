@@ -1,18 +1,18 @@
 import * as React from 'react';
 import {state, ioc} from '../../../shared';
-import {Header} from '../Header';
-import {Account} from '../../../domain';
+import {Header} from '../Controls/Page/Header';
 import {AccountsList} from './AccountsList';
-import {IAccountListService} from "../../../services/AccountListService";
+import {IAccountsListService} from "../../../services/AccountsListService";
+import {AccountModel} from '../../../models/AccountModel';
 
-export class AccountsListPage extends React.Component < {}, {accounts: Account[]} > {
+export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
 
-  private _service: IAccountListService;
+  private _service: IAccountsListService;
 
   constructor() {
     super();
 
-    this._service = ioc.IAccountListService.resolve();
+    this._service = ioc.IAccountsListService.resolve();
 
     this.state = {
       accounts: []
@@ -36,7 +36,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: Account[]
   private _refreshAccount() {
     this
     ._service
-    .getAll()
+    .getAccounts()
     .then((accounts) => {
       this.setState((state) => {
         return {

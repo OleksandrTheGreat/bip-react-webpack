@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state, ioc} from '../../../shared';
 import {Currency} from '../../../domain';
-import {Header} from '../Header';
+import {Header} from '../Controls/Page/Header';
 import {ICurrencyListService} from '../../../services/CurrencyListService';
 import {CurrencyList} from './CurrencyList';
 

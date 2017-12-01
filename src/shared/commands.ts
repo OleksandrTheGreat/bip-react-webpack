@@ -1,7 +1,10 @@
 import { Ii18n } from '../i18n/i18n';
 
 export class ChangePage {
-  constructor(public page : any) {}
+  constructor(
+    public page : any,
+    public data: any = null
+  ) {}
 }
 
 export class ChangeLanguage {

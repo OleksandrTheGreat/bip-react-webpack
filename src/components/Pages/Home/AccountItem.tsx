@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { AccountModel } from '../../../models/AccountModel';
 
-export class HomePageAccountItem extends React.Component<{account: AccountModel}> {
+export class AccountItem extends React.Component<{account: AccountModel}> {
 
   render() {
     return (

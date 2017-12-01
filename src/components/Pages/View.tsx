@@ -6,22 +6,26 @@ import {ChangePage} from '../../shared/commands';
 import {HomePage} from './Home/HomePage';
 import { PageChanged } from '../../shared/events';
 
-export class View extends React.Component<{},{page: any}> {
+export class View extends React.Component<{},{page: any, data: any}> {
 
   constructor(props){
     super(props);
 
     this.state = {
-      page: HomePage
+      page: HomePage,
+      data: null
     };
 
     bus.Handle(ChangePage, (message: ChangePage) => {
+
+//TODO: add history
 
       state.page.previous = state.page.current;
       state.page.current = message.page;
       
       this.setState({
-        page: message.page
+        page: message.page,
+        data: message.data
       });      
     });
   }
@@ -34,7 +38,7 @@ export class View extends React.Component<{},{page: any}> {
 
     return (
       <div className="page container">
-        <Page/>
+        <Page data={this.state.data}/>
       </div>
     );
   }

@@ -1,8 +1,8 @@
 import * as React from 'react';
-import {Account} from '../../../domain';
 import {AccountItem} from './AccountItem';
+import {AccountModel} from '../../../models/AccountModel';
 
-export class AccountsList extends React.Component<{accounts: Account[]}> {
+export class AccountsList extends React.Component<{accounts: AccountModel[]}> {
 
   render() {
     let items = this.props.accounts.map(x => <AccountItem account={x} key={x.id}/>);

@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {Account} from '../../../domain';
+import {AccountModel} from '../../../models/AccountModel';
 
-export class AccountItem extends React.Component<{account: Account}> {
+export class AccountItem extends React.Component<{account: AccountModel}> {
 
   render() {
     return (
       <div className="row">
-        <div className="col">
+        <div className="col va-middle">
           {this.props.account.name}
           <div>
             <small>
@@ -14,7 +14,10 @@ export class AccountItem extends React.Component<{account: Account}> {
             </small>
           </div>
         </div>
-        <div className="col-3 text-right">
+        <div className="col text-right va-middle">
+          {this.props.account.balance} {this.props.account.currency} 
+        </div>
+        <div className="col-2 col-md-auto">
           <button 
             type="button"
             className="btn btn-primary"

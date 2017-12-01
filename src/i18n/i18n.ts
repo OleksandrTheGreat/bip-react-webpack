@@ -5,6 +5,7 @@ import { Ii18nAccountsList, i18nAccountsListEN, i18nAccountsListUA } from './i18
 import { Ii18nCommon, i18nCommonEN, i18nCommonUA } from './i18n.common';
 
 export interface Ii18n {
+  locale: string;
   menu: Ii18nMenu;
   settings: Ii18nSettings;
   currencyList: Ii18nCurrencyList;
@@ -13,6 +14,7 @@ export interface Ii18n {
 }
 
 export class i18nEN implements Ii18n {
+  locale = 'en-US';
   menu = new i18nMenuEN();
   settings = new i18nSettingsEN();
   currencyList = new i18nCurrencyListEN();
@@ -21,6 +23,7 @@ export class i18nEN implements Ii18n {
 }
 
 export class i18nUA implements Ii18n {
+  locale = 'uk-UA';
   menu = new i18nMenuUA();
   settings = new i18nSettingsUA();
   currencyList = new i18nCurrencyListUA();

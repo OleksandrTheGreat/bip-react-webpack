@@ -2,7 +2,7 @@ import * as React from 'react';
 import {ioc} from '../../../shared';
 import {IHomePageService} from '../../../services/HomePageService';
 
-import {HomePageAccountList} from './HomePageAccountList';
+import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
 
 export class HomePage extends React.Component < {}, {accounts: AccountModel[]} > {
@@ -24,7 +24,7 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
   }
 
   render() {
-    return (<HomePageAccountList list={this.state.accounts}/>);
+    return (<AccountList list={this.state.accounts}/>);
   }
 
   private _refreshAccounts() {

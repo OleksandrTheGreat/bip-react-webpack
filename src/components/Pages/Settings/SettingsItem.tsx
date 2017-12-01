@@ -9,10 +9,10 @@ export class SettingsItem extends React.Component<
   render() {
     return (
       <div className="row">
-        <div className="col col-setting-title">
+        <div className="col va-middle">
             <i className={"fa title-icon " + this.props.icon}></i> {this.props.title}
         </div>
-        <div className="col text-right">
+        <div className="col-2 col-md-auto">
           <button 
             type="button" 
             className="btn btn-primary"

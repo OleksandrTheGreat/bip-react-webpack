@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {state, bus} from '../../shared';
-import {ChangePage} from '../../shared/commands';
+import {state, bus} from '../../../../shared';
+import {ChangePage} from '../../../../shared/commands';
 
 export class Header extends React.Component {
 
@@ -20,7 +20,7 @@ export class Header extends React.Component {
           <div className='col'>
             <h6>{this.props.children}</h6>
           </div>
-          <div className="col-3 text-right">
+          <div className="col-2 col-md-auto">
             <button 
               type="button" 
               className="btn btn-primary"
