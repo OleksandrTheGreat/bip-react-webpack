@@ -13,7 +13,7 @@ const render = () => {
     document.getElementById('root'));
 };
 
-state.page.current = HomePage;
+state.page.history.push(HomePage);
 
 bus.Handle(ChangeLanguage, (message : ChangeLanguage) => {
   state.i18n = message.i18n;

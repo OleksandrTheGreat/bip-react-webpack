@@ -6,8 +6,7 @@ const bus = new ABus();
 
 const state = {
   page: {
-    current: null,
-    previous: null
+    history: []
   },
   i18n: i18n.EN
 };

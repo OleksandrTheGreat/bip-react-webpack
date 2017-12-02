@@ -11,9 +11,15 @@ export class CurrencyPage extends React.Component < {
 } > {
 
   render() {
+
+    let title = this.props.data.currency.id
+      ? state.i18n.currency.editTitle
+      : state.i18n.currency.createTitle;
+
     return (
       <div>
         <Header>
+          {title}
         </Header>
         <CurrencyForm currency={this.props.data.currency} />
       </div>

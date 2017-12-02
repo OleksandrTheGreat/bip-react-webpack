@@ -1,14 +1,17 @@
 import * as React from 'react';
 
 import {bus, state} from '../../shared';
-import {ChangePage} from '../../shared/commands';
+import {ChangePage, GoBack} from '../../shared/commands';
 
 import {HomePage} from './Home/HomePage';
-import { PageChanged } from '../../shared/events';
+import {PageChanged} from '../../shared/events';
 
-export class View extends React.Component<{},{page: any, data: any}> {
+export class View extends React.Component < {}, {
+  page: any,
+  data: any
+} > {
 
-  constructor(props){
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -16,17 +19,34 @@ export class View extends React.Component<{},{page: any, data: any}> {
       data: null
     };
 
-    bus.Handle(ChangePage, (message: ChangePage) => {
+    bus.Handle(ChangePage, (message : ChangePage) => {
 
-//TODO: add history
+      state
+        .page
+        .history
+        .push(message);
 
-      state.page.previous = state.page.current;
-      state.page.current = message.page;
+      this.setState({page: message.page, data: message.data});
+    });
+
+    bus.Handle(GoBack, () => {
+
+      let i = state.page.history
+        ? state.page.history.length
+        : 0;
+
+      if (i === 0 || i === 1) 
+        return;
       
-      this.setState({
-        page: message.page,
-        data: message.data
-      });      
+      let prev = state.page.history[i - 2];
+
+      state.page.history = state
+        .page
+        .history
+        .slice(0, i - 1);
+
+      //TODO: possible old entity display
+      this.setState({page: prev.page, data: prev.data});
     });
   }
 

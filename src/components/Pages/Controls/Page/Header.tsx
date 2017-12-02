@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../../../shared';
-import {ChangePage} from '../../../../shared/commands';
+import {GoBack} from '../../../../shared/commands';
 
 export class Header extends React.Component {
 
@@ -10,7 +10,7 @@ export class Header extends React.Component {
   }
 
   onBackClick() {
-    bus.SendAsync(new ChangePage(state.page.previous));
+    bus.SendAsync(new GoBack());
   }
 
   render() {
