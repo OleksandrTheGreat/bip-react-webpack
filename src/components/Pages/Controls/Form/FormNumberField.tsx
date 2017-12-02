@@ -2,7 +2,8 @@ import * as React from 'react';
 
 export class FormNumberField extends React.Component < {
   title : string,
-  value : number
+  value : number,
+  onChange : any
 } > {
 
   render() {
@@ -16,7 +17,8 @@ export class FormNumberField extends React.Component < {
           <input
             type="number"
             className="form-control text-right"
-            value={this.props.value}/>
+            value={this.props.value}
+            onChange={this.props.onChange}/>
         </div>
       </div>
     );
