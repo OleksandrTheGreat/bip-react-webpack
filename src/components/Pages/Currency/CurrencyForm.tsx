@@ -12,7 +12,7 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
       currency: this.props.currency
     };
 
-    this._onChange = this._onChange.bind(this);
+    this._change = this._change.bind(this);
   }
 
   render() {
@@ -22,27 +22,26 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
         <FormTextField 
           title={state.i18n.common.name} 
           value={this.state.currency.name}
-          onChange={(e) => this._onChange('name', e.target.value)}
+          onChange={(e) => this._change('name', e.target.value)}
         />
         <FormTextAreaField
           title={state.i18n.common.description}
           value={this.state.currency.description}
-          onChange={(e) => this._onChange('description', e.target.value)}
+          onChange={(e) => this._change('description', e.target.value)}
         />
         <FormNumberField
           title={state.i18n.currency.precision}
           value={this.state.currency.precision}
-          onChange={(e) => this._onChange('precision', e.target.value)}
+          onChange={(e) => this._change('precision', e.target.value)}
         />
       </div>
     );
   }
 
-  private _onChange(
+  private _change(
     name: string,
     value: any
   ) {
-
     let currency = this.state.currency;
     currency[name] = value;
 
