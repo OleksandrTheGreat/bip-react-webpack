@@ -18,7 +18,7 @@ export class Header extends React.Component {
       <div className='container-fluid page-header'>
         <div className='row'>
           <div className='col'>
-            <h6>{this.props.children}</h6>
+            <h5>{this.props.children}</h5>
           </div>
           <div className="col-2 col-md-auto">
             <button 
