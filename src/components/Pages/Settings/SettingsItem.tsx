@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {state} from '../../../shared/index';
 
 export class SettingsItem extends React.Component<
 {
@@ -17,8 +18,9 @@ export class SettingsItem extends React.Component<
             type="button" 
             className="btn btn-primary"
             onClick={this.props.onClick}
+            title={state.i18n.common.open}
           > 
-            <i className="fa fa-pencil"></i>
+            <i className="fa fa-folder"></i>
           </button>
         </div>
       </div>

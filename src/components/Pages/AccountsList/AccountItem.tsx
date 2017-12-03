@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {AccountModel} from '../../../models/AccountModel';
+import {state} from '../../../shared/index';
 
 export class AccountItem extends React.Component<{account: AccountModel}> {
 
@@ -21,6 +22,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           <button 
             type="button"
             className="btn btn-primary"
+            title={state.i18n.common.edit}
           >
             <i className="fa fa-pencil"></i>
           </button>

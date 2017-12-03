@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {Currency} from '../../../domain';
-import {bus} from '../../../shared/index';
+import {bus, state} from '../../../shared/index';
 import {ChangePage} from '../../../shared/commands';
-import { CurrencyPage } from '../Currency/CurrencyPage';
+import {CurrencyPage} from '../Currency/CurrencyPage';
 
 export class CurrencyItem extends React.Component<{currency: Currency}> {
 
@@ -32,6 +32,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
             type="button"
             className="btn btn-primary"
             onClick={this.onEditClick}
+            title={state.i18n.common.edit}
           >
             <i className="fa fa-pencil"></i>
           </button>
