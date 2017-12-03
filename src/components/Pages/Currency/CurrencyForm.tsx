@@ -33,6 +33,8 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
           title={state.i18n.currency.precision}
           value={this.state.currency.precision}
           onChange={(e) => this._change('precision', e.target.value)}
+          min={0}
+          max={3}
         />
       </div>
     );
