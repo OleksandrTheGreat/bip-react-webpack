@@ -19,6 +19,7 @@ export class CurrencyPage extends React.Component < {
     return (
       <div>
         <Header>
+          <i className="fa header-icon fa-usd"></i>
           {title}
         </Header>
         <CurrencyForm currency={this.props.data.currency} />
