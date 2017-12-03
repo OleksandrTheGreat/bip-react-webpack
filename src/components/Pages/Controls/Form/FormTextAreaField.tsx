@@ -3,7 +3,7 @@ import * as React from 'react';
 export class FormTextAreaField extends React.Component < {
   title : string,
   value : string,
-  onChange : any
+  onChange? : any
 } > {
 
   render() {
