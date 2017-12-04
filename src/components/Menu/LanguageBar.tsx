@@ -10,6 +10,13 @@ import {AboutPage, HomePage, SettingsPage} from '../Pages';
 
 export class LanguageBar extends React.Component {
 
+  constructor(props) {
+    super(props);
+
+    this._switchToEN = this._switchToEN.bind(this);
+    this._switchToUA = this._switchToUA.bind(this);
+  }
+
   render() {
 
     const en = <img src={require("../../images/gb.gif")}/>;
@@ -18,14 +25,22 @@ export class LanguageBar extends React.Component {
     return (
       <div className="pull-right">
         <LanguageItem 
-          onClick={() => {bus.Send(new ChangeLanguage(i18n.EN))}}
+          onClick={this._switchToEN}
           title={en}
         />
         <LanguageItem 
-          onClick={() => {bus.Send(new ChangeLanguage(i18n.UA))}}
+          onClick={this._switchToUA}
           title={ua}
         />
       </div>
     );
+  }
+
+  private _switchToEN() {
+    bus.Send(new ChangeLanguage(i18n.EN));
+  }
+
+  private _switchToUA() {
+    bus.Send(new ChangeLanguage(i18n.UA));
   }
 }
