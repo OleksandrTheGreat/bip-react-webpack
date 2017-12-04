@@ -50,6 +50,14 @@ var
             to: common.folders.js + '/bootstrap.bundle.min.js'
         }),
         new CopyPlugin({
+          from: common.folders.root + '/node_modules/react/umd/react.production.min.js',
+          to: common.folders.js + '/react.production.min.js'
+        }),
+        new CopyPlugin({
+          from: common.folders.root + '/node_modules/react-dom/umd/react-dom.production.min.js',
+          to: common.folders.js + '/react-dom.production.min.js'
+        }),
+        new CopyPlugin({
           from: common.folders.bin + '/app.js',
           to: common.folders.js + '/app.js',
           move: true
@@ -125,7 +133,11 @@ module.exports = {
     module: common.getModule({ tsconfig: tsconfig, rules: rules }),
     resolve: common.getResolve(),
     plugins: plugins,
-    externals: [],
+    externals: {
+      jquery: 'jQuery',
+      react: 'React',
+      'react-dom': 'ReactDOM'
+    },
     devtool: 'source-map',
     bail: true,
     cache: false
