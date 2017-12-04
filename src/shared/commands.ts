@@ -13,3 +13,10 @@ export class GoBack {
 export class ChangeLanguage {
   constructor(public i18n : Ii18n) {}
 }
+
+export class Ask {
+  constructor(
+    public question: string,
+    public callback: any
+  ){}
+}
