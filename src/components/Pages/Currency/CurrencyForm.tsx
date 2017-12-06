@@ -44,6 +44,8 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
     name: string,
     value: any
   ) {
+    state.page.isDirty = true;
+
     let currency = this.state.currency;
     currency[name] = value;
 

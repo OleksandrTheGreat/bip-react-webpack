@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../../../shared';
-import {GoBack} from '../../../../shared/commands';
+import {GoBack, Ask} from '../../../../shared/commands';
 
 export class Header extends React.Component {
 
@@ -10,6 +10,19 @@ export class Header extends React.Component {
   }
 
   onBackClick() {
+
+    if (state.page.isDirty)
+    {
+      bus.SendAsync(new Ask(
+        state.i18n.common.goBackQuestion,
+        (answer) => {
+          if (answer)
+            bus.SendAsync(new GoBack());
+        }
+      ));
+      return;
+    }
+
     bus.SendAsync(new GoBack());
   }
 

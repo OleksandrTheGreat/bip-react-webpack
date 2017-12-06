@@ -3,11 +3,9 @@ import * as React from 'react';
 export class FormNumberField extends React.Component < {
   title : string,
   value : number,
-  onChange
-    ?
-    : any,
-  min?: number,
-  max?: number
+  onChange? : any,
+  min? : number,
+  max? : number
 } > {
 
   constructor(props) {

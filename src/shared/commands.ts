@@ -17,6 +17,6 @@ export class ChangeLanguage {
 export class Ask {
   constructor(
     public question: string,
-    public callback: any
+    public callback: (answer: boolean) => void
   ){}
 }

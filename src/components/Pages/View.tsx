@@ -45,6 +45,8 @@ export class View extends React.Component < {}, {
         .history
         .slice(0, i - 1);
 
+      state.page.isDirty = false;
+
       //TODO: possible old entity display
       this.setState({page: prev.page, data: prev.data});
     });
