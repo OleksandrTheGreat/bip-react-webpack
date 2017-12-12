@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {state, bus} from '../../../../shared';
-import {GoBack, Ask} from '../../../../shared/commands';
+import {state, bus} from '../../../shared';
+import {GoBack, Ask} from '../../../shared/commands';
 
 export class Header extends React.Component {
 

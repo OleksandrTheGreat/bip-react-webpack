@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state} from '../../../shared';
-import {Header} from '../Controls/Page/Header';
+import {Header} from '../../common/Page/Header';
 import {CurrencyForm} from './CurrencyForm';
 import {Currency} from '../../../domain/Currency';
 

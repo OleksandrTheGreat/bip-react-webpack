@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, ioc} from '../../../shared';
-import {Header} from '../Controls/Page/Header';
+import {Header} from '../../common/Page/Header';
 import {AccountsList} from './AccountsList';
 import {IAccountsListService} from "../../../services/AccountsListService";
 import {AccountModel} from '../../../models/AccountModel';

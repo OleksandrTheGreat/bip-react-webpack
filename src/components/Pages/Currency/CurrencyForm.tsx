@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state} from '../../../shared';
 import {Currency} from '../../../domain/Currency';
-import {FormTextField, FormTextAreaField, FormNumberField} from '../Controls/Form';
+import {FormTextField, FormTextAreaField, FormNumberField} from '../../common/Form';
 
 export class CurrencyForm extends React.Component <{currency : Currency}, {currency : Currency} > {
 
