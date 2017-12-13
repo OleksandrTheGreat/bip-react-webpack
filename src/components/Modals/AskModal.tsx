@@ -37,7 +37,7 @@ export class AskModal extends React.Component<{}, {command: Ask}> {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title">
-                <i className="fa fa-question-circle"></i> {state.i18n.common.question}
+                <i className="fa fa-question-circle"></i> {state.i18n.common.confirmation}
               </h5>
             </div>
             <div className="modal-body">

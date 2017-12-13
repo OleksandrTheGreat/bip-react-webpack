@@ -59,6 +59,6 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
   }
 
   private _onSave() {
-    alert(1)
+    
   }
 }

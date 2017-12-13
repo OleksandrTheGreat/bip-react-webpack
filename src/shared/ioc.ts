@@ -7,6 +7,7 @@ import {IHomePageService, HomePageService} from '../services/HomePageService';
 import {ICurrencyListService, CurrencyListService} from '../services/CurrencyListService';
 import {IAccountsListService, AccountsListService} from '../services/AccountsListService';
 import {IAccountMapper, AccountMapper} from '../services/AccountMapper';
+import {ICurrencyFormRepository, CurrencyFormRepository} from '../services/CurrencyFormRepository';
 
 export class iocRegistry < T > {
   constructor(public resolve : () => T) {}
@@ -19,32 +20,23 @@ export type IOC = {
   ICurrencyListService: iocRegistry<ICurrencyListService>,
   IAccountsListService: iocRegistry<IAccountsListService>,
   IAccountMapper: iocRegistry<IAccountMapper>
+  ICurrencyFormRepository: iocRegistry<ICurrencyFormRepository>;
 }
 
 const ioc: IOC = {
-  IIDBAdapter: new iocRegistry < IIDBAdapter > (() => {
-    return idbAdapter;
-  }),
+  IIDBAdapter: new iocRegistry < IIDBAdapter > (() => idbAdapter),
 
-  IIDBRepository: new iocRegistry < IIDBRepository > (() => {
-    return new IDBRepository(ioc.IIDBAdapter.resolve());
-  }),
+  IIDBRepository: new iocRegistry < IIDBRepository > (() => new IDBRepository(ioc.IIDBAdapter.resolve())),
 
-  IHomePageService: new iocRegistry < IHomePageService > (() => {
-    return new HomePageService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve());
-  }),
+  IHomePageService: new iocRegistry < IHomePageService > (() => new HomePageService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve())),
 
-  ICurrencyListService: new iocRegistry < ICurrencyListService > (() => {
-    return new CurrencyListService(ioc.IIDBRepository.resolve());
-  }),
+  ICurrencyListService: new iocRegistry < ICurrencyListService > (() => new CurrencyListService(ioc.IIDBRepository.resolve())),
 
-  IAccountsListService: new iocRegistry < IAccountsListService > (() => {
-    return new AccountsListService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve());
-  }),
+  IAccountsListService: new iocRegistry < IAccountsListService > (() => new AccountsListService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve())),
 
-  IAccountMapper: new iocRegistry < IAccountMapper > (() => {
-    return new AccountMapper(ioc.IIDBRepository.resolve())
-  })
+  IAccountMapper: new iocRegistry < IAccountMapper > (() => new AccountMapper(ioc.IIDBRepository.resolve())),
+
+  ICurrencyFormRepository: new iocRegistry<ICurrencyFormRepository>(() => new CurrencyFormRepository(ioc.IIDBRepository.resolve()))
 };
 
 export {ioc}
