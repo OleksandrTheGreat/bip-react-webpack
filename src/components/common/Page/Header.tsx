@@ -1,31 +1,9 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
-import {GoBack, Ask} from '../../../shared/commands';
+import {Ask} from '../../../shared/commands';
+import {Oprerations} from '../../../shared/operations';
 
 export class Header extends React.Component {
-
-  constructor() {
-    super();
-    this.onBackClick = this.onBackClick.bind(this);
-  }
-
-  onBackClick() {
-
-    if (state.page.isDirty)
-    {
-      bus.SendAsync(new Ask(
-        state.i18n.common.goBackQuestion,
-        (answer) => {
-          if (answer)
-            bus.SendAsync(new GoBack());
-        }
-      ));
-      return;
-    }
-
-    bus.SendAsync(new GoBack());
-  }
-
   render() {
     return (
       <div className='container-fluid page-header'>
@@ -38,7 +16,7 @@ export class Header extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.common.back}
-              onClick={this.onBackClick}
+              onClick={Oprerations.goBack}
             >
               <i className="fa fa-reply"></i>
             </button>

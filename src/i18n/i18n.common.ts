@@ -8,6 +8,8 @@ export interface Ii18nCommon {
   goBackQuestion: string;
   yes: string;
   no: string;
+  save: string;
+  cancel: string;
 }
 
 export class i18nCommonEN implements Ii18nCommon {
@@ -18,8 +20,10 @@ export class i18nCommonEN implements Ii18nCommon {
   open = 'Open';
   question = 'Question';
   goBackQuestion = 'Some changes were made on a page. Do You realy want to go back without saving?';
-  yes = "Yes";
-  no = "No";
+    yes = 'Yes';
+  no = 'No';
+  save = 'Save';
+  cancel = 'Cancel';
 }
 
 export class i18nCommonUA implements Ii18nCommon {
@@ -30,6 +34,8 @@ export class i18nCommonUA implements Ii18nCommon {
   open = 'Відкрити';
   question = 'Запитання';
   goBackQuestion = 'На сторінці відбулися деякі зміни. Ви впевнені, що хочете перейти на попередню сторінку без збереження?';
-  yes = "Так";
-  no = "Ні";
+  yes = 'Так';
+  no = 'Ні';
+  save = 'Зберегти';
+  cancel = 'Відмінити';
 }

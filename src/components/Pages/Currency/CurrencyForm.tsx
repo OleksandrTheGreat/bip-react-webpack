@@ -2,6 +2,7 @@ import * as React from 'react';
 import {state} from '../../../shared';
 import {Currency} from '../../../domain/Currency';
 import {FormTextField, FormTextAreaField, FormNumberField} from '../../common/Form';
+import { FormSave } from '../../common/Form/FormSave';
 
 export class CurrencyForm extends React.Component <{currency : Currency}, {currency : Currency} > {
 
@@ -36,6 +37,9 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
           min={0}
           max={3}
         />
+        <FormSave 
+          onSave={this._onSave}
+        />
       </div>
     );
   }
@@ -52,5 +56,9 @@ export class CurrencyForm extends React.Component <{currency : Currency}, {curre
     this.setState({
       currency: currency
     });
+  }
+
+  private _onSave() {
+    alert(1)
   }
 }
