@@ -50,13 +50,14 @@ export class IDBAdapter implements IIDBAdapter {
         this._db.onerror = this._errorHandler
           ? this._errorHandler
           : (e : Event) => {
-            throw new Error('Database error: ' + e.target['result']);
+            //TODO: crashes on error
+            reject('Database error: ' + e.target['error']['message']);
           };
 
         this._db.onversionchange = function (event) {
           if (this._db)
             this._db.close();
-          throw new Error("A new version is ready. Please reload!");
+          reject('A new version is ready. Please reload!');
         };
 
         resolve(this._db);

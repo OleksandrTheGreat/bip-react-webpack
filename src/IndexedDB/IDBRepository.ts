@@ -3,6 +3,7 @@ import {IIDBAdapter} from './IDBAdapter';
 export interface IIDBRepository {
   query < T > (storeName : string, query : (obj : T) => boolean) : Promise < Array < T > >;
   getById < T > (storeName : string, id : AAGUID) : Promise < T >;
+  update < T > (storeName : string, entity : T) : Promise < void >;
 }
 
 export class IDBRepository implements IIDBRepository {
@@ -69,10 +70,37 @@ export class IDBRepository implements IIDBRepository {
         .get()
         .then(db => {
 
-          let request = db.transaction(storeName, 'readonly').objectStore(storeName).get(id);
+          let request = db
+            .transaction(storeName, 'readonly')
+            .objectStore(storeName)
+            .get(id);
 
           request.onsuccess = (e) => {
             resolve(request.result);
+          };
+
+          request.onerror = (e) => {
+            reject(e);
+          };
+        });
+    });
+  }
+
+  update < T > (storeName : string, entity : T) : Promise < void > {
+    return new Promise < void > ((resolve, reject) => {
+
+      this
+        ._idbAdapter
+        .get()
+        .then(db => {
+
+          let request = db
+            .transaction(storeName, 'readwrite')
+            .objectStore(storeName)
+            .put(entity);
+
+          request.onsuccess = () => {
+            resolve();
           };
 
           request.onerror = (e) => {

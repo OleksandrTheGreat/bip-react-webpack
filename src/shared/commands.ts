@@ -20,3 +20,9 @@ export class Ask {
     public callback: (answer: boolean) => void
   ){}
 }
+
+export class ShowError {
+  constructor(
+    public error: string
+  ){}
+}

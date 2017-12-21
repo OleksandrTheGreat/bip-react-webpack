@@ -10,6 +10,8 @@ export interface Ii18nCommon {
   no: string;
   save: string;
   cancel: string;
+  error: string;
+  ok: string;
 }
 
 export class i18nCommonEN implements Ii18nCommon {
@@ -24,6 +26,8 @@ export class i18nCommonEN implements Ii18nCommon {
   no = 'No';
   save = 'Save';
   cancel = 'Cancel';
+  error = 'Error';
+  ok = 'OKAY';
 }
 
 export class i18nCommonUA implements Ii18nCommon {
@@ -38,4 +42,6 @@ export class i18nCommonUA implements Ii18nCommon {
   no = 'Ні';
   save = 'Зберегти';
   cancel = 'Відмінити';
+  error = 'Помилка';
+  ok = 'Зрозуміло';
 }

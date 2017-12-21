@@ -35,4 +35,8 @@ export class TestIDBRepository implements IIDBRepository {
     getById<T>(storeName: string, id: string): Promise<T> {
       throw new Error("Method not implemented.");
     }
+
+    update<T>(storeName: string, entity: T): Promise<void> {
+      throw new Error("Method not implemented.");
+    }
   }

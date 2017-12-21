@@ -7,7 +7,7 @@ import {IHomePageService, HomePageService} from '../services/HomePageService';
 import {ICurrencyListService, CurrencyListService} from '../services/CurrencyListService';
 import {IAccountsListService, AccountsListService} from '../services/AccountsListService';
 import {IAccountMapper, AccountMapper} from '../services/AccountMapper';
-import {ICurrencyFormRepository, CurrencyFormRepository} from '../services/CurrencyFormRepository';
+import {ICurrencyFormService, CurrencyFormService} from '../services/CurrencyFormService';
 
 export class iocRegistry < T > {
   constructor(public resolve : () => T) {}
@@ -20,7 +20,7 @@ export type IOC = {
   ICurrencyListService: iocRegistry<ICurrencyListService>,
   IAccountsListService: iocRegistry<IAccountsListService>,
   IAccountMapper: iocRegistry<IAccountMapper>
-  ICurrencyFormRepository: iocRegistry<ICurrencyFormRepository>;
+  ICurrencyFormService: iocRegistry<ICurrencyFormService>;
 }
 
 const ioc: IOC = {
@@ -36,7 +36,7 @@ const ioc: IOC = {
 
   IAccountMapper: new iocRegistry < IAccountMapper > (() => new AccountMapper(ioc.IIDBRepository.resolve())),
 
-  ICurrencyFormRepository: new iocRegistry<ICurrencyFormRepository>(() => new CurrencyFormRepository(ioc.IIDBRepository.resolve()))
+  ICurrencyFormService: new iocRegistry<ICurrencyFormService>(() => new CurrencyFormService(ioc.IIDBRepository.resolve()))
 };
 
 export {ioc}

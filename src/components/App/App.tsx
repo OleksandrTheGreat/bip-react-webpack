@@ -3,9 +3,12 @@ import * as React from 'react';
 import {Error} from './Error';
 import {Menu} from '../Menu/Menu';
 import {View} from '../Pages';
-import { AskModal } from '../Modals/AskModal';
+import {AskModal, ErrorModal} from '../Modals';
 
-export class App extends React.Component< {}, {error: any, info: any} > {
+export class App extends React.Component < {}, {
+  error: any,
+  info: any
+} > {
 
   constructor() {
     super();
@@ -23,8 +26,9 @@ export class App extends React.Component< {}, {error: any, info: any} > {
   render() {
     return (
       <div className="app">
-        <Error error={this.state.error} info={this.state.info} />
-        <AskModal />
+        <Error error={this.state.error} info={this.state.info}/>
+        <AskModal/>
+        <ErrorModal/>
         <Menu/>
         <View/>
       </div>
