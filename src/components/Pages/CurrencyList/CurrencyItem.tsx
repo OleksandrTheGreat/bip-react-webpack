@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {Currency} from '../../../domain';
 import {bus, state} from '../../../shared/index';
-import {ChangePage} from '../../../shared/commands';
+import {ChangePage} from '../../../commands';
 import {CurrencyPage} from '../Currency/CurrencyPage';
 
 export class CurrencyItem extends React.Component<{currency: Currency}> {

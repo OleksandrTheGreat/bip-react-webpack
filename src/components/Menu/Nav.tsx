@@ -4,7 +4,7 @@ import {bus, state} from '../../shared';
 
 import {MenuItem} from './MenuItem';
 
-import {ChangePage, ChangeLanguage} from '../../shared/commands';
+import {ChangePage, ChangeLanguage} from '../../commands';
 import {PageChanged} from '../../shared/events';
 
 import {AboutPage, HomePage, SettingsPage} from '../Pages';

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../shared';
-import {ShowError} from '../../shared/commands';
+import {ShowError} from '../../commands';
 import * as $ from 'jquery';
 
 export class ErrorModal extends React.Component < {}, {error: string} > {

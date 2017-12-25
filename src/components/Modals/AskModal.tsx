@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../shared';
-import {Ask} from '../../shared/commands';
+import {Ask} from '../../commands';
 import * as $ from 'jquery';
 
 export class AskModal extends React.Component < {}, {command: Ask} > {

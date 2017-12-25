@@ -1,5 +1,5 @@
 import { state, bus } from "./";
-import { Ask, GoBack } from "./commands";
+import { Ask, GoBack } from "../commands";
 
 export class Oprerations {
 

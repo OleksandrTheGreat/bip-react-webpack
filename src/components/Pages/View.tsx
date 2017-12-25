@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {bus, state} from '../../shared';
-import {ChangePage, GoBack} from '../../shared/commands';
+import {ChangePage, GoBack} from '../../commands';
 
 import {HomePage} from './Home/HomePage';
 import {PageChanged} from '../../shared/events';
