@@ -4,7 +4,7 @@ import {bus, i18n} from '../../shared';
 
 import {MenuItem} from './MenuItem';
 import {LanguageItem} from './LanguageItem';
-import {ChangeLanguage} from '../../commands';
+import {ChangeLanguage} from '../../bus/commands';
 
 import {AboutPage, HomePage, SettingsPage} from '../Pages';
 

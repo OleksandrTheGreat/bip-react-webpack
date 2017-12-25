@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
-import {Ask} from '../../../commands';
+import {Ask} from '../../../bus/commands';
 import {Oprerations} from '../../../shared/operations';
 
 export class FormSave extends React.Component < {

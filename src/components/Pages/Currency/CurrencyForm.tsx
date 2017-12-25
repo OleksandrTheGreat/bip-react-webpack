@@ -4,7 +4,7 @@ import {Currency} from '../../../domain/Currency';
 import {FormTextField, FormTextAreaField, FormNumberField} from '../../common/Form';
 import {FormSave} from '../../common/Form/FormSave';
 import {ICurrencyFormService} from '../../../services/CurrencyFormService';
-import {GoBack, ShowError} from '../../../commands';
+import {GoBack, ShowError} from '../../../bus/commands';
 
 export class CurrencyForm extends React.Component < {
   currency : Currency

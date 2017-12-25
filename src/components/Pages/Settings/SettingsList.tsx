@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, i18n, bus} from '../../../shared';
-import {ChangePage} from '../../../commands';
+import {ChangePage} from '../../../bus/commands';
 import {SettingsItem} from './SettingsItem';
 import {CurrencyListPage} from '../CurrencyList/CurrencyListPage';
 import {AccountsListPage} from '../AccountsList/AccountsListPage';

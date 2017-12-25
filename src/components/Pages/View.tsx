@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import {bus, state} from '../../shared';
-import {ChangePage, GoBack} from '../../commands';
+import {ChangePage, GoBack} from '../../bus/commands';
 
 import {HomePage} from './Home/HomePage';
-import {PageChanged} from '../../shared/events';
+import {PageChanged} from '../../bus/events';
 
 export class View extends React.Component < {}, {
   page: any,

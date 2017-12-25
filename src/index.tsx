@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {bus, state} from './shared';
-import {ChangeLanguage} from './commands';
+import {ChangeLanguage} from './bus/commands';
 
 import {App} from './components/App/App';
 import {HomePage} from './components/Pages/index';
