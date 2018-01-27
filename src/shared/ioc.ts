@@ -25,17 +25,11 @@ export type IOC = {
 
 const ioc: IOC = {
   IIDBAdapter: new iocRegistry < IIDBAdapter > (() => idbAdapter),
-
   IIDBRepository: new iocRegistry < IIDBRepository > (() => new IDBRepository(ioc.IIDBAdapter.resolve())),
-
   IHomePageService: new iocRegistry < IHomePageService > (() => new HomePageService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve())),
-
   ICurrencyListService: new iocRegistry < ICurrencyListService > (() => new CurrencyListService(ioc.IIDBRepository.resolve())),
-
   IAccountsListService: new iocRegistry < IAccountsListService > (() => new AccountsListService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve())),
-
   IAccountMapper: new iocRegistry < IAccountMapper > (() => new AccountMapper(ioc.IIDBRepository.resolve())),
-
   ICurrencyFormService: new iocRegistry<ICurrencyFormService>(() => new CurrencyFormService(ioc.IIDBRepository.resolve()))
 };
 

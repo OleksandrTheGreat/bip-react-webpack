@@ -1,7 +1,7 @@
-import { state, bus } from "./";
-import { Ask, GoBack } from "../bus/commands";
+import { state, bus } from "../../shared";
+import { Ask, GoBack } from "./";
 
-export class Oprerations {
+export class SharedCommands {
 
   public static goBack() {
     if (state.page.isDirty)

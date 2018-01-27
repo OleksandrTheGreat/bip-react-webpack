@@ -17,12 +17,8 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
       }
     };
 
-    this._onYes = this
-      ._onYes
-      .bind(this);
-    this._onNo = this
-      ._onNo
-      .bind(this);
+    this._onYes = this._onYes.bind(this);
+    this._onNo = this._onNo.bind(this);
 
     bus.Handle(Ask, (message : Ask) => {
 

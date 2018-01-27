@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
 import {Ask} from '../../../bus/commands';
-import {Oprerations} from '../../../shared/operations';
+import {SharedCommands} from '../../../bus/commands/shared';
 
 export class FormSave extends React.Component < {
   onSave : () => void
@@ -12,17 +12,19 @@ export class FormSave extends React.Component < {
         <button 
           type="button"
           className="btn"
-          onClick={Oprerations.goBack}
+          onClick={SharedCommands.goBack}
+          title={state.i18n.common.cancel}
         >
-          <i className="fa fa-cancel">{state.i18n.common.cancel}</i>
+          <i className="fa fa-ban"></i>
         </button>
         &nbsp;
         <button 
           type="button" 
           className="btn btn-primary"
           onClick={this.props.onSave}
+          title={state.i18n.common.save}
         >
-          <i className="fa fa-cancel">{state.i18n.common.save}</i>
+          <i className="fa fa-save"></i>
         </button>
       </div>
     );

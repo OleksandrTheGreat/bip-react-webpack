@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
 import {Ask} from '../../../bus/commands';
-import {Oprerations} from '../../../shared/operations';
+import {SharedCommands} from '../../../bus/commands/shared';
 
 export class Header extends React.Component {
   render() {
@@ -16,7 +16,7 @@ export class Header extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.common.back}
-              onClick={Oprerations.goBack}
+              onClick={SharedCommands.goBack}
             >
               <i className="fa fa-reply"></i>
             </button>
