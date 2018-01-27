@@ -4,7 +4,6 @@ import * as $ from 'jquery';
 import {bus, state} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
 
-import {HomePage} from './Home/HomePage';
 import {PageChanged} from '../../bus/events';
 
 export class View extends React.Component < {}, {
@@ -15,9 +14,14 @@ export class View extends React.Component < {}, {
   constructor(props) {
     super(props);
 
+    let i = state.page.history.length - 1;
+    let current: ChangePage = i < 0
+      ? null
+      : state.page.history[i];
+
     this.state = {
-      page: HomePage,
-      data: null
+      page: current.page,
+      data: current.data
     };
 
     bus.Handle(PageChanged, (event: PageChanged) => {

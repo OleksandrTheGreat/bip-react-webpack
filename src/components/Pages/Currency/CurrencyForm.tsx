@@ -30,22 +30,26 @@ export class CurrencyForm extends React.Component < {
   render() {
 
     return (
-      <div className="container-fluid row-list">
-        <FormTextField
-          title={state.i18n.common.name}
-          value={this.state.currency.name}
-          onChange={(e) => this._change('name', e.target.value)}/>
-        <FormTextAreaField
-          title={state.i18n.common.description}
-          value={this.state.currency.description}
-          onChange={(e) => this._change('description', e.target.value)}/>
-        <FormNumberField
-          title={state.i18n.currency.precision}
-          value={this.state.currency.precision}
-          onChange={(e) => this._change('precision', e.target.value)}
-          min={0}
-          max={3}/>
-        <FormSave onSave={this._onSave}/>
+      <div className="container-fluid">
+        <div className="container-fluid row-list">
+          <FormTextField
+            title={state.i18n.common.name}
+            value={this.state.currency.name}
+            onChange={(e) => this._change('name', e.target.value)}/>
+          <FormTextAreaField
+            title={state.i18n.common.description}
+            value={this.state.currency.description}
+            onChange={(e) => this._change('description', e.target.value)}/>
+          <FormNumberField
+            title={state.i18n.currency.precision}
+            value={this.state.currency.precision}
+            onChange={(e) => this._change('precision', e.target.value)}
+            min={0}
+            max={3}/>
+        </div>
+        <div className="container-fluid row-list">
+          <FormSave onSave={this._onSave}/>
+        </div>
       </div>
     );
   }
