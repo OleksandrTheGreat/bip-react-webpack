@@ -8,7 +8,7 @@ export class FormSave extends React.Component < {
 } > {
   render() {
     return (
-      <div className="text-right">
+      <div className="container-fluid row-list text-right">
         <button 
           type="button"
           className="btn"

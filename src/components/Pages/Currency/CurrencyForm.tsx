@@ -47,9 +47,7 @@ export class CurrencyForm extends React.Component < {
             min={0}
             max={3}/>
         </div>
-        <div className="container-fluid row-list">
-          <FormSave onSave={this._onSave}/>
-        </div>
+        <FormSave onSave={this._onSave}/>        
       </div>
     );
   }
