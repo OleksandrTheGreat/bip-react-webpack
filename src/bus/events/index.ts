@@ -1,5 +1,3 @@
-import { ChangePage } from '../commands/index';
-
 export class PageChanged {
   constructor(
     public page : any,

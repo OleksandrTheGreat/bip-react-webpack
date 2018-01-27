@@ -2,7 +2,7 @@ import { Ii18n } from '../../i18n/i18n';
 
 export class ChangePage {
   constructor(
-    public page : any,
+    public page : string,
     public data: any = null
   ) {}
 }

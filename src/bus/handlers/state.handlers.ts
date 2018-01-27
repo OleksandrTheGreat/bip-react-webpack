@@ -1,4 +1,4 @@
-import { bus, state } from '../../shared';
+import { bus, state, ioc, pages } from '../../shared';
 import { ChangePage, GoBack, ChangeLanguage } from '../commands';
 import { PageChanged, LanguageChanged } from '../events';
 
@@ -39,4 +39,12 @@ bus.Handle(GoBack, () => {
 
   //TODO: possible old entity display
   bus.SendAsync(new PageChanged(prev.page, prev.data));
+});
+
+bus.Handle(PageChanged, (event : PageChanged) => {
+  ioc.IApplicationStateService.resolve().save(state);
+});
+
+bus.Handle(LanguageChanged, (event : LanguageChanged) => {
+  ioc.IApplicationStateService.resolve().save(state);
 });

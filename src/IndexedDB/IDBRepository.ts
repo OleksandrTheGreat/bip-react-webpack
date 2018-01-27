@@ -2,7 +2,7 @@ import {IIDBAdapter} from './IDBAdapter';
 
 export interface IIDBRepository {
   query < T > (storeName : string, query : (obj : T) => boolean) : Promise < Array < T > >;
-  getById < T > (storeName : string, id : AAGUID) : Promise < T >;
+  getById < T > (storeName : string, id : any) : Promise < T >;
   update < T > (storeName : string, entity : T) : Promise < void >;
 }
 
@@ -61,7 +61,7 @@ export class IDBRepository implements IIDBRepository {
     });
   }
 
-  getById < T > (storeName : string, id : AAGUID) : Promise < T > {
+  getById < T > (storeName : string, id : any) : Promise < T > {
 
     return new Promise < T > ((resolve, reject) => {
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as $ from 'jquery';
 
-import {bus, state} from '../../shared';
+import {bus, state, pages} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
 
 import {PageChanged} from '../../bus/events';
@@ -14,14 +14,16 @@ export class View extends React.Component < {}, {
   constructor(props) {
     super(props);
 
+    //TODO: remove and add ApplicationStarted event
     let i = state.page.history.length - 1;
     let current: ChangePage = i < 0
       ? null
       : state.page.history[i];
 
-    this.state = {
-      page: current.page,
-      data: current.data
+    this.state = 
+    {
+      page: current === null ? null : current.page,
+      data: current === null ? null : current.data
     };
 
     bus.Handle(PageChanged, (event: PageChanged) => {
@@ -31,7 +33,10 @@ export class View extends React.Component < {}, {
 
   render() {
 
-    const Page = this.state.page;
+    if (this.state.page === null)
+      return null;
+
+    const Page = pages[this.state.page];
 
     return (
       <div className="page container">

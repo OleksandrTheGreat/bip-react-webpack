@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import {Currency} from '../../../domain';
-import {bus, state} from '../../../shared/index';
+
+import {bus, state, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands';
-import {CurrencyPage} from '../Currency/CurrencyPage';
 
 export class CurrencyItem extends React.Component<{currency: Currency}> {
 
@@ -12,7 +13,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
   }
 
   onEditClick() {
-    bus.SendAsync(new ChangePage(CurrencyPage, {currency: this.props.currency}));
+    bus.SendAsync(new ChangePage(pages.CurrencyPage.name, {currency: this.props.currency}));
   }
 
   render() {

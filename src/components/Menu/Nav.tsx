@@ -1,19 +1,18 @@
 import * as React from 'react';
 
-import {bus, state} from '../../shared';
+import {bus, state, pages} from '../../shared';
 
 import {MenuItem} from './MenuItem';
 
 import {ChangePage, ChangeLanguage} from '../../bus/commands';
 import {PageChanged} from '../../bus/events';
 
-import {AboutPage, HomePage, SettingsPage} from '../Pages';
-
 export class Nav extends React.Component < {}, {currentPage: any} > {
   
   constructor(props) {
     super(props);
 
+    //TODO: remove and add ApplicationStarted event
     let i = state.page.history.length - 1;
     let current: ChangePage = i < 0
       ? null
@@ -50,21 +49,21 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
         <MenuItem
           title={homeTitle}
           onClick={() => {
-            bus.Send(new ChangePage(HomePage))
+            bus.Send(new ChangePage(pages.HomePage.name))
           }}
-          isActive={this.state.currentPage === HomePage}/>
+          isActive={this.state.currentPage === pages.HomePage.name}/>
         <MenuItem
           title={settingsTitle}
           onClick={() => {
-            bus.Send(new ChangePage(SettingsPage))
+            bus.Send(new ChangePage(pages.SettingsPage.name))
           }}
-          isActive={this.state.currentPage === SettingsPage}/>
+          isActive={this.state.currentPage === pages.SettingsPage.name}/>
         <MenuItem
           title={aboutTitle}
           onClick={() => {
-            bus.Send(new ChangePage(AboutPage))
+            bus.Send(new ChangePage(pages.AboutPage.name))
           }}
-          isActive={this.state.currentPage === AboutPage}/>
+          isActive={this.state.currentPage === pages.AboutPage.name}/>
       </ul>
     );
   }

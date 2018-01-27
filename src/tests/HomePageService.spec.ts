@@ -2,6 +2,7 @@ import {IHomePageService, HomePageService} from '../services/HomePageService';
 import {Account} from '../domain/Account';
 import {TestIDBRepository} from './TestIDBRepository';
 
+//TODO: fix test
 describe('HomePageService', () => {
 
   let service : IHomePageService;

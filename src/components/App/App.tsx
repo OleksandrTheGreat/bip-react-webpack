@@ -1,8 +1,10 @@
 import * as React from 'react';
 
+import {state} from '../../shared';
+
 import {Error} from './Error';
 import {Menu} from '../Menu/Menu';
-import {View} from '../Pages';
+import {View} from '../Pages/View';
 import {AskModal, ErrorModal} from '../Modals';
 
 export class App extends React.Component < {}, {
@@ -24,6 +26,10 @@ export class App extends React.Component < {}, {
   }
 
   render() {
+
+    if (state === null)
+      return null;
+
     return (
       <div className="app">
         <Error error={this.state.error} info={this.state.info}/>

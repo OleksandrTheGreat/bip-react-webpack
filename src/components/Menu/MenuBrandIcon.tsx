@@ -1,7 +1,6 @@
 import * as React from 'react';
-import {state, bus} from '../../shared';
-import { ChangePage } from '../../bus/commands/index';
-import { HomePage } from '../Pages/index';
+import {state, bus, pages} from '../../shared';
+import {ChangePage} from '../../bus/commands/index';
 
 export class MenuBrandIcon extends React.Component {
   render() {
@@ -10,7 +9,7 @@ export class MenuBrandIcon extends React.Component {
         href="#" 
         className="navbar-brand" 
         onClick={() => {
-          bus.Send(new ChangePage(HomePage))
+          bus.Send(new ChangePage(pages.HomePage.name))
         }}
         title={state.i18n.menu.title}
       >

@@ -6,8 +6,6 @@ import {MenuItem} from './MenuItem';
 import {LanguageItem} from './LanguageItem';
 import {ChangeLanguage} from '../../bus/commands';
 
-import {AboutPage, HomePage, SettingsPage} from '../Pages';
-
 export class LanguageBar extends React.Component {
 
   constructor(props) {

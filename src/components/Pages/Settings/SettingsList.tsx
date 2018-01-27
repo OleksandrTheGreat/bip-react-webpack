@@ -1,9 +1,7 @@
 import * as React from 'react';
-import {state, i18n, bus} from '../../../shared';
+import {state, i18n, bus, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands';
 import {SettingsItem} from './SettingsItem';
-import {CurrencyListPage} from '../CurrencyList/CurrencyListPage';
-import {AccountsListPage} from '../AccountsList/AccountsListPage';
 
 export class SettingsList extends React.Component {
 
@@ -14,12 +12,12 @@ export class SettingsList extends React.Component {
         <SettingsItem 
           icon="fa-money" 
           title={state.i18n.settings.accounts} 
-          onClick={() => {bus.Send(new ChangePage(AccountsListPage))}}
+          onClick={() => {bus.Send(new ChangePage(pages.AccountsListPage.name))}}
         />
         <SettingsItem 
           icon="fa-usd" 
           title={state.i18n.settings.currency} 
-          onClick={() => {bus.Send(new ChangePage(CurrencyListPage))}}
+          onClick={() => {bus.Send(new ChangePage(pages.CurrencyListPage.name))}}
         />
       </div>
     );
