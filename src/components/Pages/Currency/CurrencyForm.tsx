@@ -23,12 +23,8 @@ export class CurrencyForm extends React.Component < {
       currency: this.props.currency
     };
 
-    this._change = this
-      ._change
-      .bind(this);
-    this._onSave = this
-      ._onSave
-      .bind(this);
+    this._change = this._change.bind(this);
+    this._onSave = this._onSave.bind(this);
   }
 
   render() {
@@ -55,6 +51,7 @@ export class CurrencyForm extends React.Component < {
   }
 
   private _change(name : string, value : any) {
+    
     state.page.isDirty = true;
 
     let currency = this.state.currency;

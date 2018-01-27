@@ -1,16 +1,9 @@
-import {ABus} from 'abus';
+import {bus} from './bus';
 import {i18n} from '../i18n/i18n';
+import {state} from './state';
 import {ioc} from './ioc';
 
-const bus = new ABus();
-
-const state = {
-  page: {
-    history: [],
-    isDirty: false
-  },
-  i18n: i18n.EN
-};
+import '../bus/handlers/state.handlers';
 
 export {
   bus,

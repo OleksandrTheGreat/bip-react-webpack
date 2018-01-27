@@ -10,16 +10,17 @@ import {PageChanged} from '../../bus/events';
 import {AboutPage, HomePage, SettingsPage} from '../Pages';
 
 export class Nav extends React.Component < {}, {currentPage: any} > {
+  
   constructor(props) {
     super(props);
 
-    let i = state.page.history.length;
-    let page = i === 0
+    let i = state.page.history.length - 1;
+    let current: ChangePage = i < 0
       ? null
       : state.page.history[i];
 
     this.state = {
-      currentPage: page
+      currentPage: current === null ? null : current.page
     };
 
     bus.Handle(PageChanged, (message : PageChanged) => {
@@ -32,37 +33,37 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
     let homeTitle = <span>
       <i className="fa fa-home"></i>
       {state.i18n.menu.home}
-    </span>
+    </span>;
 
     let settingsTitle = <span>
       <i className="fa fa-cogs"></i>
       {state.i18n.menu.settings}
-    </span>
+    </span>;
 
     let aboutTitle = <span>
       <i className="fa fa-info-circle"></i>
       {state.i18n.menu.about}
-    </span>
+    </span>;
 
     return (
       <ul className="navbar-nav mr-auto">
         <MenuItem
           title={homeTitle}
           onClick={() => {
-          bus.Send(new ChangePage(HomePage))
-        }}
+            bus.Send(new ChangePage(HomePage))
+          }}
           isActive={this.state.currentPage === HomePage}/>
         <MenuItem
           title={settingsTitle}
           onClick={() => {
-          bus.Send(new ChangePage(SettingsPage))
-        }}
+            bus.Send(new ChangePage(SettingsPage))
+          }}
           isActive={this.state.currentPage === SettingsPage}/>
         <MenuItem
           title={aboutTitle}
           onClick={() => {
-          bus.Send(new ChangePage(AboutPage))
-        }}
+            bus.Send(new ChangePage(AboutPage))
+          }}
           isActive={this.state.currentPage === AboutPage}/>
       </ul>
     );

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as $ from 'jquery';
 
 import {bus, state} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
@@ -19,44 +20,14 @@ export class View extends React.Component < {}, {
       data: null
     };
 
-    bus.Handle(ChangePage, (message : ChangePage) => {
-
-      state
-        .page
-        .history
-        .push(message);
-
-      this.setState({page: message.page, data: message.data});
-    });
-
-    bus.Handle(GoBack, () => {
-
-      let i = state.page.history
-        ? state.page.history.length
-        : 0;
-
-      if (i === 0 || i === 1) 
-        return;
-      
-      let prev = state.page.history[i - 2];
-
-      state.page.history = state
-        .page
-        .history
-        .slice(0, i - 1);
-
-      state.page.isDirty = false;
-
-      //TODO: possible old entity display
-      this.setState({page: prev.page, data: prev.data});
+    bus.Handle(PageChanged, (event: PageChanged) => {
+      this.setState({page: event.page, data: event.data});
     });
   }
 
   render() {
 
     const Page = this.state.page;
-
-    bus.SendAsync(new PageChanged(this.state.page));
 
     return (
       <div className="page container">

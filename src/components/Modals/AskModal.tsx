@@ -70,7 +70,7 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
 
   private _answer(answer : boolean) {
 
-    $(this._id).modal('hide');
+    $('#' + this._id).modal('hide');
 
     if (this.state.command.callback !== undefined || this.state.command.callback !== null) 
       this.state.command.callback(answer);
