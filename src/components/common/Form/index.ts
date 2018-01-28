@@ -1,11 +1,11 @@
 import {FormNumberField} from './FormNumberField';
 import {FormTextAreaField} from './FormTextAreaField';
 import {FormTextField} from './FormTextField';
-import {FormSave} from './FormSave';
+import {Form} from './Form';
 
 export {
   FormNumberField,
   FormTextAreaField,
   FormTextField,
-  FormSave
+  Form
 }

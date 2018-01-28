@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {state, ioc, bus} from '../../../shared';
 import {Currency} from '../../../domain/Currency';
-import {FormTextField, FormTextAreaField, FormNumberField} from '../../common/Form';
-import {FormSave} from '../../common/Form/FormSave';
+import {FormTextField, FormTextAreaField, FormNumberField, Form} from '../../common/Form';
 import {ICurrencyFormService} from '../../../services/CurrencyFormService';
 import {GoBack, ShowError, SaveState} from '../../../bus/commands';
 
@@ -32,35 +31,27 @@ export class CurrencyForm extends React.Component <
   }
 
   render() {
-
-    const id = 'CurrencyForm';
-
     return (
-      <form id={id} noValidate>
-        <div className="container-fluid row-list">
-          <FormTextField
-            title={state.i18n.common.name}
-            value={this.state.currency.name}
-            isRequired={true}
-            validationMessage={state.i18n.currency.nameValidationMessage}
-            onChange={(e) => this._change('name', e.target.value)}/>
-          <FormTextAreaField
-            title={state.i18n.common.description}
-            value={this.state.currency.description}
-            onChange={(e) => this._change('description', e.target.value)}/>
-          <FormNumberField
-            title={state.i18n.currency.precision}
-            value={this.state.currency.precision}
-            isRequired={true}
-            validationMessage={state.i18n.currency.minimumFractionDigitsValidationMessage}
-            onChange={(e) => this._change('precision', e.target.value)}
-            min={0}
-            max={3}/>
-        </div>
-        <FormSave 
-          formId={id}
-          onSave={this._onSave}/>        
-      </form>
+      <Form onSave={this._onSave}>
+        <FormTextField
+          title={state.i18n.common.name}
+          value={this.state.currency.name}
+          isRequired={true}
+          validationMessage={state.i18n.currency.nameValidationMessage}
+          onChange={(e) => this._change('name', e.target.value)}/>
+        <FormTextAreaField
+          title={state.i18n.common.description}
+          value={this.state.currency.description}
+          onChange={(e) => this._change('description', e.target.value)}/>
+        <FormNumberField
+          title={state.i18n.currency.precision}
+          value={this.state.currency.precision}
+          isRequired={true}
+          validationMessage={state.i18n.currency.minimumFractionDigitsValidationMessage}
+          onChange={(e) => this._change('precision', e.target.value)}
+          min={0}
+          max={3}/>
+      </Form>
     );
   }
 
