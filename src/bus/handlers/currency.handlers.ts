@@ -30,10 +30,7 @@ import { GUID } from 'xtypescript';
   bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 
     repository
-      .query<Currency>(
-        "Currency", 
-        (currency: Currency) => !currency.isDeleted
-      )
+      .query<Currency>("Currency")
       .then(currencyList => {
         let result = currencyList.sort((a, b)=>{
           

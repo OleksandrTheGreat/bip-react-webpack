@@ -15,6 +15,62 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
     this._onDeleteClick = this._onDeleteClick.bind(this);
   }
 
+  render() {
+
+    const editButtonContent = this.props.currency.id == null
+      ? <i className="fa fa-plus"></i>
+      : <i className="fa fa-pencil"></i>;
+
+    const deleteButton = this.props.currency.id == null || this.props.currency.isDeleted
+      ? null
+      : <div className="d-inline-block">
+          &nbsp;
+          <button 
+            type="button"
+            className="btn btn-danger"
+            onClick={this._onDeleteClick}
+            title={state.i18n.common.delete}
+          >
+            <i className="fa fa-trash"></i>
+          </button>
+        </div>;
+
+    const info = this.props.currency.isDeleted
+      ? <div className="col va-middle">
+          <del><em>{this.props.currency.name || state.i18n.currency.createTitle}</em></del>
+          <div>
+            <small>
+              <del><em>{this.props.currency.description}</em></del>
+            </small>
+          </div>
+        </div>
+      : <div className="col va-middle">
+          {this.props.currency.name || state.i18n.currency.createTitle}
+          <div>
+            <small>
+              {this.props.currency.description}
+            </small>
+          </div>
+        </div>;
+
+    return (
+      <div className="row">
+        {info}
+        <div className="col-2 col-md-auto">
+          <button 
+            type="button"
+            className="btn btn-primary"
+            onClick={this._onEditClick}
+            title={state.i18n.common.edit}
+          >
+            {editButtonContent}
+          </button>
+          {deleteButton}
+        </div>
+      </div>
+    );
+  }
+
   _onEditClick() {
     bus.SendAsync(new ChangePage(pages.CurrencyPage.name, {currency: this.props.currency}));
   }
@@ -33,50 +89,5 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
                 bus.SendAsync(new ShowError(error));
               }));
        }));
-  }
-
-  render() {
-
-    const editTitle = this.props.currency.id == null
-      ? <i className="fa fa-plus"></i>
-      : <i className="fa fa-pencil"></i>;
-
-    const deleteButton = this.props.currency.id == null
-      ? null
-      : <div className="d-inline-block">
-          &nbsp;
-          <button 
-            type="button"
-            className="btn btn-danger"
-            onClick={this._onDeleteClick}
-            title={state.i18n.common.delete}
-          >
-            <i className="fa fa-trash"></i>
-          </button>
-        </div>;
-
-    return (
-      <div className="row">
-        <div className="col va-middle">
-          {this.props.currency.name || state.i18n.currency.createTitle}
-          <div>
-            <small>
-              {this.props.currency.description}
-            </small>
-          </div>
-        </div>
-        <div className="col-2 col-md-auto">
-          <button 
-            type="button"
-            className="btn btn-primary"
-            onClick={this._onEditClick}
-            title={state.i18n.common.edit}
-          >
-            {editTitle}
-          </button>
-          {deleteButton}
-        </div>
-      </div>
-    );
   }
 }
