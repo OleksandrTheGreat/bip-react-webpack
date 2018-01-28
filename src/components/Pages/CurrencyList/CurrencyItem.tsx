@@ -18,10 +18,14 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
 
   render() {
 
+    const editButton = this.props.currency.id == null
+      ? <i className="fa fa-plus"></i>
+      : <i className="fa fa-pencil"></i>;
+
     return (
       <div className="row">
         <div className="col va-middle">
-          {this.props.currency.name}
+          {this.props.currency.name || state.i18n.currency.createTitle}
           <div>
             <small>
               {this.props.currency.description}
@@ -35,7 +39,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
             onClick={this.onEditClick}
             title={state.i18n.common.edit}
           >
-            <i className="fa fa-pencil"></i>
+            {editButton}
           </button>
         </div>
       </div>

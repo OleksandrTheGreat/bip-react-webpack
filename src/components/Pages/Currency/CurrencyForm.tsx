@@ -4,6 +4,7 @@ import {Currency} from '../../../domain/Currency';
 import {FormTextField, FormTextAreaField, FormNumberField, Form} from '../../common/Form';
 import {ICurrencyFormService} from '../../../services/CurrencyFormService';
 import {GoBack, ShowError, SaveState} from '../../../bus/commands';
+import { GUID } from 'xtypescript';
 
 export class CurrencyForm extends React.Component <
 {
@@ -71,9 +72,14 @@ export class CurrencyForm extends React.Component <
 
   private _onSave() {
     try {
+
+      let currency = this.state.currency;
+
+      currency.id = currency.id || GUID.New();
+
       this
         ._service
-        .save(this.state.currency)
+        .save(currency)
         .then(() => {
           bus.SendAsync(new GoBack());
         }, (e) => {

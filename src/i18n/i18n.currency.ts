@@ -17,7 +17,7 @@ export class i18nCurrencyEN implements Ii18nCurrency {
 export class i18nCurrencyUA implements Ii18nCurrency {
   precision = 'К-сть знаків після крапки';
   editTitle = 'Редагувати валюту';
-  createTitle = 'Створити currency';
+  createTitle = 'Створити валюту';
   nameValidationMessage = 'Вкажіть назву валюти';
   minimumFractionDigitsValidationMessage = 'Вкажіть кількістьсть знаків після крапки';
 }
