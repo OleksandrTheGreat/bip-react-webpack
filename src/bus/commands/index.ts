@@ -23,7 +23,7 @@ export class Ask {
 
 export class ShowError {
   constructor(
-    public error: string
+    public error: any
   ){}
 }
 

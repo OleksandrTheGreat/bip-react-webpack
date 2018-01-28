@@ -2,9 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
 import {bus, state} from './shared';
-
 import {LanguageChanged} from './bus/events';
-
 import {App} from './components/App/App';
 
 
@@ -15,7 +13,7 @@ const render = () => {
 };
 
 //TODO: find better place for this handler
-bus.Handle(LanguageChanged, (message : LanguageChanged) => {
+bus.Handle(LanguageChanged, () => {
   render();
 });
 

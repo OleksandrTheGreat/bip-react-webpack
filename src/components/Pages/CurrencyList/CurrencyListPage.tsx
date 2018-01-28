@@ -1,22 +1,23 @@
 import * as React from 'react';
-import {state, ioc} from '../../../shared';
+import {state, ioc, bus} from '../../../shared';
 import {Currency} from '../../../domain';
 import {Header} from '../../common/Page/Header';
-import {ICurrencyListService} from '../../../services/CurrencyListService';
 import {CurrencyList} from './CurrencyList';
+import { QueryCurrencyList, RefreshCurrencyListPage } from '../../../bus/commands/currency.commands';
+import { ShowError } from '../../../bus/commands/index';
 
 export class CurrencyListPage extends React.Component < {}, {currencyList: Currency[]} > {
-
-  private _service: ICurrencyListService;
 
   constructor() {
     super();
 
-    this._service = ioc.ICurrencyListService.resolve();
-
     this.state = {
       currencyList: []
     };
+
+    bus.Handle(RefreshCurrencyListPage, () => {
+      this._refreshCurrency()
+    });
 
     this._refreshCurrency();
   }
@@ -34,16 +35,18 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   }
 
   private _refreshCurrency() {
-    this
-      ._service
-      .getAll()
-      .then((currencyList) => {
-        this.setState((state) => {
-          return {
-            ...state,
-            currencyList: currencyList
-          }
-        });
-      });
+    bus.SendAsync(
+      new QueryCurrencyList(
+        (list: Currency[]) => {
+          this.setState((state) => {
+            return {
+              ...state,
+              currencyList: list
+            }
+          });
+        },
+        (error) => {
+          bus.SendAsync(new ShowError(error));
+        }));
   }
 }

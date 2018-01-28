@@ -4,6 +4,7 @@ export interface Ii18nCurrency {
   createTitle: string;
   nameValidationMessage: string;
   minimumFractionDigitsValidationMessage: string;
+  deleteQuestion: string;
 }
 
 export class i18nCurrencyEN implements Ii18nCurrency {
@@ -12,6 +13,7 @@ export class i18nCurrencyEN implements Ii18nCurrency {
   createTitle = 'Create currency';
   nameValidationMessage = 'Provide currency name';
   minimumFractionDigitsValidationMessage = 'Provide minimum fraction digits';
+  deleteQuestion = 'Are you sure you want to delete the currency?';
 }
 
 export class i18nCurrencyUA implements Ii18nCurrency {
@@ -20,4 +22,5 @@ export class i18nCurrencyUA implements Ii18nCurrency {
   createTitle = 'Створити валюту';
   nameValidationMessage = 'Вкажіть назву валюти';
   minimumFractionDigitsValidationMessage = 'Вкажіть кількістьсть знаків після крапки';
+  deleteQuestion = 'Ви впевнені, що хочете видалити валюту?';
 }
