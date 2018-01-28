@@ -4,12 +4,10 @@ import {Account, Currency, Marker, Transaction} from '../domain';
 
 let uahId = GUID.New();
 
-let upgradeSettings =  (db : IDBDatabase) => {
-
-  let store = db.createObjectStore('Settings', {keyPath: "id"});
-
-  store.add({'id': 'state', 'value': null });
-};
+// let upgradeSettings =  (db : IDBDatabase) => {
+//   let store = db.createObjectStore('Settings', {keyPath: "id"});
+//   store.add({'id': 'state', 'value': null });
+// };
 
 let upgradeCurrency = (db : IDBDatabase) => {
 
@@ -37,7 +35,7 @@ let upgradeAccount = (db : IDBDatabase) => {
 };
 
 export const idbAdapter: IIDBAdapter = new IDBAdapter('BiP2', 1, (db : IDBDatabase) => {
-  upgradeSettings(db);
+  //upgradeSettings(db);
   upgradeCurrency(db);
   upgradeAccount(db);
 });

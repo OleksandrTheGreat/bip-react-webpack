@@ -2,12 +2,21 @@ import { bus, state, ioc, pages } from '../../shared';
 import { ChangePage, GoBack, ChangeLanguage } from '../commands';
 import { PageChanged, LanguageChanged } from '../events';
 
+(() => {
+
 bus.Handle(ChangePage, (message : ChangePage) => {
 
-  state
-    .page
-    .history
-    .push(message);
+  let len = state.page.history.length;
+  let  current: ChangePage = state.page.history[len-1];
+
+  if (current.page == message.page)
+    return;
+
+  if (len >= 10) {
+    state.page.history = state.page.history.slice(1, len);
+  }
+
+  state.page.history.push(message);
 
   bus.SendAsync(new PageChanged(message.page, message.data));
 });
@@ -30,10 +39,7 @@ bus.Handle(GoBack, () => {
   
   let prev = state.page.history[i - 2];
 
-  state.page.history = state
-    .page
-    .history
-    .slice(0, i - 1);
+  state.page.history = state.page.history.slice(0, i - 1);
 
   state.page.isDirty = false;
 
@@ -42,9 +48,21 @@ bus.Handle(GoBack, () => {
 });
 
 bus.Handle(PageChanged, (event : PageChanged) => {
-  ioc.IApplicationStateService.resolve().save(state);
+
+  _saveApplicationState();
+
+  //ioc.IApplicationStateService.resolve().save(state);
 });
 
 bus.Handle(LanguageChanged, (event : LanguageChanged) => {
-  ioc.IApplicationStateService.resolve().save(state);
+
+  _saveApplicationState();
+
+  //ioc.IApplicationStateService.resolve().save(state);
 });
+
+function _saveApplicationState() {
+  localStorage.state = JSON.stringify(state);
+}
+
+})();

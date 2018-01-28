@@ -6,9 +6,13 @@ import {FormSave} from '../../common/Form/FormSave';
 import {ICurrencyFormService} from '../../../services/CurrencyFormService';
 import {GoBack, ShowError} from '../../../bus/commands';
 
-export class CurrencyForm extends React.Component < {
+export class CurrencyForm extends React.Component <
+{
   currency : Currency
-}, {currency: Currency} > {
+}, 
+{
+  currency: Currency
+} > {
 
   private _service: ICurrencyFormService;
 

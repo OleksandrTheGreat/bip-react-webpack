@@ -12,15 +12,18 @@ export interface IApplicationState {
   i18n: Ii18n;
 }
 
-let state: IApplicationState = {
+let savedState: IApplicationState = null;
+let defaultState: IApplicationState = {
   page: {
     history: [],
     isDirty: false
   },
   i18n: i18n.EN
 };
-state.page.history.push(new ChangePage(pages.HomePage.name));
+defaultState.page.history.push(new ChangePage(pages.HomePage.name));
 
-export {
-  state
-};
+if (localStorage.state) {
+  savedState = JSON.parse(localStorage.state);
+}
+
+export const state = savedState === null ? defaultState : savedState;
