@@ -26,3 +26,6 @@ export class ShowError {
     public error: string
   ){}
 }
+
+export class SaveState {
+}

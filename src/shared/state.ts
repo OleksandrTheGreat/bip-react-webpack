@@ -4,6 +4,7 @@ import {pages} from './pages';
 
 export interface IPageState {
   history: ChangePage[];
+  data: any;
   isDirty: boolean;
 }
 
@@ -16,6 +17,7 @@ let savedState: IApplicationState = null;
 let defaultState: IApplicationState = {
   page: {
     history: [],
+    data: null,
     isDirty: false
   },
   i18n: i18n.EN

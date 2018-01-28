@@ -4,7 +4,7 @@ import {Currency} from '../../../domain/Currency';
 import {FormTextField, FormTextAreaField, FormNumberField} from '../../common/Form';
 import {FormSave} from '../../common/Form/FormSave';
 import {ICurrencyFormService} from '../../../services/CurrencyFormService';
-import {GoBack, ShowError} from '../../../bus/commands';
+import {GoBack, ShowError, SaveState} from '../../../bus/commands';
 
 export class CurrencyForm extends React.Component <
 {
@@ -24,7 +24,7 @@ export class CurrencyForm extends React.Component <
       .resolve();
 
     this.state = {
-      currency: this.props.currency
+      currency: state.page.isDirty ? state.page.data : this.props.currency
     };
 
     this._change = this._change.bind(this);
@@ -62,6 +62,10 @@ export class CurrencyForm extends React.Component <
 
     let currency = this.state.currency;
     currency[name] = value;
+
+    state.page.data = currency;
+    
+    bus.SendAsync(new SaveState());
 
     this.setState({currency: currency});
   }
