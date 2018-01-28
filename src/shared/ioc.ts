@@ -22,7 +22,6 @@ export type IOC = {
   IAccountsListService: iocRegistry<IAccountsListService>,
   IAccountMapper: iocRegistry<IAccountMapper>
   ICurrencyFormService: iocRegistry<ICurrencyFormService>;
-  IApplicationStateService: iocRegistry<IApplicationStateService>;
 }
 
 const ioc: IOC = {
@@ -32,8 +31,7 @@ const ioc: IOC = {
   ICurrencyListService: new iocRegistry < ICurrencyListService > (() => new CurrencyListService(ioc.IIDBRepository.resolve())),
   IAccountsListService: new iocRegistry < IAccountsListService > (() => new AccountsListService(ioc.IIDBRepository.resolve(), ioc.IAccountMapper.resolve())),
   IAccountMapper: new iocRegistry < IAccountMapper > (() => new AccountMapper(ioc.IIDBRepository.resolve())),
-  ICurrencyFormService: new iocRegistry<ICurrencyFormService>(() => new CurrencyFormService(ioc.IIDBRepository.resolve())),
-  IApplicationStateService: new iocRegistry<IApplicationStateService>(() => new ApplicationStateService(ioc.IIDBRepository.resolve()))
+  ICurrencyFormService: new iocRegistry<ICurrencyFormService>(() => new CurrencyFormService(ioc.IIDBRepository.resolve()))
 };
 
 export {ioc}
