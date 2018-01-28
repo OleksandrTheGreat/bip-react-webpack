@@ -8,7 +8,6 @@ import {ICurrencyListService, CurrencyListService} from '../services/CurrencyLis
 import {IAccountsListService, AccountsListService} from '../services/AccountsListService';
 import {IAccountMapper, AccountMapper} from '../services/AccountMapper';
 import {ICurrencyFormService, CurrencyFormService} from '../services/CurrencyFormService';
-import {IApplicationStateService, ApplicationStateService} from '../services/ApplicationStateService';
 
 export class iocRegistry < T > {
   constructor(public resolve : () => T) {}
