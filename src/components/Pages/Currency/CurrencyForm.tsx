@@ -33,12 +33,16 @@ export class CurrencyForm extends React.Component <
 
   render() {
 
+    const id = 'CurrencyForm';
+
     return (
-      <div className="container-fluid">
+      <form id={id} noValidate>
         <div className="container-fluid row-list">
           <FormTextField
             title={state.i18n.common.name}
             value={this.state.currency.name}
+            isRequired={true}
+            validationMessage={state.i18n.currency.nameValidationMessage}
             onChange={(e) => this._change('name', e.target.value)}/>
           <FormTextAreaField
             title={state.i18n.common.description}
@@ -47,12 +51,16 @@ export class CurrencyForm extends React.Component <
           <FormNumberField
             title={state.i18n.currency.precision}
             value={this.state.currency.precision}
+            isRequired={true}
+            validationMessage={state.i18n.currency.minimumFractionDigitsValidationMessage}
             onChange={(e) => this._change('precision', e.target.value)}
             min={0}
             max={3}/>
         </div>
-        <FormSave onSave={this._onSave}/>        
-      </div>
+        <FormSave 
+          formId={id}
+          onSave={this._onSave}/>        
+      </form>
     );
   }
 

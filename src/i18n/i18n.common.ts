@@ -12,6 +12,7 @@ export interface Ii18nCommon {
   cancel: string;
   error: string;
   ok: string;
+  defaultValidationMessage: string;
 }
 
 export class i18nCommonEN implements Ii18nCommon {
@@ -28,6 +29,7 @@ export class i18nCommonEN implements Ii18nCommon {
   cancel = 'Cancel';
   error = 'Error';
   ok = 'OKAY';
+  defaultValidationMessage = 'Provide a valid field value.';
 }
 
 export class i18nCommonUA implements Ii18nCommon {
@@ -44,4 +46,5 @@ export class i18nCommonUA implements Ii18nCommon {
   cancel = 'Відмінити';
   error = 'Помилка';
   ok = 'Зрозуміло';
+  defaultValidationMessage = 'Надайте валідне значення полю.';
 }

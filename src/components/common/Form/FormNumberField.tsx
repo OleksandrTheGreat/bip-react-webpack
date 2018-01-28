@@ -1,8 +1,11 @@
 import * as React from 'react';
+import {state} from '../../../shared';
 
 export class FormNumberField extends React.Component < {
   title : string,
   value : number,
+  isRequired?: boolean,
+  validationMessage?: string,
   onChange? : any,
   min? : number,
   max? : number
@@ -18,19 +21,38 @@ export class FormNumberField extends React.Component < {
 
   render() {
 
-    return (
-      <div className="row">
-        <div className="col va-middle">
-          <label>{this.props.title}</label>
-        </div>
-        <div className="col">
+    const Input = this.props.isRequired
+      ? <div>
           <input
             type="number"
             className="form-control text-right"
             value={this.props.value}
             onChange={this._onChange}
             min={this.props.min}
-            max={this.props.max}/>
+            max={this.props.max}
+            required />
+          <div className="invalid-feedback">
+            {this.props.validationMessage 
+              ? this.props.validationMessage 
+              : state.i18n.common.defaultValidationMessage}
+          </div>
+        </div>
+      : <input
+          type="number"
+          className="form-control text-right"
+          value={this.props.value}
+          onChange={this._onChange}
+          min={this.props.min}
+          max={this.props.max}/>;
+
+
+    return (
+      <div className="row">
+        <div className="col va-middle">
+          <label>{this.props.title}</label>
+        </div>
+        <div className="col">
+          {Input}
         </div>
       </div>
     );
