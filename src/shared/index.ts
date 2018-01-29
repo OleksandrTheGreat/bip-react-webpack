@@ -4,9 +4,6 @@ import {state} from './state';
 import {ioc} from './ioc';
 import {pages} from './pages';
 
-import '../bus/handlers/state.handlers';
-import '../bus/handlers/currency.handlers';
-
 export {
   bus,
   i18n,

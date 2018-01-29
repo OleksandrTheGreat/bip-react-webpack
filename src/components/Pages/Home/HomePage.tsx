@@ -1,20 +1,15 @@
 import * as React from 'react';
-import {ioc} from '../../../shared';
-import {IHomePageService} from '../../../services/HomePageService';
+import {bus} from '../../../shared';
 
 import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
+import {QueryDashboardAccounts} from '../../../bus/commands/account.commands';
+import {ShowError} from '../../../bus/commands';
 
 export class HomePage extends React.Component < {}, {accounts: AccountModel[]} > {
 
-  private _service: IHomePageService;
-
   constructor() {
     super();
-
-    this._service = ioc
-      .IHomePageService
-      .resolve();
 
     this.state = {
       accounts: []
@@ -29,16 +24,18 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
 
   private _refreshAccounts() {
 
-    this
-      ._service
-      .getDashboardAccounts()
-      .then((accounts : AccountModel[]) => {
-        this.setState((state) => {
-          return {
-            ...state,
-            accounts: accounts
-          }
-        });
-      });
+    bus.SendAsync(
+      new QueryDashboardAccounts(
+        (accounts : AccountModel[]) => {
+          this.setState((state) => {
+            return {
+              ...state,
+              accounts: accounts
+            }
+          });
+        },
+        (error) => {
+          bus.SendAsync(new ShowError(error));
+        }));
   }
 }

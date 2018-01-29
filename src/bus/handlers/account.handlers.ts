@@ -1,0 +1,35 @@
+import {bus, state, ioc} from '../../shared';
+import {Account} from "../../domain/Account";
+import {QueryDashboardAccounts} from '../commands/account.commands';
+
+(() => {
+
+  let _repository = ioc.IIDBRepository.resolve();
+  let _mapper = ioc.IAccountMapper.resolve();
+
+  bus.Handle(QueryDashboardAccounts, (command: QueryDashboardAccounts) => {
+
+    _repository
+      .query<Account>('Account', account => !account.isDeleted && account.showOnHomePage)
+      .then(accounts => {
+
+        let result = accounts.sort((a, b)=>{
+          
+          if(a.showOrder > b.showOrder)
+            return 1;
+          
+          if(a.showOrder < b.showOrder)
+            return -1;
+          
+          return 0;
+        });
+
+        _mapper
+          .toModelList(result)
+          .then(models => command.onSuccess(models))
+          .catch(e => command.onError(e));
+      })
+      .catch(e => command.onError(e));
+  });
+
+})();
