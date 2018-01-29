@@ -1,18 +1,15 @@
 import * as React from 'react';
-import {state, ioc} from '../../../shared';
+import {state, bus} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {AccountsList} from './AccountsList';
-import {IAccountsListService} from "../../../services/AccountsListService";
 import {AccountModel} from '../../../models/AccountModel';
+import { QueryAccountList } from '../../../bus/commands/account.commands';
+import { ShowError } from '../../../bus/commands/index';
 
 export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
 
-  private _service: IAccountsListService;
-
   constructor() {
     super();
-
-    this._service = ioc.IAccountsListService.resolve();
 
     this.state = {
       accounts: []
@@ -34,16 +31,18 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
   }
 
   private _refreshAccount() {
-    this
-    ._service
-    .getAccounts()
-    .then((accounts) => {
-      this.setState((state) => {
-        return {
-          ...state,
-          accounts: accounts
-        }
-      });
-    });
+    bus.SendAsync(new QueryAccountList(
+      (accounts) => {
+        this.setState((state) => {
+          return {
+            ...state,
+            accounts: accounts
+          }
+        });
+      },
+      (error) => {
+        bus.SendAsync(new ShowError(error));
+      }
+    ));
   }
 }

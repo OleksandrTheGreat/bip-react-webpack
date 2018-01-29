@@ -7,3 +7,10 @@ export class QueryDashboardAccounts {
     public onError: (error: any) => void
   ) {}
 }
+
+export class QueryAccountList {
+  constructor(
+    public onSuccess: (accounts: AccountModel[]) => void,
+    public onError: (error: any) => void
+  ) {}
+}
