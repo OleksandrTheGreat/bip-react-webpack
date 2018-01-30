@@ -55,7 +55,7 @@ export class IDBRepository implements IIDBRepository {
           };
 
           request.onerror = (e) => {
-            reject(e);
+            reject((<IDBRequest>e.currentTarget).error.message);
           };
         });
     });
@@ -80,7 +80,7 @@ export class IDBRepository implements IIDBRepository {
           };
 
           request.onerror = (e) => {
-            reject(e);
+            reject((<IDBRequest>e.currentTarget).error.message);
           };
         });
     });
@@ -104,7 +104,7 @@ export class IDBRepository implements IIDBRepository {
           };
 
           request.onerror = (e) => {
-            reject(e);
+            reject((<IDBRequest>e.currentTarget).error.message);
           };
         });
     });
