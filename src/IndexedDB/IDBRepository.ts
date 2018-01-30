@@ -104,7 +104,7 @@ export class IDBRepository implements IIDBRepository {
           };
 
           request.onerror = (e) => {
-            reject((<IDBRequest>e.currentTarget).error.message);
+            reject((<IDBRequest>e.currentTarget).error);
           };
         });
     });

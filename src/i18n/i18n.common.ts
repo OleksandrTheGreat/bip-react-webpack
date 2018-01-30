@@ -14,6 +14,7 @@ export interface Ii18nCommon {
   error: string;
   ok: string;
   defaultValidationMessage: string;
+  defaulErrorMessage: string;
 }
 
 export class i18nCommonEN implements Ii18nCommon {
@@ -32,6 +33,7 @@ export class i18nCommonEN implements Ii18nCommon {
   error = 'Error';
   ok = 'OKAY';
   defaultValidationMessage = 'Provide a valid field value.';
+  defaulErrorMessage = 'An error occurred.';
 }
 
 export class i18nCommonUA implements Ii18nCommon {
@@ -50,4 +52,5 @@ export class i18nCommonUA implements Ii18nCommon {
   error = 'Помилка';
   ok = 'Зрозуміло';
   defaultValidationMessage = 'Надайте валідне значення полю.';
+  defaulErrorMessage = 'Виникла помилка.';
 }

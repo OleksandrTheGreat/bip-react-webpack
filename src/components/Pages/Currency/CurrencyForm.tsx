@@ -70,8 +70,19 @@ export class CurrencyForm extends React.Component <
         () => {
           bus.SendAsync(new GoBack());
         }, 
-        (error) => {
-          bus.SendAsync(new ShowError(error));
+        (error: DOMError) => {
+
+          let message: string;
+
+          switch(error.name) {
+            case 'ConstraintError':
+              message = state.i18n.currency.constraintErrorMessage.replace('{0}', this.state.currency.name);
+              break;
+            default:
+              message = state.i18n.common.defaulErrorMessage;
+          }
+
+          bus.SendAsync(new ShowError(message));
         }));
   }
 }
