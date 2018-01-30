@@ -25,3 +25,11 @@ export class QueryCurrencyList {
 
 export class RefreshCurrencyListPage {
 }
+
+export class UnDeleteCurrency {
+  constructor(
+    public currency: Currency,
+    public onSuccess: () => void,
+    public onError: (error: any) => void
+  ){}
+}

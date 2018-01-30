@@ -41,7 +41,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
         });
       },
       (error) => {
-        bus.SendAsync(new ShowError(error));
+        bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
       }
     ));
   }

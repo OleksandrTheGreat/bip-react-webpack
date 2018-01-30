@@ -1,6 +1,6 @@
 import {Currency} from '../../domain/Currency';
 import {bus, state, ioc} from '../../shared';
-import {QueryCurrencyList, DeleteCurrency, SaveCurrency} from '../commands/currency.commands';
+import {QueryCurrencyList, DeleteCurrency, SaveCurrency, UnDeleteCurrency} from '../commands/currency.commands';
 import { GUID } from 'xtypescript';
 
 (() => {
@@ -47,4 +47,16 @@ import { GUID } from 'xtypescript';
       })
       .catch(e => command.onError(e));
   });
+
+  
+  bus.Handle(UnDeleteCurrency, (command: UnDeleteCurrency) => {
+
+    command.currency.isDeleted = false;
+
+    repository
+      .update('Currency', command.currency)
+      .then(() => command.onSuccess())
+      .catch(e => command.onError(e));
+  });
+
 })();

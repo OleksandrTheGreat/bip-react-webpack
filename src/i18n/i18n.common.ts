@@ -4,6 +4,7 @@ export interface Ii18nCommon {
   description: string;
   edit: string;
   delete: string;
+  undelete: string;
   open: string;
   confirmation: string;
   goBackQuestion: string;
@@ -23,6 +24,7 @@ export class i18nCommonEN implements Ii18nCommon {
   description = 'Description';
   edit = 'Edit';
   delete = 'Delete';
+  undelete = 'Undelete';
   open = 'Open';
   confirmation = 'Confirmation';
   goBackQuestion = 'Some changes were made on a page. Do You realy want to go back without saving?';
@@ -42,6 +44,7 @@ export class i18nCommonUA implements Ii18nCommon {
   description = 'Опис';  
   edit = 'Редагувати';
   delete = 'Видалити';
+  undelete = 'Відновити';
   open = 'Відкрити';
   confirmation = 'Підтвердження';
   goBackQuestion = 'На сторінці відбулися деякі зміни. Ви впевнені, що хочете перейти на попередню сторінку без збереження?';

@@ -4,7 +4,7 @@ import {Currency} from '../../../domain';
 
 import {bus, state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
-import {DeleteCurrency, RefreshCurrencyListPage} from '../../../bus/commands/currency.commands';
+import {DeleteCurrency, RefreshCurrencyListPage, UnDeleteCurrency} from '../../../bus/commands/currency.commands';
 
 export class CurrencyItem extends React.Component<{currency: Currency}> {
 
@@ -13,6 +13,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
 
     this._onEditClick = this._onEditClick.bind(this);
     this._onDeleteClick = this._onDeleteClick.bind(this);
+    this._onUnDeleteClick = this._onUnDeleteClick.bind(this);
   }
 
   render() {
@@ -53,6 +54,20 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
           </div>
         </div>;
 
+    const undoButton = this.props.currency.isDeleted
+      ? <div className="d-inline-block">
+          &nbsp;
+          <button 
+            type="button"
+            className="btn btn-success"
+            onClick={this._onUnDeleteClick}
+            title={state.i18n.common.undelete}
+          >
+            <i className="fa fa-undo"></i>
+          </button>
+        </div>
+      : null;
+
     return (
       <div className="row">
         {info}
@@ -66,6 +81,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
             {editButtonContent}
           </button>
           {deleteButton}
+          {undoButton}
         </div>
       </div>
     );
@@ -77,7 +93,8 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
 
   _onDeleteClick() {
     bus.SendAsync(
-      new Ask(state.i18n.currency.deleteQuestion, 
+      new Ask(
+        state.i18n.currency.deleteQuestion.replace('{0}', this.props.currency.name), 
         (answer: boolean) => {
           bus.SendAsync(
             new DeleteCurrency(
@@ -86,7 +103,24 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
                 bus.SendAsync(new RefreshCurrencyListPage());
               }, 
               (error) => {
-                bus.SendAsync(new ShowError(error));
+                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+              }));
+       }));
+  }
+
+  _onUnDeleteClick() {
+    bus.SendAsync(
+      new Ask(
+        state.i18n.currency.undeleteQuestion.replace('{0}', this.props.currency.name), 
+        (answer: boolean) => {
+          bus.SendAsync(
+            new UnDeleteCurrency(
+              this.props.currency, 
+              () => {
+                bus.SendAsync(new RefreshCurrencyListPage());
+              }, 
+              (error) => {
+                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
               }));
        }));
   }

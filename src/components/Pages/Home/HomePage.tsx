@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {bus} from '../../../shared';
+import {bus, state} from '../../../shared';
 
 import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
@@ -35,7 +35,7 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
           });
         },
         (error) => {
-          bus.SendAsync(new ShowError(error));
+          bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
         }));
   }
 }

@@ -46,7 +46,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
           });
         },
         (error) => {
-          bus.SendAsync(new ShowError(error));
+          bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
         }));
   }
 }
