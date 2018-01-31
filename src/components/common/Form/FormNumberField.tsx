@@ -45,7 +45,6 @@ export class FormNumberField extends React.Component < {
           min={this.props.min}
           max={this.props.max}/>;
 
-
     return (
       <div className="row">
         <div className="col va-middle">

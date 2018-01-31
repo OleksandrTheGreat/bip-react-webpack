@@ -22,6 +22,16 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
+    const editButton = (
+      <button 
+        type="button"
+        className="btn btn-primary"
+        onClick={this._onEditClick}
+        title={state.i18n.common.edit}
+      >
+        {editButtonContent}
+      </button>);
+
     const deleteButton = this.props.currency.id == null || this.props.currency.isDeleted
       ? null
       : <div className="d-inline-block">
@@ -72,14 +82,7 @@ export class CurrencyItem extends React.Component<{currency: Currency}> {
       <div className="row">
         {info}
         <div className="col-2 col-md-auto">
-          <button 
-            type="button"
-            className="btn btn-primary"
-            onClick={this._onEditClick}
-            title={state.i18n.common.edit}
-          >
-            {editButtonContent}
-          </button>
+          {editButton}
           {deleteButton}
           {undoButton}
         </div>

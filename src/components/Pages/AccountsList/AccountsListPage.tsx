@@ -3,8 +3,8 @@ import {state, bus} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
-import { QueryAccountList } from '../../../bus/commands/account.commands';
-import { ShowError } from '../../../bus/commands/index';
+import {QueryAccountList} from '../../../bus/commands/account.commands';
+import {ShowError} from '../../../bus/commands/index';
 
 export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
 

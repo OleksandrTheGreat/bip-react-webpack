@@ -1,11 +1,18 @@
 import * as React from 'react';
+import {state} from '../../../shared';
 import {AccountItem} from './AccountItem';
 import {AccountModel} from '../../../models/AccountModel';
 
 export class AccountsList extends React.Component<{accounts: AccountModel[]}> {
 
   render() {
-    let items = this.props.accounts.map(x => <AccountItem account={x} key={x.id}/>);
+
+    let list = [
+      new AccountModel(null, state.i18n.account.createTitle),
+      ...this.props.accounts
+    ];
+
+    let items = list.map(x => <AccountItem account={x} key={x.id}/>);
     
     return (
       <div className="container-fluid row-list">
