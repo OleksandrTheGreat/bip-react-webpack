@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
 import {Account, Currency} from '../../../domain';
-import {Form, FormTextField, FormOptionValue} from '../../common/Form';
+import {Form, FormTextField, FormOptionValue, FormReadOnly} from '../../common/Form';
 import {SaveState, ShowError } from '../../../bus/commands/index';
 import {FormOptionsField, FormPage} from '../../common/Form';
 import {QueryCurrencyList} from '../../../bus/commands/currency.commands';
@@ -23,6 +23,16 @@ export class AccountForm extends FormPage {
 
   render() {
 
+    const currencyOptionField = this.state.data.account.id == null
+      ? <FormOptionsField 
+          title={state.i18n.account.currency}
+          values = {this.state.data.currencyList}
+          selectedValue={this.props.data.account.currencyId} 
+          onChange={(e) => this.onChange<AccountFormModel>(model => model.account.currencyId = e.target.value)}/>
+      : <FormReadOnly
+        title={state.i18n.account.currency}
+        value={this.props.data.account.currency}/>;
+
     return (
       <Form onSave={this._onSave}>
         <FormTextField
@@ -31,11 +41,7 @@ export class AccountForm extends FormPage {
           isRequired={true}
           validationMessage={state.i18n.account.nameValidationMessage}
           onChange={(e) => this.onChange<AccountFormModel>(model => model.account.name = e.target.value)} />
-        <FormOptionsField 
-          title={state.i18n.account.currency}
-          values = {this.state.data.currencyList}
-          selectedValue={this.props.data.account.currencyId} 
-          onChange={(e) => this.onChange<AccountFormModel>(model => model.account.currencyId = e.target.value)}/>
+        {currencyOptionField}
       </Form>
     );
   }
