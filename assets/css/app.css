@@ -6,7 +6,48 @@
   .hidden-sm {
     display: none; } }
 
-.pull-right {
-  float: right !important; }
+.navbar-nav .fa {
+  margin-right: 0.5em; }
+
+.page {
+  margin-top: 1em; }
+
+.language-item {
+  padding: 0.5em; }
+
+.row-list {
+  max-width: 33em;
+  min-width: 10em; }
+  .row-list .row {
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 7px;
+    padding-bottom: 7px; }
+  .row-list .row:last-child {
+    border-bottom: none; }
+
+.settings-list .col-setting-title {
+  padding-top: 0.4em; }
+
+.btn, button {
+  cursor: pointer; }
+
+.page-header {
+  margin-bottom: 1em; }
+
+.fa.title-icon {
+  width: 1.5em;
+  text-align: center; }
+
+.fa.header-icon {
+  margin-right: 0.34em; }
+
+label {
+  font-weight: 500; }
+
+.ask.modal-title {
+  color: orange; }
+
+.error.modal-title {
+  color: red; }
 
 /*# sourceMappingURL=app.css.map*/
