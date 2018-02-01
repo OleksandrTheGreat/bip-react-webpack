@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {state} from '../../../shared';
 
-export class FormReadOnly extends React.Component < {
+export class FormReadOnlyField extends React.Component < {
   title : string,
   value : string,
 } > {
