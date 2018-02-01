@@ -24,6 +24,7 @@ export class FormOptionsField extends React.Component < {
     const Input = <div>
       <select
         className="form-control"
+        onChange={this.props.onChange}
       >
         {Options}
       </select>

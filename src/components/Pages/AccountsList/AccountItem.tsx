@@ -15,7 +15,16 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
 
   render() {
 
-    const editButton = (
+    const editButton = this.props.account.id == null
+    ? <button 
+        type="button"
+        className="btn btn-primary"
+        title={state.i18n.common.edit}
+        onClick={this._onEditClick}
+      >
+        <i className="fa fa-plus"></i>
+      </button>
+    :
       <button 
         type="button"
         className="btn btn-primary"
@@ -23,12 +32,12 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
         onClick={this._onEditClick}
       >
         <i className="fa fa-pencil"></i>
-      </button>);
+      </button>;
 
     return (
       <div className="row">
         <div className="col va-middle">
-          {this.props.account.name}
+          {this.props.account.name || state.i18n.account.createTitle}
           <div>
             <small>
               {this.props.account.description}

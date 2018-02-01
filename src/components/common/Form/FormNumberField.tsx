@@ -14,9 +14,7 @@ export class FormNumberField extends React.Component < {
   constructor(props) {
     super(props);
 
-    this._onChange = this
-      ._onChange
-      .bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
   render() {

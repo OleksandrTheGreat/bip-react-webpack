@@ -27,7 +27,7 @@ export class AccountForm extends FormPage {
       ? <FormOptionsField 
           title={state.i18n.account.currency}
           values = {this.state.data.currencyList}
-          selectedValue={this.props.data.account.currencyId} 
+          selectedValue={this.state.data.account.currencyId} 
           onChange={(e) => this.onChange<AccountFormModel>(model => model.account.currencyId = e.target.value)}/>
       : <FormReadOnlyField
           title={state.i18n.account.currency}

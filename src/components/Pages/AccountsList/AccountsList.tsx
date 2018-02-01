@@ -8,7 +8,7 @@ export class AccountsList extends React.Component<{accounts: AccountModel[]}> {
   render() {
 
     let list = [
-      new AccountModel(null, state.i18n.account.createTitle),
+      new AccountModel(null, null),
       ...this.props.accounts
     ];
 

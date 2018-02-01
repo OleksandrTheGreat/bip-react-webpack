@@ -14,12 +14,12 @@ export abstract class FormPage extends React.Component <{data: any}, {data: any}
     this.onChange = this.onChange.bind(this);
   }
 
-  public onChange<T>(delegate: (data: T) => T) {
+  public onChange<T>(delegate: (data: T) => void) {
 
     state.page.isDirty = true;
 
     let data = this.state.data;
-    data = delegate(data);
+    delegate(data);
 
     state.page.data = data;
     

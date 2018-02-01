@@ -19,7 +19,7 @@ export class AccountPage extends React.Component < {
     return (
       <div>
         <Header>
-          <i className="fa header-icon fa-usd"></i>
+          <i className="fa header-icon fa-money"></i>
           {title}
         </Header>
         <AccountForm data={{
