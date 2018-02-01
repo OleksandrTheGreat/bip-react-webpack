@@ -6,6 +6,7 @@ import {SaveState, ShowError } from '../../../bus/commands/index';
 import {FormOptionsField, FormPage} from '../../common/Form';
 import {QueryCurrencyList} from '../../../bus/commands/currency.commands';
 import { AccountModel } from '../../../models/AccountModel';
+import { FormTextAreaField } from '../../common/Form/FormTextAreaField';
 
 class AccountFormModel {
   account: AccountModel;
@@ -42,6 +43,11 @@ export class AccountForm extends FormPage {
           validationMessage={state.i18n.account.nameValidationMessage}
           onChange={(e) => this.onChange<AccountFormModel>(model => model.account.name = e.target.value)} />
         {currencyOptionField}
+        <FormTextAreaField
+          title={state.i18n.common.description}
+          value={this.state.data.account.description}
+          onChange={(e) => this.onChange<AccountFormModel>(model => model.account.description = e.target.value)} />
+        
       </Form>
     );
   }
