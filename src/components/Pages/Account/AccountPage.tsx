@@ -22,7 +22,10 @@ export class AccountPage extends React.Component < {
           <i className="fa header-icon fa-usd"></i>
           {title}
         </Header>
-        <AccountForm data={this.props.data.account} />
+        <AccountForm data={{
+          account: this.props.data.account,
+          currencyList: []
+        }} />
       </div>
     );
   }

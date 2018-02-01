@@ -2,7 +2,7 @@ import * as React from 'react';
 import {state, bus} from '../../../shared';
 import {SaveState} from '../../../bus/commands/index';
 
-export class FormPage extends React.Component <{data: any}, {data: any}> {
+export abstract class FormPage extends React.Component <{data: any}, {data: any}> {
 
   constructor(props) {
     super(props);
@@ -14,12 +14,12 @@ export class FormPage extends React.Component <{data: any}, {data: any}> {
     this.onChange = this.onChange.bind(this);
   }
 
-  public onChange(name : string, value : any) {
-    
+  public onChange<T>(delegate: (data: T) => T) {
+
     state.page.isDirty = true;
 
     let data = this.state.data;
-    data[name] = value;
+    data = delegate(data);
 
     state.page.data = data;
     

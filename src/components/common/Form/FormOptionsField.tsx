@@ -7,7 +7,7 @@ export class FormOptionValue {
   ){ }
 }
 
-export class FormOptions extends React.Component < {
+export class FormOptionsField extends React.Component < {
   title : string,
   values : FormOptionValue[],
   selectedValue?: any,
@@ -18,12 +18,14 @@ export class FormOptions extends React.Component < {
 
   render(){
 
-    const options = this.props.values.map(x => <option value={x.value}>x.display</option>);
+    const Options = this.props.values.map(x => 
+      <option value={x.value} selected={x.value == this.props.selectedValue}>{x.display}</option>);
 
     const Input = <div>
       <select
         className="form-control"
       >
+        {Options}
       </select>
     </div>;
 

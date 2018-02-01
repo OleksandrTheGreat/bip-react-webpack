@@ -38,6 +38,7 @@ export class AccountMapper implements IAccountMapper {
               account.id, 
               account.name, 
               balance, 
+              currency.id,
               currency.name, 
               account.showOrder, 
               account.description
