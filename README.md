@@ -7,4 +7,7 @@
   <p>
     A simple accountant tool to store and manage home/personal accounts. App is using IndexedDb as a content storage.
   </p>
+  <div>
+    https://oleksandrthegreat.github.io/bip-react-webpack/
+  </div>
 </section>
