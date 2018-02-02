@@ -4,9 +4,9 @@
   <div><b>P</b>ocket</div>
 </section>
 <section style="margin-top: 2.5em">
-  <p>
+  <div>
     A simple accountant tool to store and manage home/personal accounts. App is using IndexedDb as a content storage.
-  </p>
+  </div>
   <div>
     https://oleksandrthegreat.github.io/bip-react-webpack/
   </div>
