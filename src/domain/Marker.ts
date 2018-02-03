@@ -10,8 +10,16 @@ export class Marker  extends Entity {
   constructor(
     id: AAGUID,
     public category: MarkerCategory,
-    public name: string
+    public name: string,
+    isDeleted?: boolean,
+    createdDateTime?: Date,
+    modifiedDateTime?: Date
   ) {
-    super(id);
+    super(
+      id,
+      isDeleted,
+      createdDateTime,
+      modifiedDateTime
+    );
   }
 }

@@ -10,8 +10,16 @@ export class Account extends Entity {
     public description: string = null,
     public showOnHomePage: boolean = false,
     public displayOrder: number = 0,
-    public useInBalance: boolean = true
+    public useInBalance: boolean = true,
+    isDeleted?: boolean,
+    createdDateTime?: Date,
+    modifiedDateTime?: Date
   ) {
-    super(id);
+    super(
+      id,
+      isDeleted,
+      createdDateTime,
+      modifiedDateTime
+    );
   }
 }

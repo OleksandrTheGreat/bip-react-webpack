@@ -1,9 +1,9 @@
 export abstract class Entity {
-  createdDateTime: Date;
-  modifyDateTime: Date;
-  isDeleted: boolean;
-
+  
   constructor(
-    public id: AAGUID
+    public id: AAGUID,
+    public isDeleted: boolean = false,
+    public createdDateTime: Date = new Date(),
+    public modifiedDateTime: Date = new Date()
   ) {}
 }

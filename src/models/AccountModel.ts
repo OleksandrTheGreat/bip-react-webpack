@@ -6,7 +6,7 @@ export class AccountModel {
     public balance: string = null,
     public currencyId: AAGUID = null,
     public currency: string = null,
-    public displayOrder: number = -1,
+    public displayOrder: number = 0,
     public description: string = null
   ) {    
   }

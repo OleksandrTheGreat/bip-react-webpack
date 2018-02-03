@@ -10,8 +10,16 @@ export class Transaction  extends Entity {
     public sumFrom: number,
     public sumTo: number,
     public rate: number = null,
-    public description: string = null
+    public description: string = null,
+    isDeleted?: boolean,
+    createdDateTime?: Date,
+    modifiedDateTime?: Date
   ) {
-    super(id);
+    super(
+      id,
+      isDeleted,
+      createdDateTime,
+      modifiedDateTime
+    );
   }
 }
