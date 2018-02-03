@@ -99,7 +99,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         (answer: boolean) => {
           bus.SendAsync(
             new DeleteCurrency(
-              this.props.currency, 
+              this.props.currency.id, 
               () => {
                 bus.SendAsync(new RefreshCurrencyListPage());
               }, 
@@ -116,7 +116,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         (answer: boolean) => {
           bus.SendAsync(
             new UnDeleteCurrency(
-              this.props.currency, 
+              this.props.currency.id, 
               () => {
                 bus.SendAsync(new RefreshCurrencyListPage());
               }, 

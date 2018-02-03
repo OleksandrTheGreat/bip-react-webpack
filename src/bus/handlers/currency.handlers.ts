@@ -75,7 +75,7 @@ import {CurrencyModel} from '../../models';
   bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
 
     repository
-        .getById<Currency>(storageName, command.currency.id)
+        .getById<Currency>(storageName, command.id)
         .then(currency => {
 
           currency.isDeleted = true;
@@ -92,7 +92,7 @@ import {CurrencyModel} from '../../models';
   bus.Handle(UnDeleteCurrency, (command: UnDeleteCurrency) => {
 
     repository
-        .getById<Currency>(storageName, command.currency.id)
+        .getById<Currency>(storageName, command.id)
         .then(currency => {
 
           currency.isDeleted = false;

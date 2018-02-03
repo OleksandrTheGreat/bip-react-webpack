@@ -2,7 +2,7 @@ import {CurrencyModel} from '../../models';
 
 export class DeleteCurrency {
   constructor(
-    public currency: CurrencyModel,
+    public id: AAGUID,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}
@@ -28,7 +28,7 @@ export class RefreshCurrencyListPage {
 
 export class UnDeleteCurrency {
   constructor(
-    public currency: CurrencyModel,
+    public id: AAGUID,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}
