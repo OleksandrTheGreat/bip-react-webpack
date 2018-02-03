@@ -14,3 +14,11 @@ export class QueryAccountList {
     public onError: (error: any) => void
   ) {}
 }
+
+export class SaveAccount {
+  constructor(
+    public account: AccountModel,
+    public onSuccess: () => void,
+    public onError: (error: any) => void
+  ){}
+}

@@ -4,7 +4,7 @@ export class AccountModel {
 
   public get balanceView(): string {
 
-    if (this.balance === null)
+    if (!!!this.balance)
       return '';
 
     return this.balance.toLocaleString(
@@ -20,10 +20,11 @@ export class AccountModel {
     public name: string,
     public balance: number = null,
     public currencyId: AAGUID = null,
-    public currency: string = null,
+    public currencyName: string = null,
     public displayOrder: number = 0,
     public description: string = null,
-    public precision: number = 2
+    public precision: number = 2,
+    public showOnHomePage: boolean = false
   ) {    
   }
 }

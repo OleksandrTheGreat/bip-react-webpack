@@ -36,7 +36,8 @@ export class AccountMapper implements IAccountMapper {
               currency.name, 
               account.displayOrder, 
               account.description,
-              currency.precision
+              currency.precision,
+              account.showOnHomePage
             )
           });
 

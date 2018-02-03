@@ -10,7 +10,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           {this.props.account.name}
         </div>
         <div className="col text-right text-nowrap">
-          {this.props.account.balanceView} {this.props.account.currency}
+          {this.props.account.balanceView} {this.props.account.currencyName}
         </div>
       </div>
     );

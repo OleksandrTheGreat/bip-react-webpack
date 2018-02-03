@@ -45,7 +45,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           </div>
         </div>
         <div className="col text-right va-middle">
-          {this.props.account.balanceView} {this.props.account.currency} 
+          {this.props.account.balanceView} {this.props.account.currencyName} 
         </div>
         <div className="col-2 col-md-auto">
           {editButton}
