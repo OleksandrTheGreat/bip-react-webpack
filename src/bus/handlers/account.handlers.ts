@@ -37,7 +37,7 @@ import { GUID } from 'xtypescript';
   bus.Handle(QueryAccountList, (command: QueryAccountList) => {
 
     _repository
-      .query<Account>(storageName, account => !account.isDeleted && account.showOnHomePage)
+      .query<Account>(storageName, account => !account.isDeleted)
       .then(accounts => {
 
         let result = accounts.sort((a, b)=>{
@@ -75,6 +75,8 @@ import { GUID } from 'xtypescript';
           account.displayOrder = command.account.displayOrder;
           account.modifiedDateTime = new Date();
 
+          adjust(account);
+          
           _repository
             .update<Account>(storageName, account)
             .then(() => command.onSuccess())
@@ -88,11 +90,18 @@ import { GUID } from 'xtypescript';
         GUID.New(),
         command.account.name,
         command.account.currencyId,
-        command.account.balance,
+        command.account.balance || 0,
         command.account.description,
         command.account.showOnHomePage,
         command.account.displayOrder
       );
+
+      if (!account.currencyId){
+        command.onError({name: 'CurrencyIsMissing'});
+        return;
+      }
+
+      adjust(account);
 
       _repository
         .update<Account>(storageName, account)
@@ -101,5 +110,9 @@ import { GUID } from 'xtypescript';
     }
   });
 
-
+  
+  function adjust(account: Account): void {
+    account.balance = account.balance || 0;
+    account.displayOrder = account.displayOrder || 0;
+  }
 })();

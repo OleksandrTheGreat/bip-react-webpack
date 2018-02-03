@@ -4,7 +4,7 @@ export class AccountModel {
 
   public get balanceView(): string {
 
-    if (!!!this.balance)
+    if (!this.balance === null || this.balance === undefined)
       return '';
 
     return this.balance.toLocaleString(
@@ -18,7 +18,7 @@ export class AccountModel {
   constructor(
     public id: AAGUID,
     public name: string,
-    public balance: number = null,
+    public balance: number = 0,
     public currencyId: AAGUID = null,
     public currencyName: string = null,
     public displayOrder: number = 0,

@@ -7,6 +7,7 @@ export interface Ii18nAccount {
   balance: string;
   displayOrder: string;
   showOnHomePage: string;
+  currencyIsMissingError: string;
 }
 
 export class i18nAccountEN implements Ii18nAccount {
@@ -18,6 +19,7 @@ export class i18nAccountEN implements Ii18nAccount {
   balance = 'Balance';
   displayOrder = 'Display order';
   showOnHomePage = 'Show on Home Page';
+  currencyIsMissingError = 'Cannot save Account. Currency was not set.';
 }
 
 export class i18nAccountUA implements Ii18nAccount {
@@ -29,4 +31,5 @@ export class i18nAccountUA implements Ii18nAccount {
   balance = 'Залишок';
   displayOrder = 'Порядок показу';
   showOnHomePage = 'Показувати на головній сторінці';
+  currencyIsMissingError = 'Збереження неможливе. Валюту не було встановлено.';
 }

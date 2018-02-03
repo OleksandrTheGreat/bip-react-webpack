@@ -101,6 +101,9 @@ export class AccountForm extends FormPage<AccountFormModel> {
               .replace('{0}', this.state.data.account.name)
               .replace('{1}', this.state.data.account.currencyName);
             break;
+          case 'CurrencyIsMissing':
+            message = state.i18n.account.currencyIsMissingError;
+            break;
           default:
             message = state.i18n.common.defaulErrorMessage;
         }
@@ -117,9 +120,20 @@ export class AccountForm extends FormPage<AccountFormModel> {
 
           this.setState((state) => {
 
+            let account = state.data.account;
+
+            if (!account.currencyId) {
+
+              let currency = list[0];
+        
+              this.state.data.account.currencyId = currency.id;
+              this.state.data.account.currencyName = currency.name;
+            }
+
             return {
               data: {
               ...state.data,
+              account: account,
               currencyList: list
                 .filter(x => x.isDeleted === false || x.isDeleted === undefined)
                 .map(x => new FormOptionValue(x.id, x.name))
