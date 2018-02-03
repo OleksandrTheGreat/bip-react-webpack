@@ -7,6 +7,7 @@ import {FormOptionsField, FormPage} from '../../common/Form';
 import {QueryCurrencyList} from '../../../bus/commands/currency.commands';
 import {AccountModel, CurrencyModel} from '../../../models';
 import {FormTextAreaField} from '../../common/Form/FormTextAreaField';
+import { xMath } from 'xtypescript';
 
 export class AccountFormModel {
   constructor(
@@ -44,7 +45,7 @@ export class AccountForm extends FormPage<AccountFormModel> {
           value={this.state.data.account.name}
           isRequired={true}
           validationMessage={state.i18n.account.nameValidationMessage}
-          onChange={(e) => this.onChange(model => model.account.name = e.target.value)}
+          onChange={e => this.onChange(model => model.account.name = e.target.value)}
         />
 
         {currencyOptionField}
@@ -52,9 +53,15 @@ export class AccountForm extends FormPage<AccountFormModel> {
         <FormTextAreaField
           title={state.i18n.common.description}
           value={this.state.data.account.description}
-          onChange={(e) => this.onChange(model => model.account.description = e.target.value)}
+          onChange={e => this.onChange(model => model.account.description = e.target.value)}
         />
         
+        <FormNumberField 
+          title={state.i18n.account.balance}
+          value={this.state.data.account.balance}
+          onChange={e => this.onChange(model => model.account.balance = xMath.roundTo(e.target.value, model.account.precision))}
+        />
+
       </Form>
     );
   }

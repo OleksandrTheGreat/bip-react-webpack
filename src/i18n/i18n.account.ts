@@ -4,6 +4,7 @@ export interface Ii18nAccount {
   constraintErrorMessage: string;
   nameValidationMessage: string;
   currency: string;
+  balance: string;
 }
 
 export class i18nAccountEN implements Ii18nAccount {
@@ -12,6 +13,7 @@ export class i18nAccountEN implements Ii18nAccount {
   constraintErrorMessage = 'Account {0} already exists';
   nameValidationMessage = 'Provide account name';
   currency = 'Currency';
+  balance = 'Balance';
 }
 
 export class i18nAccountUA implements Ii18nAccount {
@@ -20,4 +22,5 @@ export class i18nAccountUA implements Ii18nAccount {
   constraintErrorMessage = 'Account {0} already exists';
   nameValidationMessage = 'Вкажіть назву рахунку';
   currency = 'Валюта';
+  balance = 'Залишок';
 }

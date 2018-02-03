@@ -30,7 +30,8 @@ export class FormNumberField extends React.Component < {
             onChange={this._onChange}
             min={this.props.min}
             max={this.props.max}
-            required />
+            required 
+          />
           <div className="invalid-feedback">
             {this.props.validationMessage 
               ? this.props.validationMessage 
@@ -43,7 +44,8 @@ export class FormNumberField extends React.Component < {
           value={this.props.value}
           onChange={this._onChange}
           min={this.props.min}
-          max={this.props.max}/>;
+          max={this.props.max}
+        />;
 
     return (
       <FormField 
