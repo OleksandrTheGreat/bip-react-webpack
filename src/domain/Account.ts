@@ -9,7 +9,7 @@ export class Account extends Entity {
     public balance: number = 0,
     public description: string = null,
     public showOnHomePage: boolean = false,
-    public showOrder: number = 0,
+    public displayOrder: number = 0,
     public useInBalance: boolean = true
   ) {
     super(id);

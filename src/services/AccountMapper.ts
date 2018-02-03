@@ -40,7 +40,7 @@ export class AccountMapper implements IAccountMapper {
               balance, 
               currency.id,
               currency.name, 
-              account.showOrder, 
+              account.displayOrder, 
               account.description
             )
           });
