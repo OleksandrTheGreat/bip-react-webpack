@@ -12,7 +12,7 @@
 .page {
   margin-top: 1em; }
 
-.page-content {
+.page-content, .row-list {
   max-width: 33em;
   min-width: 10em; }
 
