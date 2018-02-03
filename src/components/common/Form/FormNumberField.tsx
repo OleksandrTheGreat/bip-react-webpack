@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {state} from '../../../shared';
+import { FormField } from './FormField';
 
 export class FormNumberField extends React.Component < {
   title : string,
@@ -44,14 +45,9 @@ export class FormNumberField extends React.Component < {
           max={this.props.max}/>;
 
     return (
-      <div className="row">
-        <div className="col va-middle">
-          <label>{this.props.title}</label>
-        </div>
-        <div className="col">
-          {Input}
-        </div>
-      </div>
+      <FormField title={this.props.title}>
+        {Input}
+      </FormField>
     );
   }
 

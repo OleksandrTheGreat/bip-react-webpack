@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {state} from '../../../shared';
+import { FormField } from './FormField';
 
 export class FormTextAreaField extends React.Component < {
   title : string,
@@ -32,14 +33,9 @@ export class FormTextAreaField extends React.Component < {
         ></textarea>;
 
     return (
-      <div className="row">
-        <div className="col va-middle">
-          <label>{this.props.title}</label>
-        </div>
-        <div className="col">
-          {TextArea}
-        </div>
-      </div>
+      <FormField title={this.props.title}>
+        {TextArea}
+      </FormField>
     );
   }
 }

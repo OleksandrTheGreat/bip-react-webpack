@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { FormField } from './FormField';
 
 export class FormOptionValue {
   constructor(
@@ -31,14 +32,9 @@ export class FormOptionsField extends React.Component < {
     </div>;
 
     return (
-      <div className="row">
-        <div className="col va-middle">
-          <label>{this.props.title}</label>
-        </div>
-        <div className="col">
-          {Input}
-        </div>
-      </div>
+      <FormField title={this.props.title}>
+        {Input}
+      </FormField>
     );
   }
 }
