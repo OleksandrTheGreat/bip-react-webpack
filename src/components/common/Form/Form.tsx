@@ -17,7 +17,36 @@ export class Form extends React.Component <
     this._onSave = this._onSave.bind(this);
   }
 
-  render(){
+  render() {
+
+    const cancelButton = (
+      <button 
+        type="button"
+        className="btn"
+        onClick={SharedCommands.goBack}
+        title={state.i18n.common.cancel}
+      >
+        <i className="fa fa-ban"></i>
+      </button>
+    );
+
+    const saveButton = state.page.isDirty
+      ? <button 
+          type="submit" 
+          className="btn btn-primary"
+          title={state.i18n.common.save}
+        >
+          <i className="fa fa-save"></i>
+        </button>
+      : <button 
+          type="submit" 
+          className="btn btn-primary"
+          onClick={this._onSave}
+          title={state.i18n.common.save}
+          disabled
+        >
+          <i className="fa fa-save"></i>
+        </button>;
 
     return (
       <form id={this._id} noValidate>
@@ -25,23 +54,9 @@ export class Form extends React.Component <
           {this.props.children}
         </div>
         <div className="container-fluid row-list text-right">
-          <button 
-            type="button"
-            className="btn"
-            onClick={SharedCommands.goBack}
-            title={state.i18n.common.cancel}
-          >
-            <i className="fa fa-ban"></i>
-          </button>
+          {cancelButton}
           &nbsp;
-          <button 
-            type="submit" 
-            className="btn btn-primary"
-            onClick={this._onSave}
-            title={state.i18n.common.save}
-          >
-            <i className="fa fa-save"></i>
-          </button>
+          {saveButton}
         </div>  
       </form>
     );
