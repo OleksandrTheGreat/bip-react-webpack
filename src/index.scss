@@ -18,6 +18,8 @@
 
 .page {
   margin-top: 1em;
+  max-width: 33em;
+  min-width: 10em;
 }
 
 .language-item {
@@ -25,9 +27,6 @@
 }
 
 .row-list {
-  max-width: 33em;
-  min-width: 10em;
-
   .row {
     border-bottom: 1px solid #ebebeb;
     margin-bottom: 7px;

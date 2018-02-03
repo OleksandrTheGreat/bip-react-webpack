@@ -5,7 +5,7 @@ const common = require('../webpack.config.common.js');
 const source = common.folders.bin;
 
 console.log('------------------------ deploying to github pages - started ------------------------');
-console.log('publishing "' + source + '" to "' + package.repository.demo + '"');
+console.log('publishing "' + source + '" to "' + package.repository.url + '"');
 
 ghpages.publish(source, function(err) {
     if (err) {
