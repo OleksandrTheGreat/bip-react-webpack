@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {bus, state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
-import {DeleteCurrency, RefreshCurrencyListPage, UnDeleteCurrency} from '../../../bus/commands/currency.commands';
+import {DeleteCurrency, RefreshCurrencyListPage, RestoreCurrency} from '../../../bus/commands/currency.commands';
 import {CurrencyModel} from '../../../models';
 
 export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
@@ -45,7 +45,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         </div>;
 
     const info = this.props.currency.isDeleted
-      ? <div className="col va-middle">
+      ? <div className="col">
           <del><em>{this.props.currency.name || state.i18n.currency.createTitle}</em></del>
           <div>
             <small>
@@ -53,7 +53,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
             </small>
           </div>
         </div>
-      : <div className="col va-middle">
+      : <div className="col">
           {this.props.currency.name || state.i18n.currency.createTitle}
           <div>
             <small>
@@ -62,7 +62,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
           </div>
         </div>;
 
-    const undoButton = this.props.currency.isDeleted
+    const restoreButton = this.props.currency.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -82,7 +82,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         <div className="col-2 col-md-auto">
           {editButton}
           {deleteButton}
-          {undoButton}
+          {restoreButton}
         </div>
       </div>
     );
@@ -112,10 +112,10 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   _onUnDeleteClick() {
     bus.SendAsync(
       new Ask(
-        state.i18n.currency.undeleteQuestion.replace('{0}', this.props.currency.name), 
+        state.i18n.currency.restoreQuestion.replace('{0}', this.props.currency.name), 
         (answer: boolean) => {
           bus.SendAsync(
-            new UnDeleteCurrency(
+            new RestoreCurrency(
               this.props.currency.id, 
               () => {
                 bus.SendAsync(new RefreshCurrencyListPage());

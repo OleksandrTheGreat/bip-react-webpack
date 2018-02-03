@@ -6,7 +6,7 @@ export interface Ii18nCurrency {
   minimumFractionDigitsValidationMessage: string;
   deleteQuestion: string;
   constraintErrorMessage: string;
-  undeleteQuestion: string;
+  restoreQuestion: string;
 }
 
 export class i18nCurrencyEN implements Ii18nCurrency {
@@ -17,7 +17,7 @@ export class i18nCurrencyEN implements Ii18nCurrency {
   minimumFractionDigitsValidationMessage = 'Provide minimum fraction digits';
   deleteQuestion = 'Are you sure you want to delete "{0}" currency?';
   constraintErrorMessage = 'Currency "{0}" already exists';
-  undeleteQuestion = 'Are you realy want to undelete "{0}" currency?';
+  restoreQuestion = 'Are you realy want to restore "{0}" currency?';
 }
 
 export class i18nCurrencyUA implements Ii18nCurrency {
@@ -28,5 +28,5 @@ export class i18nCurrencyUA implements Ii18nCurrency {
   minimumFractionDigitsValidationMessage = 'Вкажіть кількістьсть знаків після крапки';
   deleteQuestion = 'Ви впевнені, що хочете видалити валюту "{0}"?';
   constraintErrorMessage = 'Валюта "{0}" вже існує.';
-  undeleteQuestion = 'Ви впевнені, що хочете відновити валюту "{0}"?';
+  restoreQuestion = 'Ви впевнені, що хочете відновити валюту "{0}"?';
 }

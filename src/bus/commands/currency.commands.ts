@@ -26,7 +26,7 @@ export class QueryCurrencyList {
 export class RefreshCurrencyListPage {
 }
 
-export class UnDeleteCurrency {
+export class RestoreCurrency {
   constructor(
     public id: AAGUID,
     public onSuccess: () => void,

@@ -1,6 +1,6 @@
 import {bus, state, ioc} from '../../shared';
 import {Account} from "../../domain/Account";
-import {QueryDashboardAccounts, QueryAccountList, SaveAccount} from '../commands/account.commands';
+import {QueryDashboardAccounts, QueryAccountList, SaveAccount, DeleteAccount, ResoreAccount} from '../commands/account.commands';
 import { GUID } from 'xtypescript';
 
 (() => {
@@ -37,7 +37,7 @@ import { GUID } from 'xtypescript';
   bus.Handle(QueryAccountList, (command: QueryAccountList) => {
 
     _repository
-      .query<Account>(storageName, account => !account.isDeleted)
+      .query<Account>(storageName)
       .then(accounts => {
 
         let result = accounts.sort((a, b)=>{
@@ -110,9 +110,43 @@ import { GUID } from 'xtypescript';
     }
   });
 
+  bus.Handle(DeleteAccount, (command: DeleteAccount) => {
+
+    _repository
+      .getById<Account>(storageName, command.id)
+      .then(account => {
+
+        account.isDeleted = true;
+        account.modifiedDateTime = new Date();
+
+        _repository
+          .update<Account>(storageName, account)
+          .then(() => command.onSuccess())
+          .catch(e => command.onError(e));
+      })
+      .catch(e => command.onError(e));
+  });
   
+  bus.Handle(ResoreAccount, (command: ResoreAccount) => {
+
+    _repository
+      .getById<Account>(storageName, command.id)
+      .then(account => {
+
+        account.isDeleted = false;
+        account.modifiedDateTime = new Date();
+
+        _repository
+          .update<Account>(storageName, account)
+          .then(() => command.onSuccess())
+          .catch(e => command.onError(e));
+      })
+      .catch(e => command.onError(e));
+  });
+
   function adjust(account: Account): void {
     account.balance = account.balance || 0;
     account.displayOrder = account.displayOrder || 0;
   }
+
 })();

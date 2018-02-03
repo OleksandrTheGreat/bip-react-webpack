@@ -3,8 +3,8 @@ import {state, bus} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
-import {QueryAccountList} from '../../../bus/commands/account.commands';
-import {ShowError} from '../../../bus/commands/index';
+import {QueryAccountList, RefreshAccountsListPage} from '../../../bus/commands/account.commands';
+import {ShowError} from '../../../bus/commands';
 
 export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
 
@@ -14,6 +14,8 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
     this.state = {
       accounts: []
     };
+
+    bus.Handle(RefreshAccountsListPage, () => this._refreshAccount());
 
     this._refreshAccount();
   }

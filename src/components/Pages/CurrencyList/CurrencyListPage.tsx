@@ -15,9 +15,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
       currencyList: []
     };
 
-    bus.Handle(RefreshCurrencyListPage, () => {
-      this._refreshCurrency()
-    });
+    bus.Handle(RefreshCurrencyListPage, () => this._refreshCurrency());
 
     this._refreshCurrency();
   }

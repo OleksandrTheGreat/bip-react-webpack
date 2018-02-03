@@ -1,6 +1,6 @@
 import {Currency} from '../../domain/Currency';
 import {bus, state, ioc} from '../../shared';
-import {QueryCurrencyList, DeleteCurrency, SaveCurrency, UnDeleteCurrency} from '../commands/currency.commands';
+import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
 import { GUID } from 'xtypescript';
 import {CurrencyModel} from '../../models';
 
@@ -89,7 +89,7 @@ import {CurrencyModel} from '../../models';
         .catch(e => command.onError(e));
   });
 
-  bus.Handle(UnDeleteCurrency, (command: UnDeleteCurrency) => {
+  bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
 
     repository
         .getById<Currency>(storageName, command.id)

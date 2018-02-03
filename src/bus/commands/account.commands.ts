@@ -22,3 +22,22 @@ export class SaveAccount {
     public onError: (error: any) => void
   ){}
 }
+
+export class DeleteAccount {
+  constructor(
+    public id: AAGUID,
+    public onSuccess: () => void,
+    public onError: (error: any) => void
+  ){}
+}
+
+export class ResoreAccount {
+  constructor(
+    public id: AAGUID,
+    public onSuccess: () => void,
+    public onError: (error: any) => void
+  ){}
+}
+
+export class RefreshAccountsListPage {
+}

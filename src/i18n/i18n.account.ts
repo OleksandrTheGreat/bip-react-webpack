@@ -8,6 +8,8 @@ export interface Ii18nAccount {
   displayOrder: string;
   showOnHomePage: string;
   currencyIsMissingError: string;
+  deleteQuestion: string;
+  restoreQuestion: string;
 }
 
 export class i18nAccountEN implements Ii18nAccount {
@@ -20,6 +22,8 @@ export class i18nAccountEN implements Ii18nAccount {
   displayOrder = 'Display order';
   showOnHomePage = 'Show on Home Page';
   currencyIsMissingError = 'Cannot save Account. Currency was not set.';
+  deleteQuestion = 'Are you realy want to delete "{0} {1}" account?';
+  restoreQuestion = 'Are you realy want to restore "{0} {1}" account?';
 }
 
 export class i18nAccountUA implements Ii18nAccount {
@@ -32,4 +36,6 @@ export class i18nAccountUA implements Ii18nAccount {
   displayOrder = 'Порядок показу';
   showOnHomePage = 'Показувати на головній сторінці';
   currencyIsMissingError = 'Збереження неможливе. Валюту не було встановлено.';
+  deleteQuestion = 'Ви впевнені, що хочете видалити рахунок "{0} {1}"?';
+  restoreQuestion = 'Ви впевнені, що хочете відновити рахунок "{0} {1}"?';
 }

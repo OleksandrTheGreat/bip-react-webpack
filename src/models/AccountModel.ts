@@ -24,7 +24,8 @@ export class AccountModel {
     public displayOrder: number = 0,
     public description: string = null,
     public precision: number = 2,
-    public showOnHomePage: boolean = false
+    public showOnHomePage: boolean = false,
+    public isDeleted: boolean = false
   ) {    
   }
 }

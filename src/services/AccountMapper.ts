@@ -37,7 +37,8 @@ export class AccountMapper implements IAccountMapper {
               account.displayOrder, 
               account.description,
               currency.precision,
-              account.showOnHomePage
+              account.showOnHomePage,
+              account.isDeleted
             )
           });
 
