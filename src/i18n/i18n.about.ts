@@ -3,7 +3,7 @@ export interface Ii18nAbout {
 }
 
 export class i18nAboutEN implements Ii18nAbout {
-  description = 'A simple accountant tool to store and manage home/personal accounts. App is using IndexedDb as a content storage. What means that your data stays in your browser. No network transfer has place.';  
+  description = 'A simple accountant tool to store and manage home/personal accounts. App is using IndexedDb as a content storage. What means that your data stays in your browser. No network data transfer has place to take.';  
 }
 
 export class i18nAboutUA implements Ii18nAbout {
