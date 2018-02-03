@@ -5,7 +5,7 @@ export class AboutPage extends React.Component {
 
   render() {    
     return (
-      <div className="container-fluid">
+      <div className="container-fluid page-content">
         <div><b className="text-danger">B</b>alance</div>
         <div><b className="text-danger">i</b>n</div>
         <div><b className="text-danger">P</b>ocket</div>
