@@ -6,7 +6,7 @@ import {AccountForm, AccountFormModel} from './AccountForm';
 import {AccountModel} from '../../../models/AccountModel';
 
 export class AccountPage extends React.Component < {
-  data : {
+  data : {//todo: add page super type
     account: AccountModel
   }
 } > {

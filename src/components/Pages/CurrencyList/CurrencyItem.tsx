@@ -1,12 +1,10 @@
 import * as React from 'react';
-
-import {Currency} from '../../../domain';
-
 import {bus, state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
 import {DeleteCurrency, RefreshCurrencyListPage, UnDeleteCurrency} from '../../../bus/commands/currency.commands';
+import {CurrencyModel} from '../../../models';
 
-export class CurrencyItem extends React.Component<{currency: Currency}> {
+export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
 
   constructor() {
     super();

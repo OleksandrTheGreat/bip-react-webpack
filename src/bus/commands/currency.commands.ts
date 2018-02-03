@@ -1,8 +1,8 @@
-import { Currency } from "../../domain";
+import {CurrencyModel} from '../../models';
 
 export class DeleteCurrency {
   constructor(
-    public currency: Currency,
+    public currency: CurrencyModel,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}
@@ -10,7 +10,7 @@ export class DeleteCurrency {
 
 export class SaveCurrency {
   constructor(
-    public currency: Currency,
+    public currency: CurrencyModel,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}
@@ -18,7 +18,7 @@ export class SaveCurrency {
 
 export class QueryCurrencyList {
   constructor(
-    public onSuccess: (list: Currency[]) => void,
+    public onSuccess: (list: CurrencyModel[]) => void,
     public onError: (error: any) => void
   ){}
 }
@@ -28,7 +28,7 @@ export class RefreshCurrencyListPage {
 
 export class UnDeleteCurrency {
   constructor(
-    public currency: Currency,
+    public currency: CurrencyModel,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}

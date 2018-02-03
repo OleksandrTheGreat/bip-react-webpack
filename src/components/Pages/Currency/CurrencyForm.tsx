@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {state, ioc, bus} from '../../../shared';
-import {Currency} from '../../../domain/Currency';
 import {FormTextField, FormTextAreaField, FormNumberField, Form, FormPage} from '../../common/Form';
 import {GoBack, ShowError, SaveState} from '../../../bus/commands';
 import {SaveCurrency} from '../../../bus/commands/currency.commands';
+import {CurrencyModel} from '../../../models';
 
-export class CurrencyForm extends FormPage<Currency> {
+export class CurrencyForm extends FormPage<CurrencyModel> {
 
   constructor(props) {
     super(props);

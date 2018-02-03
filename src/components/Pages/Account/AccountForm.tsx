@@ -2,11 +2,11 @@ import * as React from 'react';
 import {state, bus} from '../../../shared';
 import {Account, Currency} from '../../../domain';
 import {Form, FormTextField, FormOptionValue, FormReadOnlyField, FormNumberField} from '../../common/Form';
-import {SaveState, ShowError } from '../../../bus/commands/index';
+import {SaveState, ShowError } from '../../../bus/commands';
 import {FormOptionsField, FormPage} from '../../common/Form';
 import {QueryCurrencyList} from '../../../bus/commands/currency.commands';
-import { AccountModel } from '../../../models/AccountModel';
-import { FormTextAreaField } from '../../common/Form/FormTextAreaField';
+import {AccountModel, CurrencyModel} from '../../../models';
+import {FormTextAreaField} from '../../common/Form/FormTextAreaField';
 
 export class AccountFormModel {
   constructor(
@@ -67,7 +67,7 @@ export class AccountForm extends FormPage<AccountFormModel> {
 
     bus.SendAsync(
       new  QueryCurrencyList( 
-        (list: Currency[]) => {
+        (list: CurrencyModel[]) => {
 
           this.setState((state) => {
 

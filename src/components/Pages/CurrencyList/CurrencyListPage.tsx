@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {state, ioc, bus} from '../../../shared';
-import {Currency} from '../../../domain';
 import {Header} from '../../common/Page/Header';
 import {CurrencyList} from './CurrencyList';
 import { QueryCurrencyList, RefreshCurrencyListPage } from '../../../bus/commands/currency.commands';
 import { ShowError } from '../../../bus/commands/index';
+import { CurrencyModel } from '../../../models';
 
-export class CurrencyListPage extends React.Component < {}, {currencyList: Currency[]} > {
+export class CurrencyListPage extends React.Component < {}, {currencyList: CurrencyModel[]} > {
 
   constructor() {
     super();
@@ -37,7 +37,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   private _refreshCurrency() {
     bus.SendAsync(
       new QueryCurrencyList(
-        (list: Currency[]) => {
+        (list: CurrencyModel[]) => {
           this.setState((state) => {
             return {
               ...state,

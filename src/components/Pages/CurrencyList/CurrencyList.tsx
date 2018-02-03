@@ -1,15 +1,15 @@
 import * as React from 'react';
-import {Currency} from '../../../domain';
 import {CurrencyItem} from './CurrencyItem';
 import {GUID} from 'xtypescript';
 import {state} from '../../../shared';
+import { CurrencyModel } from '../../../models';
 
-export class CurrencyList extends React.Component<{list: Currency[]}> {
+export class CurrencyList extends React.Component<{list: CurrencyModel[]}> {
 
   render() {
 
     let list = [
-      new Currency(null, null),
+      new CurrencyModel(null, null),
       ...this.props.list
     ];
 

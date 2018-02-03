@@ -2,11 +2,11 @@ import * as React from 'react';
 import {state} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {CurrencyForm} from './CurrencyForm';
-import {Currency} from '../../../domain/Currency';
+import {CurrencyModel} from '../../../models';
 
 export class CurrencyPage extends React.Component < {
-  data : {
-    currency: Currency
+  data : {//todo: add page super type
+    currency: CurrencyModel
   }
 } > {
 
