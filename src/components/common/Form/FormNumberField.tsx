@@ -9,7 +9,8 @@ export class FormNumberField extends React.Component < {
   validationMessage?: string,
   onChange? : any,
   min? : number,
-  max? : number
+  max? : number,
+  className?: string
 } > {
 
   constructor(props) {
@@ -45,7 +46,10 @@ export class FormNumberField extends React.Component < {
           max={this.props.max}/>;
 
     return (
-      <FormField title={this.props.title}>
+      <FormField 
+        title={this.props.title}
+        className={this.props.className}
+      >
         {Input}
       </FormField>
     );

@@ -32,7 +32,8 @@ export class AccountForm extends FormPage {
           onChange={(e) => this.onChange<AccountFormModel>(model => model.account.currencyId = e.target.value)}/>
       : <FormReadOnlyField
           title={state.i18n.account.currency}
-          value={this.props.data.account.currency}/>;
+          value={this.props.data.account.currency}
+          className='text-right' />;
 
     return (
       <Form onSave={this._onSave}>

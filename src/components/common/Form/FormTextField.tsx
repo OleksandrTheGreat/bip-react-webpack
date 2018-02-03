@@ -7,7 +7,8 @@ export class FormTextField extends React.Component < {
   value : string,
   isRequired?: boolean,
   validationMessage?: string,
-  onChange? : any
+  onChange? : any,
+  className?: string
 } > {
 
   render() {
@@ -33,7 +34,10 @@ export class FormTextField extends React.Component < {
         onChange={this.props.onChange} />;
 
     return (
-      <FormField title={this.props.title}>
+      <FormField 
+        title={this.props.title}
+        className={this.props.className}
+      >
         {Input}
       </FormField>
     );

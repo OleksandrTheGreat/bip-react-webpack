@@ -14,7 +14,8 @@ export class FormOptionsField extends React.Component < {
   selectedValue?: any,
   isRequired?: boolean,
   validationMessage?: string,
-  onChange? : any
+  onChange? : any,
+  className?: string
 } > {
 
   render(){
@@ -32,7 +33,10 @@ export class FormOptionsField extends React.Component < {
     </div>;
 
     return (
-      <FormField title={this.props.title}>
+      <FormField 
+        title={this.props.title}
+        className={this.props.className}
+      >
         {Input}
       </FormField>
     );

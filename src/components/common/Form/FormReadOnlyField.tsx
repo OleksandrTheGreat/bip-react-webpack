@@ -3,13 +3,14 @@ import { FormField } from './FormField';
 
 export class FormReadOnlyField extends React.Component < {
   title : string,
-  value : string
+  value : string,
+  className?: string
 } > {
   render() {
     return (
       <FormField 
         title={this.props.title}
-        className='text-right'
+        className={this.props.className}
       >
         {this.props.value}
       </FormField>
