@@ -1,13 +1,29 @@
+import {state} from '../shared';
+
 export class AccountModel {
+
+  public get balanceView(): string {
+
+    if (this.balance === null)
+      return '';
+
+    return this.balance.toLocaleString(
+      state.i18n.locale, 
+      {
+        style: 'decimal',
+        minimumFractionDigits: this.precision
+      });
+  }
 
   constructor(
     public id: AAGUID,
     public name: string,
-    public balance: string = null,
+    public balance: number = null,
     public currencyId: AAGUID = null,
     public currency: string = null,
     public displayOrder: number = 0,
-    public description: string = null
+    public description: string = null,
+    public precision: number = 2
   ) {    
   }
 }

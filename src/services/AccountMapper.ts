@@ -27,21 +27,16 @@ export class AccountMapper implements IAccountMapper {
           let result = accounts.map(account => {
 
             let currency = currencyList.filter(x => x.id === account.currencyId)[0];
-            let balance = account.balance.toLocaleString(
-              state.i18n.locale, 
-              {
-                style: 'decimal',
-                minimumFractionDigits: currency.precision
-              });
 
             return new AccountModel(
               account.id, 
               account.name, 
-              balance, 
+              account.balance, 
               currency.id,
               currency.name, 
               account.displayOrder, 
-              account.description
+              account.description,
+              currency.precision
             )
           });
 
