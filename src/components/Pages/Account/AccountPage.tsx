@@ -2,11 +2,12 @@ import * as React from 'react';
 import {state} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {Account} from '../../../domain';
-import {AccountForm} from './AccountForm';
+import {AccountForm, AccountFormModel} from './AccountForm';
+import {AccountModel} from '../../../models/AccountModel';
 
 export class AccountPage extends React.Component < {
   data : {
-    account: Account
+    account: AccountModel
   }
 } > {
 
@@ -22,10 +23,7 @@ export class AccountPage extends React.Component < {
           <i className="fa header-icon fa-money"></i>
           {title}
         </Header>
-        <AccountForm data={{
-          account: this.props.data.account,
-          currencyList: []
-        }} />
+        <AccountForm data={new AccountFormModel(this.props.data.account, [])} />
       </div>
     );
   }

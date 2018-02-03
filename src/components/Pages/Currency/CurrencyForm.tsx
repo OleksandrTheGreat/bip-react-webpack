@@ -5,7 +5,7 @@ import {FormTextField, FormTextAreaField, FormNumberField, Form, FormPage} from 
 import {GoBack, ShowError, SaveState} from '../../../bus/commands';
 import {SaveCurrency} from '../../../bus/commands/currency.commands';
 
-export class CurrencyForm extends FormPage {
+export class CurrencyForm extends FormPage<Currency> {
 
   constructor(props) {
     super(props);
@@ -21,17 +21,17 @@ export class CurrencyForm extends FormPage {
           value={this.state.data.name}
           isRequired={true}
           validationMessage={state.i18n.currency.nameValidationMessage}
-          onChange={(e) => this.onChange<Currency>(currency => currency.name = e.target.value)}/>
+          onChange={(e) => this.onChange(currency => currency.name = e.target.value)}/>
         <FormTextAreaField
           title={state.i18n.common.description}
           value={this.state.data.description}
-          onChange={(e) => this.onChange<Currency>(currency => currency.description = e.target.value)}/>
+          onChange={(e) => this.onChange(currency => currency.description = e.target.value)}/>
         <FormNumberField
           title={state.i18n.currency.precision}
           value={this.state.data.precision}
           isRequired={true}
           validationMessage={state.i18n.currency.minimumFractionDigitsValidationMessage}
-          onChange={(e) => this.onChange<Currency>(currency => currency.precision = e.target.value)}
+          onChange={(e) => this.onChange(currency => currency.precision = e.target.value)}
           min={0}
           max={3}/>
       </Form>
