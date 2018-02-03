@@ -15,10 +15,10 @@ import {QueryDashboardAccounts, QueryAccountList} from '../commands/account.comm
 
         let result = accounts.sort((a, b)=>{
           
-          if(a.showOrder > b.showOrder)
+          if(a.displayOrder > b.displayOrder)
             return 1;
           
-          if(a.showOrder < b.showOrder)
+          if(a.displayOrder < b.displayOrder)
             return -1;
           
           return 0;
