@@ -1,42 +1,62 @@
 import { Currency } from "../domain";
+import { CurrencyModel } from "../models";
 import { IIDBRepository } from "../IndexedDB/IDBRepository";
 import { GUID } from "xtypescript";
 
 export interface ICurrencyService {
-  getAll(): Promise<Currency[]>;
-  save(currency: Currency) : Promise<void>;
+  getAll(): Promise<CurrencyModel[]>;
+  save(currency: CurrencyModel) : Promise<void>;
   delete(id: AAGUID) : Promise<void>;
   restore(id: AAGUID) : Promise<void>;
 }
 
 export class CurrencyService implements ICurrencyService {
   
-  _storageName = 'Currency';
-  _repository: IIDBRepository;
+  storageName = 'Currency';
 
   constructor(
-    repository: IIDBRepository
-  ) {
-    this._repository = repository;
-  }
+    private repository: IIDBRepository
+  ) {}
 
-  getAll(): Promise<Currency[]> {
-    return new Promise<Currency[]>((resolve, reject)=> {
+  getAll(): Promise<CurrencyModel[]> {
+
+    return new Promise<CurrencyModel[]>((resolve, reject)=> {
+
       this
-        ._repository
-        .query<Currency>(this._storageName, null)
-        .then(list => resolve(list))
+        .repository
+        .query<Currency>(this.storageName, null)
+        .then(list => {
+
+          let result = list
+            .sort((a, b) => {
+              if(a.name > b.name)
+                return 1;
+              if(a.name < b.name)
+                return -1;
+              return 0;
+            })
+            .map(x => new CurrencyModel(
+              x.id,
+              x.name,
+              x.precision,
+              x.description,
+              x.isDeleted
+            ));
+
+          resolve(result);
+        })
         .catch(e => reject(e));
     });
   }
   
-  save(currency: Currency) : Promise<void> {
+  save(currency: CurrencyModel) : Promise<void> {
     return new Promise<void>((resolve, reject)=> {
 
       if (currency.id) {
+
         this
-          ._repository
-          .getById<Currency>(this._storageName, currency.id)
+          .repository
+          .getById<Currency>(this.storageName, currency.id)
           .then(updateCurrency => {
   
             updateCurrency.name = currency.name.toUpperCase();
@@ -45,13 +65,14 @@ export class CurrencyService implements ICurrencyService {
             updateCurrency.modifiedDateTime = new Date();
   
             this
-              ._repository
-              .update<Currency>('Currency', updateCurrency)
+              .repository
+              .update<Currency>(this.storageName, updateCurrency)
               .then(() => resolve())
               .catch(e => reject(e));
           })
           .catch(e => reject(e));
       } else {
+
         let newCurrency = new Currency(
           GUID.New(),
           currency.name.toUpperCase(),
@@ -60,8 +81,8 @@ export class CurrencyService implements ICurrencyService {
         );
   
         this
-          ._repository
-          .update<Currency>('Currency', newCurrency)
+          .repository
+          .update<Currency>(this.storageName, newCurrency)
           .then(() => resolve())
           .catch(e => reject(e));
       }
@@ -80,16 +101,16 @@ export class CurrencyService implements ICurrencyService {
     return new Promise<void>((resolve, reject)=> {
 
       this
-        ._repository
-        .getById<Currency>(this._storageName, id)
+        .repository
+        .getById<Currency>(this.storageName, id)
         .then(currency => {
 
           currency.isDeleted = isDeleted;
           currency.modifiedDateTime = new Date();
 
           this
-          ._repository
-          .update<Currency>('Currency', currency)
+          .repository
+          .update<Currency>(this.storageName, currency)
           .then(() => resolve())
           .catch(e => reject(e));
         })

@@ -6,46 +6,20 @@ import {CurrencyModel} from '../../models';
 
 (() => {
 
-  const storageName = 'Currency';
-  let repository = ioc.IIDBRepository.resolve();
   let service = ioc.ICurrencyService.resolve();
 
   bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 
     service
       .getAll()
-      .then(list => {
-
-        let result = list
-          .sort((a, b) => {
-            if(a.name > b.name)
-              return 1;
-            if(a.name < b.name)
-              return -1;
-            return 0;
-          })
-          .map(x => new CurrencyModel(
-            x.id,
-            x.name,
-            x.precision,
-            x.description,
-            x.isDeleted
-          ));
-
-        command.onSuccess(result);
-      })
+      .then(list => command.onSuccess(list))
       .catch(e => command.onError(e));
   });
 
   bus.Handle(SaveCurrency, (command: SaveCurrency) => {
 
     service
-      .save(new Currency(
-        command.currency.id,
-        command.currency.name,
-        command.currency.precision,
-        command.currency.description
-      ))
+      .save(command.currency)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
   });
