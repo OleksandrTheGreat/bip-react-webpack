@@ -4,7 +4,9 @@ import { CurrencyListPage } from "../components/Pages/CurrencyList/CurrencyListP
 import { CurrencyPage } from "../components/Pages/Currency/CurrencyPage";
 import { AccountsListPage } from "../components/Pages/AccountsList/AccountsListPage";
 import { AccountPage } from "../components/Pages/Account/AccountPage";
+import { TransactionPage } from "../components/Pages/Transactions/TransactionPage";
 import { AboutPage } from "../components/Pages/About/AboutPage";
+
 
 export const pages = {
   HomePage: HomePage,
@@ -13,5 +15,6 @@ export const pages = {
   CurrencyPage: CurrencyPage,
   AccountsListPage: AccountsListPage,
   AccountPage: AccountPage,
-  AboutPage: AboutPage
+  TransactionPage: TransactionPage,
+  AboutPage: AboutPage,
 };

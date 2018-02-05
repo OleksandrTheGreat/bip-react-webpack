@@ -4,6 +4,7 @@ export interface Ii18nMenu {
   about: string;
   title: string;
   toggleButtonTitle: string;
+  transactions: string;
 }
 
 export class i18nMenuEN implements Ii18nMenu {
@@ -12,6 +13,7 @@ export class i18nMenuEN implements Ii18nMenu {
   about = 'About';
   title = 'Balance in pocket';
   toggleButtonTitle = 'Toggle navigation menu';
+  transactions = 'Transactions';
 }
 
 export class i18nMenuUA implements Ii18nMenu {
@@ -20,4 +22,5 @@ export class i18nMenuUA implements Ii18nMenu {
   about = 'Про';
   title = 'Баланс в кішені';
   toggleButtonTitle = 'Перемкнути меню навігації';
+  transactions = 'Операції';
 }

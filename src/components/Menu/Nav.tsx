@@ -39,6 +39,11 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
       {state.i18n.menu.settings}
     </span>;
 
+    let transactionsTitle = <span>
+      <i className="fa fa-exchange"></i>
+      {state.i18n.menu.transactions}
+    </span>;
+
     let aboutTitle = <span>
       <i className="fa fa-info-circle"></i>
       {state.i18n.menu.about}
@@ -48,22 +53,24 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
       <ul className="navbar-nav mr-auto">
         <MenuItem
           title={homeTitle}
-          onClick={() => {
-            bus.Send(new ChangePage(pages.HomePage.name))
-          }}
-          isActive={this.state.currentPage === pages.HomePage.name}/>
+          onClick={() => bus.Send(new ChangePage(pages.HomePage.name))}
+          isActive={this.state.currentPage === pages.HomePage.name}
+        />
         <MenuItem
           title={settingsTitle}
-          onClick={() => {
-            bus.Send(new ChangePage(pages.SettingsPage.name))
-          }}
-          isActive={this.state.currentPage === pages.SettingsPage.name}/>
+          onClick={() => bus.Send(new ChangePage(pages.SettingsPage.name))}
+          isActive={this.state.currentPage === pages.SettingsPage.name}
+        />
+        <MenuItem
+          title={transactionsTitle}
+          onClick={() => bus.Send(new ChangePage(pages.TransactionPage.name))}
+          isActive={this.state.currentPage === pages.TransactionPage.name}
+        />
         <MenuItem
           title={aboutTitle}
-          onClick={() => {
-            bus.Send(new ChangePage(pages.AboutPage.name))
-          }}
-          isActive={this.state.currentPage === pages.AboutPage.name}/>
+          onClick={() => bus.Send(new ChangePage(pages.AboutPage.name))}
+          isActive={this.state.currentPage === pages.AboutPage.name}
+        />
       </ul>
     );
   }
