@@ -1,11 +1,14 @@
 import * as React from 'react';
 import {state} from '../../../shared';
+import {TransactionPageHeader} from './TransactionPageHeader';
 
 export class TransactionPage extends React.Component {
 
-  render() {    
+  render() {
     return (
-      'Transactions'
+      <div>
+        <TransactionPageHeader />
+      </div>
     );
   }
 }

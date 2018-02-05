@@ -1,24 +1,23 @@
 import * as React from 'react';
-import {state, bus} from '../../../shared';
-import {Ask} from '../../../bus/commands';
-import {SharedCommands} from '../../../bus/commands/shared';
+import {state} from '../../../shared';
 
-export class Header extends React.Component {
+export class TransactionPageHeader extends React.Component {
+
   render() {
     return (
       <div className='container-fluid page-header'>
         <div className='row'>
           <div className='col'>
-            <h5>{this.props.children}</h5>
+            <h5>{state.i18n.transactions.title}</h5>
           </div>
           <div className="col-2 col-md-auto">
             <button 
               type="button" 
               className="btn btn-primary"
-              title={state.i18n.common.back}
-              onClick={SharedCommands.goBack}
+              title={state.i18n.transactions.create}
+              onClick={() => alert('Not implemented yet')}
             >
-              <i className="fa fa-arrow-left"></i>
+              <i className="fa fa-plus"></i>
             </button>
           </div>
         </div>
