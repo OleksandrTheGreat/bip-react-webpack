@@ -7,25 +7,25 @@ export class AccountsList extends React.Component<{accounts: AccountModel[]}> {
 
   render() {
 
-    let list = [
+    let availableAccounts = [
       new AccountModel(null, null, null),
     ];
 
-    let deletedList = [];
+    let deletedAccounts = [];
 
     this.props.accounts.forEach(x => {
       if(x.isDeleted) 
-        deletedList.push(x);
+        deletedAccounts.push(x);
       else
-        list.push(x);
+        availableAccounts.push(x);
     });
 
-    let items = list.map(x => <AccountItem account={x} key={x.id}/>);
-    let deletedItems = deletedList.map(x => <AccountItem account={x} key={x.id}/>);
+    let availableItems = availableAccounts.map(x => <AccountItem account={x} key={x.id}/>);
+    let deletedItems = deletedAccounts.map(x => <AccountItem account={x} key={x.id}/>);
 
     return (
       <div className="container-fluid row-list">
-        {items}
+        {availableItems}
         {deletedItems}
       </div>
     );

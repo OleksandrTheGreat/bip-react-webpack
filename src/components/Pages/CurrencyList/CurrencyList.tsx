@@ -8,16 +8,26 @@ export class CurrencyList extends React.Component<{list: CurrencyModel[]}> {
 
   render() {
 
-    let list = [
-      new CurrencyModel(null, null),
-      ...this.props.list
+    let availableCurrency = [
+      new CurrencyModel(null, null)      
     ];
 
-    let items = list.map(x => <CurrencyItem currency={x} key={x.id}/>);
-    
+    let deletedCurrency = [];
+
+    this.props.list.forEach(x => {
+      if (x.isDeleted)
+        deletedCurrency.push(x);
+      else
+        availableCurrency.push(x);
+    });
+
+    let availableItems = availableCurrency.map(x => <CurrencyItem currency={x} key={x.id}/>);
+    let deletedItems = deletedCurrency.map(x => <CurrencyItem currency={x} key={x.id}/>);
+
     return (
       <div className="container-fluid row-list">
-        {items}
+        {availableItems}
+        {deletedItems}
       </div>
     );
   }
