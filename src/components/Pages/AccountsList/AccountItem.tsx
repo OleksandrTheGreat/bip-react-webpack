@@ -70,9 +70,17 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           </div>
         </div>;
 
-    const balance = this.props.account.isDeleted || !this.props.account.id
-      ? null
-      : this.props.account.balanceView + ' ' + this.props.account.currencyName;
+    const balance = this.props.account.id
+      ? this.props.account.balanceView + ' ' + this.props.account.currencyName
+      : '';
+      
+    const balanceElement = this.props.account.isDeleted
+      ? <del>
+          <em>
+            {balance}
+          </em>
+        </del>
+      : balance;
 
     const restoreButton = this.props.account.isDeleted
       ? <div className="d-inline-block">
@@ -92,7 +100,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
       <div className="row">
         {info}
         <div className="col text-right">
-          {balance}
+          {balanceElement}
         </div>
         <div className="col-2 col-md-auto">
           {editButton}
