@@ -34,6 +34,7 @@ export class Form extends React.Component <
       ? <button 
           type="submit" 
           className="btn btn-primary"
+          onClick={this._onSave}
           title={state.i18n.common.save}
         >
           <i className="fa fa-save"></i>

@@ -51,7 +51,7 @@ export class CurrencyForm extends FormPage<CurrencyModel> {
 
           switch(error.name) {
             case 'ConstraintError':
-              message = state.i18n.currency.constraintErrorMessage.replace('{0}', this.state.data.name);
+              message = state.i18n.currency.constraintErrorMessage.replace('{0}', this.state.data.name.toUpperCase());
               break;
             default:
               message = state.i18n.common.defaulErrorMessage;

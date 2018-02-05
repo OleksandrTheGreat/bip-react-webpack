@@ -1,18 +1,19 @@
 import {Currency} from '../../domain/Currency';
 import {bus, state, ioc} from '../../shared';
 import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
-import { GUID } from 'xtypescript';
+import {GUID} from 'xtypescript';
 import {CurrencyModel} from '../../models';
 
 (() => {
 
   const storageName = 'Currency';
   let repository = ioc.IIDBRepository.resolve();
+  let service = ioc.ICurrencyService.resolve();
 
   bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 
-    repository
-      .query<Currency>(storageName)
+    service
+      .getAll()
       .then(list => {
 
         let result = list
@@ -38,72 +39,31 @@ import {CurrencyModel} from '../../models';
 
   bus.Handle(SaveCurrency, (command: SaveCurrency) => {
 
-    if (command.currency.id) {
-
-      repository
-        .getById<Currency>(storageName, command.currency.id)
-        .then(currency => {
-
-          currency.name = command.currency.name;
-          currency.precision = command.currency.precision;
-          currency.description = command.currency.description;
-          currency.modifiedDateTime = new Date();
-
-          repository
-            .update<Currency>('Currency', currency)
-            .then(() => command.onSuccess())
-            .catch(e => command.onError(e));
-        })
-        .catch(e => command.onError(e));
-
-    } else {
-
-      let currency = new Currency(
-        GUID.New(),
+    service
+      .save(new Currency(
+        command.currency.id,
         command.currency.name,
         command.currency.precision,
         command.currency.description
-      );
-
-      repository
-        .update<Currency>('Currency', currency)
-        .then(() => command.onSuccess())
-        .catch(e => command.onError(e));
-    }
+      ))
+      .then(() => command.onSuccess())
+      .catch(e => command.onError(e));
   });
 
   bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
 
-    repository
-        .getById<Currency>(storageName, command.id)
-        .then(currency => {
-
-          currency.isDeleted = true;
-          currency.modifiedDateTime = new Date();
-
-          repository
-            .update<Currency>('Currency', currency)
-            .then(() => command.onSuccess())
-            .catch(e => command.onError(e));
-        })
-        .catch(e => command.onError(e));
+    service
+      .delete(command.id)
+      .then(() => command.onSuccess())
+      .catch(e => command.onError(e));
   });
 
   bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
 
-    repository
-        .getById<Currency>(storageName, command.id)
-        .then(currency => {
-
-          currency.isDeleted = false;
-          currency.modifiedDateTime = new Date();
-
-          repository
-            .update<Currency>('Currency', currency)
-            .then(() => command.onSuccess())
-            .catch(e => command.onError(e));
-        })
-        .catch(e => command.onError(e));
+    service
+      .restore(command.id)
+      .then(() => command.onSuccess())
+      .catch(e => command.onError(e));
   });
 
 })();
