@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {bus, state} from '../../../shared';
-
+import {ABus} from 'abus';
+import {ioc, state} from '../../../shared';
 import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryDashboardAccounts} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
 
 export class HomePage extends React.Component < {}, {accounts: AccountModel[]} > {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor() {
     super();
@@ -24,7 +26,7 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
 
   private _refreshAccounts() {
 
-    bus.SendAsync(
+    this._bus.SendAsync(
       new QueryDashboardAccounts(
         (accounts : AccountModel[]) => {
           this.setState((state) => {
@@ -34,8 +36,8 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
             }
           });
         },
-        (error) => {
-          bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
-        }));
+        error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))
+      )
+    );
   }
 }

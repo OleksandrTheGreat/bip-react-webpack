@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {state, bus} from '../../../shared';
+import {state} from '../../../shared';
 import {Ask} from '../../../bus/commands';
 import {SharedCommands} from '../../../bus/commands/shared';
 
 export class Header extends React.Component {
+
   render() {
     return (
       <div className='container-fluid page-header'>

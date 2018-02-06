@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {state, ioc, bus} from '../../../shared';
+import {state, ioc} from '../../../shared';
 import {FormTextField, FormTextAreaField, FormNumberField, Form, FormPage} from '../../common/Form';
 import {GoBack, ShowError, SaveState} from '../../../bus/commands';
 import {SaveCurrency} from '../../../bus/commands/currency.commands';
@@ -39,11 +39,11 @@ export class CurrencyForm extends FormPage<CurrencyModel> {
   }
 
   private _onSave() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new SaveCurrency(
         this.state.data, 
         () => {
-          bus.SendAsync(new GoBack());
+          this._bus.SendAsync(new GoBack());
         }, 
         (error: DOMError) => {
 
@@ -57,7 +57,7 @@ export class CurrencyForm extends FormPage<CurrencyModel> {
               message = state.i18n.common.defaulErrorMessage;
           }
 
-          bus.SendAsync(new ShowError(message));
+          this._bus.SendAsync(new ShowError(message));
         }));
   }
 }

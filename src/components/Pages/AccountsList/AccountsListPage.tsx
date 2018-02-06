@@ -1,5 +1,6 @@
 import * as React from 'react';
-import {state, bus} from '../../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
@@ -8,6 +9,8 @@ import {ShowError} from '../../../bus/commands';
 
 export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
 
+  private _bus = ioc.resolve<ABus>(ABus);
+
   constructor() {
     super();
 
@@ -15,7 +18,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
       accounts: []
     };
 
-    bus.Handle(RefreshAccountsListPage, () => this._refreshAccount());
+    this._bus.Handle(RefreshAccountsListPage, () => this._refreshAccount());
 
     this._refreshAccount();
   }
@@ -33,7 +36,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
   }
 
   private _refreshAccount() {
-    bus.SendAsync(new QueryAccountList(
+    this._bus.SendAsync(new QueryAccountList(
       (accounts) => {
         this.setState((state) => {
           return {
@@ -43,7 +46,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
         });
       },
       (error) => {
-        bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+        this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
       }
     ));
   }

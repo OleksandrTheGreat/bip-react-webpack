@@ -1,10 +1,13 @@
-import {bus, state, ioc, pages} from '../../shared';
+import {ABus} from 'abus';
+import {state, ioc, pages} from '../../shared';
 import {ChangePage, GoBack, ChangeLanguage, SaveState} from '../commands';
 import {PageChanged, LanguageChanged} from '../events';
 
 (() => {
 
-  bus.Handle(ChangePage, (message : ChangePage) => {
+  let _bus = ioc.resolve<ABus>(ABus);
+
+  _bus.Handle(ChangePage, (message : ChangePage) => {
 
     let len = state.page.history.length;
     let current : ChangePage = state.page.history[len - 1];
@@ -24,17 +27,17 @@ import {PageChanged, LanguageChanged} from '../events';
       .history
       .push(message);
 
-    bus.SendAsync(new PageChanged(message.page, message.data));
+    _bus.SendAsync(new PageChanged(message.page, message.data));
   });
 
-  bus.Handle(ChangeLanguage, (message : ChangeLanguage) => {
+  _bus.Handle(ChangeLanguage, (message : ChangeLanguage) => {
 
     state.i18n = message.i18n;
 
-    bus.SendAsync(new LanguageChanged());
+    _bus.SendAsync(new LanguageChanged());
   });
 
-  bus.Handle(GoBack, () => {
+  _bus.Handle(GoBack, () => {
 
     let i = state.page.history
       ? state.page.history.length
@@ -54,18 +57,18 @@ import {PageChanged, LanguageChanged} from '../events';
     state.page.isDirty = false;
 
     //TODO: possible old entity display
-    bus.SendAsync(new PageChanged(prev.page, prev.data));
+    _bus.SendAsync(new PageChanged(prev.page, prev.data));
   });
 
-  bus.Handle(PageChanged, (event : PageChanged) => {
+  _bus.Handle(PageChanged, (event : PageChanged) => {
     _saveApplicationState();
   });
 
-  bus.Handle(LanguageChanged, (event : LanguageChanged) => {
+  _bus.Handle(LanguageChanged, (event : LanguageChanged) => {
     _saveApplicationState();
   });
 
-  bus.Handle(SaveState, (event : SaveState) => {
+  _bus.Handle(SaveState, (event : SaveState) => {
     _saveApplicationState();
   });
 

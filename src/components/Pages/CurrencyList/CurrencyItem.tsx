@@ -1,10 +1,13 @@
 import * as React from 'react';
-import {bus, state, pages} from '../../../shared';
+import {ABus} from 'abus';
+import {ioc, state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
 import {DeleteCurrency, RefreshCurrencyListPage, RestoreCurrency} from '../../../bus/commands/currency.commands';
 import {CurrencyModel} from '../../../models';
 
 export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor() {
     super();
@@ -89,39 +92,39 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   }
 
   _onEditClick() {
-    bus.SendAsync(new ChangePage(pages.CurrencyPage.name, {currency: this.props.currency}));
+    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, {currency: this.props.currency}));
   }
 
   _onDeleteClick() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new Ask(
         state.i18n.currency.deleteQuestion.replace('{0}', this.props.currency.name), 
         (answer: boolean) => {
-          bus.SendAsync(
+          this._bus.SendAsync(
             new DeleteCurrency(
               this.props.currency.id, 
               () => {
-                bus.SendAsync(new RefreshCurrencyListPage());
+                this._bus.SendAsync(new RefreshCurrencyListPage());
               }, 
               (error) => {
-                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
               }));
        }));
   }
 
   _onUnDeleteClick() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new Ask(
         state.i18n.currency.restoreQuestion.replace('{0}', this.props.currency.name), 
         (answer: boolean) => {
-          bus.SendAsync(
+          this._bus.SendAsync(
             new RestoreCurrency(
               this.props.currency.id, 
               () => {
-                bus.SendAsync(new RefreshCurrencyListPage());
+                this._bus.SendAsync(new RefreshCurrencyListPage());
               }, 
               (error) => {
-                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
               }));
        }));
   }

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {state, bus} from '../../../shared';
+import {state, ioc} from '../../../shared';
 import {Account, Currency} from '../../../domain';
 import {Form, FormTextField, FormOptionValue, FormReadOnlyField, FormNumberField} from '../../common/Form';
 import {SaveState, ShowError, GoBack } from '../../../bus/commands';
@@ -7,9 +7,9 @@ import {FormOptionsField, FormPage} from '../../common/Form';
 import {QueryCurrencyList} from '../../../bus/commands/currency.commands';
 import {AccountModel, CurrencyModel} from '../../../models';
 import {FormTextAreaField} from '../../common/Form/FormTextAreaField';
-import { xMath } from 'xtypescript';
-import { FormCheckBoxField } from '../../common/Form/FormCheckBoxField';
-import { SaveAccount } from '../../../bus/commands/account.commands';
+import {xMath} from 'xtypescript';
+import {FormCheckBoxField} from '../../common/Form/FormCheckBoxField';
+import {SaveAccount} from '../../../bus/commands/account.commands';
 
 export class AccountFormModel {
   constructor(
@@ -86,10 +86,10 @@ export class AccountForm extends FormPage<AccountFormModel> {
   }
 
   private _onSave() {
-    bus.SendAsync(new SaveAccount(
+    this._bus.SendAsync(new SaveAccount(
       this.state.data.account,
       () => {
-        bus.SendAsync(new GoBack());
+        this._bus.SendAsync(new GoBack());
       },
       (error: DOMError) => {
 
@@ -108,13 +108,13 @@ export class AccountForm extends FormPage<AccountFormModel> {
             message = state.i18n.common.defaulErrorMessage;
         }
 
-        bus.SendAsync(new ShowError(message));
+        this._bus.SendAsync(new ShowError(message));
       }));
   }
 
   private _refreshCurrencyList(){
 
-    bus.SendAsync(
+    this._bus.SendAsync(
       new  QueryCurrencyList( 
         (list: CurrencyModel[]) => {
 
@@ -142,7 +142,7 @@ export class AccountForm extends FormPage<AccountFormModel> {
           });
         },
         (error) => {
-          bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+          this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
         }));
   }
 }

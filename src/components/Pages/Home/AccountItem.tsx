@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { AccountModel } from '../../../models/AccountModel';
+import {AccountModel} from '../../../models/AccountModel';
 
 export class AccountItem extends React.Component<{account: AccountModel}> {
 

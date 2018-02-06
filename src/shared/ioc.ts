@@ -1,5 +1,6 @@
 import {IOCContainer} from 'ioc';
 import {IIDBAdapter, IIDBRepository, IDBRepository} from 'xIndexedDB';
+import {ABus} from 'abus';
 
 import {idbAdapter} from './db';
 import {IAccountMapper, AccountMapper} from '../services/AccountMapper';
@@ -7,8 +8,11 @@ import {ICurrencyService, CurrencyService} from '../services/CurrencyService';
 import {IAccountService, AccountService} from '../services/AccountService';
 import {IHomePageService, HomePageService} from '../services/HomePageService';
 
-const ioc = new IOCContainer();
 
+const ioc = new IOCContainer();
+const bus = new ABus();
+
+ioc.register<ABus>(ABus, container => bus);
 ioc.register<IIDBAdapter>(IIDBAdapter, container => idbAdapter);
 ioc.register<IIDBRepository>(IIDBRepository, container => new IDBRepository(container.resolve<IIDBAdapter>(IIDBAdapter)));
 ioc.register<IAccountMapper>(IAccountMapper, container => new AccountMapper(container.resolve<IIDBRepository>(IIDBRepository)));

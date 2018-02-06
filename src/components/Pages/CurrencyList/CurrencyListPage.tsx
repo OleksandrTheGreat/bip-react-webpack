@@ -1,12 +1,15 @@
 import * as React from 'react';
-import {state, ioc, bus} from '../../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {CurrencyList} from './CurrencyList';
-import { QueryCurrencyList, RefreshCurrencyListPage } from '../../../bus/commands/currency.commands';
-import { ShowError } from '../../../bus/commands';
-import { CurrencyModel } from '../../../models';
+import {QueryCurrencyList, RefreshCurrencyListPage} from '../../../bus/commands/currency.commands';
+import {ShowError} from '../../../bus/commands';
+import {CurrencyModel} from '../../../models';
 
 export class CurrencyListPage extends React.Component < {}, {currencyList: CurrencyModel[]} > {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor() {
     super();
@@ -15,7 +18,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
       currencyList: []
     };
 
-    bus.Handle(RefreshCurrencyListPage, () => this._refreshCurrency());
+    this._bus.Handle(RefreshCurrencyListPage, () => this._refreshCurrency());
 
     this._refreshCurrency();
   }
@@ -33,7 +36,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   }
 
   private _refreshCurrency() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new QueryCurrencyList(
         (list: CurrencyModel[]) => {
           this.setState((state) => {
@@ -44,7 +47,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
           });
         },
         (error) => {
-          bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+          this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
         }));
   }
 }

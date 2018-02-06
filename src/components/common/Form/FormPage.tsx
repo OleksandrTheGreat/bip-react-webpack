@@ -1,8 +1,11 @@
 import * as React from 'react';
-import {state, bus} from '../../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../../shared';
 import {SaveState} from '../../../bus/commands';
 
 export abstract class FormPage<T> extends React.Component <{data: T}, {data: T}> {
+
+  protected _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
@@ -23,7 +26,7 @@ export abstract class FormPage<T> extends React.Component <{data: T}, {data: T}>
 
     state.page.data = data;
     
-    bus.SendAsync(new SaveState());
+    this._bus.SendAsync(new SaveState());
 
     this.setState({data: data});
   }

@@ -1,15 +1,16 @@
 import * as React from 'react';
 import * as $ from 'jquery';
-
-import {bus, state, pages} from '../../shared';
+import {ABus} from 'abus';
+import {ioc, state, pages} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
-
 import {PageChanged} from '../../bus/events';
 
 export class View extends React.Component < {}, {
   page: any,
   data: any
 } > {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
@@ -26,7 +27,7 @@ export class View extends React.Component < {}, {
       data: current === null ? null : current.data
     };
 
-    bus.Handle(PageChanged, (event: PageChanged) => {
+    this._bus.Handle(PageChanged, (event: PageChanged) => {
       this.setState({page: event.page, data: event.data});
     });
   }

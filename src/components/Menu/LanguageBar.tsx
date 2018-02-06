@@ -1,12 +1,13 @@
 import * as React from 'react';
-
-import {bus, i18n} from '../../shared';
-
+import {ABus} from 'abus';
+import {ioc, i18n} from '../../shared';
 import {MenuItem} from './MenuItem';
 import {LanguageItem} from './LanguageItem';
 import {ChangeLanguage} from '../../bus/commands';
 
 export class LanguageBar extends React.Component {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
@@ -35,10 +36,10 @@ export class LanguageBar extends React.Component {
   }
 
   private _switchToEN() {
-    bus.Send(new ChangeLanguage(i18n.EN));
+    this._bus.Send(new ChangeLanguage(i18n.EN));
   }
 
   private _switchToUA() {
-    bus.Send(new ChangeLanguage(i18n.UA));
+    this._bus.Send(new ChangeLanguage(i18n.UA));
   }
 }

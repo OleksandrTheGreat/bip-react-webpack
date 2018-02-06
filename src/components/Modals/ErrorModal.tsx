@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {state, bus} from '../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../shared';
 import {ShowError} from '../../bus/commands';
 import * as $ from 'jquery';
 
 export class ErrorModal extends React.Component < {}, {error: string} > {
 
   private _id = "ErrorModal";
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
@@ -14,7 +16,7 @@ export class ErrorModal extends React.Component < {}, {error: string} > {
       error: null
     };
 
-    bus.Handle(ShowError, (message : ShowError) => {
+    this._bus.Handle(ShowError, (message : ShowError) => {
 
       this.setState({error: message.error});
 

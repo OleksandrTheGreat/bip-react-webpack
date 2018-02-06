@@ -1,9 +1,13 @@
-import { state, bus } from "../../shared";
+import {ABus} from 'abus';
+import { state, ioc } from "../../shared";
 import { Ask, GoBack } from "./";
 
 export class SharedCommands {
 
   public static goBack() {
+
+    let bus = ioc.resolve<ABus>(ABus);
+
     if (state.page.isDirty)
     {
       bus.SendAsync(new Ask(

@@ -1,15 +1,17 @@
-import {Currency} from '../../domain/Currency';
-import {bus, state, ioc} from '../../shared';
-import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
+import {ABus} from 'abus';
 import {GUID} from 'xtypescript';
+import {state, ioc} from '../../shared';
+import {Currency} from '../../domain/Currency';
+import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
 import {CurrencyModel} from '../../models';
 import {ICurrencyService} from '../../services/CurrencyService';
 
 (() => {
 
+  let _bus = ioc.resolve<ABus>(ABus);
   let _service = ioc.resolve<ICurrencyService>(ICurrencyService);
 
-  bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
+  _bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 
     _service
       .getAll()
@@ -17,7 +19,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(SaveCurrency, (command: SaveCurrency) => {
+  _bus.Handle(SaveCurrency, (command: SaveCurrency) => {
 
     _service
       .save(command.currency)
@@ -25,7 +27,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
+  _bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
 
     _service
       .delete(command.id)
@@ -33,7 +35,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
+  _bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
 
     _service
       .restore(command.id)

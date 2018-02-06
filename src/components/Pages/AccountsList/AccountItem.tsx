@@ -1,10 +1,13 @@
 import * as React from 'react';
+import {ABus} from 'abus';
 import {AccountModel} from '../../../models/AccountModel';
-import {state, bus, pages} from '../../../shared';
+import {state, ioc, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
 import {DeleteAccount, RefreshAccountsListPage, ResoreAccount} from '../../../bus/commands/account.commands';
 
 export class AccountItem extends React.Component<{account: AccountModel}> {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props){
     super(props);
@@ -112,39 +115,39 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
   }
 
   _onEditClick() {
-    bus.SendAsync(new ChangePage(pages.AccountPage.name, {account: this.props.account}));
+    this._bus.SendAsync(new ChangePage(pages.AccountPage.name, {account: this.props.account}));
   }
 
   _onDeleteClick() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new Ask(
         state.i18n.account.deleteQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
         (answer: boolean) => {
-          bus.SendAsync(
+          this._bus.SendAsync(
             new DeleteAccount(
               this.props.account.id, 
               () => {
-                bus.SendAsync(new RefreshAccountsListPage());
+                this._bus.SendAsync(new RefreshAccountsListPage());
               }, 
               (error) => {
-                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
               }));
        }));
   }
 
   _onUnDeleteClick() {
-    bus.SendAsync(
+    this._bus.SendAsync(
       new Ask(
         state.i18n.account.restoreQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
         (answer: boolean) => {
-          bus.SendAsync(
+          this._bus.SendAsync(
             new ResoreAccount(
               this.props.account.id, 
               () => {
-                bus.SendAsync(new RefreshAccountsListPage());
+                this._bus.SendAsync(new RefreshAccountsListPage());
               }, 
               (error) => {
-                bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
+                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
               }));
        }));
   }

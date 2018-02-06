@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {state, bus} from '../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../shared';
 import {Ask} from '../../bus/commands';
 import * as $ from 'jquery';
 
 export class AskModal extends React.Component < {}, {command: Ask} > {
 
   private _id = "AskModal";
+  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
@@ -20,7 +22,7 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
     this._onYes = this._onYes.bind(this);
     this._onNo = this._onNo.bind(this);
 
-    bus.Handle(Ask, (message : Ask) => {
+    this._bus.Handle(Ask, (message : Ask) => {
 
       this.setState({command: message});
 

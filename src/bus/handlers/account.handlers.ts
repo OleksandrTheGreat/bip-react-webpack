@@ -1,4 +1,5 @@
-import {bus, state, ioc} from '../../shared';
+import {ABus} from 'abus';
+import {state, ioc} from '../../shared';
 import {Account} from "../../domain/Account";
 import {QueryDashboardAccounts, QueryAccountList, SaveAccount, DeleteAccount, ResoreAccount} from '../commands/account.commands';
 import {GUID} from 'xtypescript';
@@ -7,10 +8,11 @@ import {IAccountService} from '../../services/AccountService';
 
 (() => {
 
+  let _bus = ioc.resolve<ABus>(ABus);
   let _accountService = ioc.resolve<IAccountService>(IAccountService);
   let _homePagService = ioc.resolve<IHomePageService>(IHomePageService);
 
-  bus.Handle(QueryDashboardAccounts, (command: QueryDashboardAccounts) => {
+  _bus.Handle(QueryDashboardAccounts, (command: QueryDashboardAccounts) => {
 
     _homePagService
       .getAccounts()
@@ -18,7 +20,7 @@ import {IAccountService} from '../../services/AccountService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(QueryAccountList, (command: QueryAccountList) => {
+  _bus.Handle(QueryAccountList, (command: QueryAccountList) => {
 
     _accountService
       .getAll()
@@ -26,7 +28,7 @@ import {IAccountService} from '../../services/AccountService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(SaveAccount, (command: SaveAccount) => {
+  _bus.Handle(SaveAccount, (command: SaveAccount) => {
 
     _accountService
       .save(command.account)
@@ -34,7 +36,7 @@ import {IAccountService} from '../../services/AccountService';
       .catch(e => command.onError(e));
   });
 
-  bus.Handle(DeleteAccount, (command: DeleteAccount) => {
+  _bus.Handle(DeleteAccount, (command: DeleteAccount) => {
 
     _accountService
       .delete(command.id)
@@ -42,7 +44,7 @@ import {IAccountService} from '../../services/AccountService';
       .catch(e => command.onError(e));
   });
   
-  bus.Handle(ResoreAccount, (command: ResoreAccount) => {
+  _bus.Handle(ResoreAccount, (command: ResoreAccount) => {
 
     _accountService
       .restore(command.id)
