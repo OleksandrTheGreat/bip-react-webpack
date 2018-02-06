@@ -9,19 +9,11 @@ import './bus/handlers/state.handlers';
 import './bus/handlers/currency.handlers';
 import './bus/handlers/account.handlers';
 
-(() => {
-  const render = () => {
-    ReactDOM.render(
-      <App/>, document.getElementById('root'));
-  };
+export const renderApp = () => {
+  ReactDOM.render(
+    <App/>, 
+    document.getElementById('root')
+  );
+};
 
-  //TODO: find better place for this handler
-  let _bus = ioc.resolve < ABus > (ABus);
-
-  _bus.Handle(LanguageChanged, () => {
-    render();
-  });
-
-  render();
-
-})();
+renderApp();

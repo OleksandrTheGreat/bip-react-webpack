@@ -2,6 +2,7 @@ import {ABus} from 'abus';
 import {state, ioc, pages} from '../../shared';
 import {ChangePage, GoBack, ChangeLanguage, SaveState} from '../commands';
 import {PageChanged, LanguageChanged} from '../events';
+import {renderApp} from '../../index';
 
 (() => {
 
@@ -66,6 +67,7 @@ import {PageChanged, LanguageChanged} from '../events';
 
   _bus.Handle(LanguageChanged, (event : LanguageChanged) => {
     _saveApplicationState();
+    renderApp();
   });
 
   _bus.Handle(SaveState, (event : SaveState) => {
