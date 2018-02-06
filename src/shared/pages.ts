@@ -7,6 +7,8 @@ import {AccountPage} from '../components/Pages/Account/AccountPage';
 import {TransactionListPage} from '../components/Pages/TransactionList/TransactionListPage';
 import {TransactionPage} from '../components/Pages/Transaction/TransactionPage';
 import {AboutPage} from '../components/Pages/About/AboutPage';
+import {IncomeListPage} from '../components/Pages/Income/IncomeListPage';
+import {ExpenseListPage} from '../components/Pages/Expenses/ExpenseListPage';
 
 export const pages = {
   HomePage: HomePage,
@@ -18,4 +20,6 @@ export const pages = {
   TransactionListPage: TransactionListPage,
   TransactionPage: TransactionPage,
   AboutPage: AboutPage,
+  IncomeListPage: IncomeListPage,
+  ExpenseListPage: ExpenseListPage
 };

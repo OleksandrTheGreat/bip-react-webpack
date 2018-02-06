@@ -7,6 +7,8 @@ import { Ii18nCurrency, i18nCurrencyEN, i18nCurrencyUA } from './i18n.currency';
 import { Ii18nAccount, i18nAccountEN, i18nAccountUA } from './i18n.account';
 import { Ii18nAbout, i18nAboutEN, i18nAboutUA } from './i18n.about';
 import { Ii18nTransactions, i18nTransactionsEN, i18nTransactionsUA } from './i18n.transactions';
+import { Ii18nIncomeList, i18nIncomeListEN, i18nIncomeListUA } from './i18n.income.list';
+import { Ii18nExpenseList, i18nExpenseListEN, i18nExpenseListUA } from './i18n.expense.list';
 
 export interface Ii18n {
   locale: string;
@@ -19,6 +21,8 @@ export interface Ii18n {
   account: Ii18nAccount;
   about: Ii18nAbout;
   transactions: Ii18nTransactions;
+  incomeList: Ii18nIncomeList;
+  expenseList: Ii18nExpenseList;
 }
 
 export class i18nEN implements Ii18n {
@@ -32,6 +36,8 @@ export class i18nEN implements Ii18n {
   account = new i18nAccountEN();
   about = new i18nAboutEN();
   transactions = new i18nTransactionsEN();
+  incomeList = new i18nIncomeListEN();
+  expenseList = new i18nExpenseListEN();
 }
 
 export class i18nUA implements Ii18n {
@@ -45,6 +51,8 @@ export class i18nUA implements Ii18n {
   account = new i18nAccountUA();
   about = new i18nAboutUA();
   transactions = new i18nTransactionsUA();
+  incomeList = new i18nIncomeListUA();
+  expenseList = new i18nExpenseListUA();
 }
 
 export const i18n = {
