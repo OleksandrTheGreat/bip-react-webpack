@@ -3,9 +3,10 @@ import {ABus} from 'abus';
 import {ioc, state, pages} from '../../../shared';
 import {MarkerModel} from '../../../models';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
-import { RefreshIncomeListPage, DeleteMarker, RestoreMarker } from '../../../bus/commands/marker.commands';
+import {RefreshExpenseListPage, DeleteMarker, RestoreMarker } from '../../../bus/commands/marker.commands';
+import { RefreshAccountsListPage } from '../../../bus/commands/account.commands';
 
-export class IncomeItem extends React.Component<{income: MarkerModel}> {
+export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
   
   private _bus = ioc.resolve<ABus>(ABus);
 
@@ -19,7 +20,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
   render() {
 
-    const editButtonContent = this.props.income.id == null
+    const editButtonContent = this.props.expense.id == null
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
@@ -33,7 +34,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
         {editButtonContent}
       </button>);
 
-    const deleteButton = this.props.income.id == null || this.props.income.isDeleted
+    const deleteButton = this.props.expense.id == null || this.props.expense.isDeleted
       ? null
       : <div className="d-inline-block">
           &nbsp;
@@ -47,15 +48,15 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
           </button>
         </div>;
 
-    const info = this.props.income.isDeleted
+    const info = this.props.expense.isDeleted
       ? <div className="col">
-          <del><em>{this.props.income.name || state.i18n.income.createTitle}</em></del>
+          <del><em>{this.props.expense.name || state.i18n.expense.createTitle}</em></del>
         </div>
       : <div className="col">
-          {this.props.income.name || state.i18n.income.createTitle}
+          {this.props.expense.name || state.i18n.expense.createTitle}
         </div>;
 
-    const restoreButton = this.props.income.isDeleted
+    const restoreButton = this.props.expense.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -82,13 +83,13 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.IncomePage.name, this.props.income));
+    this._bus.SendAsync(new ChangePage(pages.ExpensePage.name, this.props.expense));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.income.deleteQuestion.replace('{0}', this.props.income.name), 
+        state.i18n.expense.deleteQuestion.replace('{0}', this.props.expense.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -96,8 +97,8 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
           this._bus.SendAsync(
             new DeleteMarker(
-              this.props.income.id, 
-              () => this._bus.SendAsync(new RefreshIncomeListPage()), 
+              this.props.expense.id, 
+              () => this._bus.SendAsync(new RefreshExpenseListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }
@@ -105,7 +106,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.income.restoreQuestion.replace('{0}', this.props.income.name), 
+        state.i18n.expense.restoreQuestion.replace('{0}', this.props.expense.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -113,8 +114,8 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
           this._bus.SendAsync(
             new RestoreMarker(
-              this.props.income.id, 
-              () => this._bus.SendAsync(new RefreshIncomeListPage()), 
+              this.props.expense.id, 
+              () => this._bus.SendAsync(new RefreshExpenseListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }

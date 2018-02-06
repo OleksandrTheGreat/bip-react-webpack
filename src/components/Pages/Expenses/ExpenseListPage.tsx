@@ -4,6 +4,8 @@ import {state, ioc} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
+import { RefreshExpenseListPage, QueryExpenseList } from '../../../bus/commands/marker.commands';
+import { ExpenseList } from './ExpenseList';
 
 export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerModel[]} > {
 
@@ -16,7 +18,7 @@ export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerM
       expenseList: []
     };
 
-    //this._bus.Handle(RefreshExpenseListPage, () => this._refresh());
+    this._bus.Handle(RefreshExpenseListPage, () => this._refresh());
 
     this._refresh();
   }
@@ -28,23 +30,22 @@ export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerM
           <i className="fa header-icon fa-minus"></i>
           {state.i18n.expenseList.title}
         </Header>
+        <ExpenseList list={this.state.expenseList} />
       </div>
     );
   }
 
   private _refresh() {
-    // this._bus.SendAsync(
-    //   new QueryCurrencyList(
-    //     (list: CurrencyModel[]) => {
-    //       this.setState((state) => {
-    //         return {
-    //           ...state,
-    //           currencyList: list
-    //         }
-    //       });
-    //     },
-    //     (error) => {
-    //       this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
-    //     }));
+    this._bus.SendAsync(
+      new QueryExpenseList(
+        (list: MarkerModel[]) => {
+          this.setState((state) => {
+            return {
+              ...state,
+              expenseList: list
+            }
+          });
+        },
+        error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
   }
 }

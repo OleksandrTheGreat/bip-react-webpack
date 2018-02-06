@@ -10,9 +10,9 @@ export class QueryIncomeList {
 export class RefreshIncomeListPage {
 }
 
-export class SaveIncome {
+export class SaveMarker {
   constructor(
-    public income: MarkerModel,
+    public marker: MarkerModel,
     public onSuccess: () => void,
     public onError: (error: any) => void
   ){}
@@ -30,6 +30,16 @@ export class RestoreMarker {
   constructor(
     public id: AAGUID,
     public onSuccess: () => void,
+    public onError: (error: any) => void
+  ){}
+}
+
+export class RefreshExpenseListPage {
+}
+
+export class QueryExpenseList {
+  constructor(
+    public onSuccess: (list: MarkerModel[]) => void,
     public onError: (error: any) => void
   ){}
 }

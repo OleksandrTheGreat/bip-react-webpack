@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {ABus} from 'abus';
 import { MarkerModel } from "../../../models";
 import { FormPage, Form, FormTextField } from "../../common/Form";
 import { state } from '../../../shared';
@@ -7,7 +8,7 @@ import { SaveMarker } from "../../../bus/commands/marker.commands";
 import { GoBack, ShowError } from "../../../bus/commands/index";
 import { MarkerCategory } from "../../../domain";
 
-export class IncomePage extends FormPage<MarkerModel> {
+export class ExpensePage extends FormPage<MarkerModel> {
   
   constructor(props) {
     super(props);
@@ -18,13 +19,13 @@ export class IncomePage extends FormPage<MarkerModel> {
   render() {
 
     let title = this.props.data.id
-      ? state.i18n.income.editTitle
-      : state.i18n.income.createTitle;
+      ? state.i18n.expense.editTitle
+      : state.i18n.expense.createTitle;
 
     return (
       <div>
         <Header>
-          <i className="fa header-icon fa-plus"></i>
+          <i className="fa header-icon fa-minus"></i>
           {title}
         </Header>
         <Form onSave={this._onSave}>
@@ -32,8 +33,8 @@ export class IncomePage extends FormPage<MarkerModel> {
             title={state.i18n.common.name}
             value={this.state.data.name}
             isRequired={true}
-            validationMessage={state.i18n.income.nameValidationMessage}
-            onChange={(e) => this.onChange(income => income.name = e.target.value)}/>
+            validationMessage={state.i18n.expense.nameValidationMessage}
+            onChange={(e) => this.onChange(expense => expense.name = e.target.value)}/>
         </Form>
       </div>
     );
@@ -41,12 +42,12 @@ export class IncomePage extends FormPage<MarkerModel> {
 
   private _onSave() {
 
-    let income = this.state.data;
-    income.category = MarkerCategory.income;
+    let expense = this.state.data;
+    expense.category = MarkerCategory.expense;
 
     this._bus.SendAsync(
       new SaveMarker(
-        income, 
+        expense, 
         () => this._bus.SendAsync(new GoBack()), 
         (error: DOMError) => {
 
@@ -54,7 +55,7 @@ export class IncomePage extends FormPage<MarkerModel> {
 
           switch(error.name) {
             case 'ConstraintError':
-              message = state.i18n.income.constraintErrorMessage.replace('{0}', this.state.data.name);
+              message = state.i18n.expense.constraintErrorMessage.replace('{0}', this.state.data.name);
               break;
             default:
               message = state.i18n.common.defaulErrorMessage;

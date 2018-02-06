@@ -1,7 +1,7 @@
 import {ABus} from 'abus';
 import {GUID} from 'xtypescript';
 import {ioc} from '../../shared';
-import { QueryIncomeList, SaveIncome, DeleteMarker, RestoreMarker } from '../commands/marker.commands';
+import { QueryIncomeList, SaveMarker, DeleteMarker, RestoreMarker, QueryExpenseList } from '../commands/marker.commands';
 import { IMarkerService } from '../../services/MarkerService';
 import { MarkerCategory } from '../../domain/Marker';
 
@@ -18,10 +18,19 @@ import { MarkerCategory } from '../../domain/Marker';
       .catch(e => command.onError(e));
   });
 
-  _bus.Handle(SaveIncome, (command: SaveIncome) => {
+  
+  _bus.Handle(QueryExpenseList, (command: QueryIncomeList) => {
 
     _service
-      .save(command.income)
+      .get(MarkerCategory.expense)
+      .then(list => command.onSuccess(list))
+      .catch(e => command.onError(e));
+  });
+
+  _bus.Handle(SaveMarker, (command: SaveMarker) => {
+
+    _service
+      .save(command.marker)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
   });
