@@ -7,11 +7,11 @@ import {ICurrencyService} from '../../services/CurrencyService';
 
 (() => {
 
-  let service = ioc.resolve<ICurrencyService>(ICurrencyService);
+  let _service = ioc.resolve<ICurrencyService>(ICurrencyService);
 
   bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 
-    service
+    _service
       .getAll()
       .then(list => command.onSuccess(list))
       .catch(e => command.onError(e));
@@ -19,7 +19,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
 
   bus.Handle(SaveCurrency, (command: SaveCurrency) => {
 
-    service
+    _service
       .save(command.currency)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
@@ -27,7 +27,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
 
   bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
 
-    service
+    _service
       .delete(command.id)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
@@ -35,7 +35,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
 
   bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
 
-    service
+    _service
       .restore(command.id)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
