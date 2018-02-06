@@ -1,32 +1,32 @@
 import {ABus} from 'abus';
 import {GUID} from 'xtypescript';
 import {ioc} from '../../shared';
-import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
-import {CurrencyModel} from '../../models';
-import {ICurrencyService} from '../../services/CurrencyService';
+import { QueryIncomeList, SaveIncome, DeleteMarker, RestoreMarker } from '../commands/marker.commands';
+import { IMarkerService } from '../../services/MarkerService';
+import { MarkerCategory } from '../../domain/Marker';
 
 (() => {
 
   let _bus = ioc.resolve<ABus>(ABus);
-  let _service = ioc.resolve<ICurrencyService>(ICurrencyService);
+  let _service = ioc.resolve<IMarkerService>(IMarkerService);
 
-  _bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
+  _bus.Handle(QueryIncomeList, (command: QueryIncomeList) => {
 
     _service
-      .getAll()
+      .get(MarkerCategory.income)
       .then(list => command.onSuccess(list))
       .catch(e => command.onError(e));
   });
 
-  _bus.Handle(SaveCurrency, (command: SaveCurrency) => {
+  _bus.Handle(SaveIncome, (command: SaveIncome) => {
 
     _service
-      .save(command.currency)
+      .save(command.income)
       .then(() => command.onSuccess())
       .catch(e => command.onError(e));
   });
 
-  _bus.Handle(DeleteCurrency, (command: DeleteCurrency) => {
+  _bus.Handle(DeleteMarker, (command: DeleteMarker) => {
 
     _service
       .delete(command.id)
@@ -34,7 +34,7 @@ import {ICurrencyService} from '../../services/CurrencyService';
       .catch(e => command.onError(e));
   });
 
-  _bus.Handle(RestoreCurrency, (command: RestoreCurrency) => {
+  _bus.Handle(RestoreMarker, (command: RestoreMarker) => {
 
     _service
       .restore(command.id)

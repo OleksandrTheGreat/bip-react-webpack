@@ -8,6 +8,7 @@ import {App} from './components/App/App';
 import './bus/handlers/state.handlers';
 import './bus/handlers/currency.handlers';
 import './bus/handlers/account.handlers';
+import './bus/handlers/marker.handlers';
 
 export const renderApp = () => {
   ReactDOM.render(

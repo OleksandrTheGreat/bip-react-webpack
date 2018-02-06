@@ -54,9 +54,7 @@ export class CurrencyPage extends FormPage<CurrencyModel> {
     this._bus.SendAsync(
       new SaveCurrency(
         this.state.data, 
-        () => {
-          this._bus.SendAsync(new GoBack());
-        }, 
+        () => this._bus.SendAsync(new GoBack()), 
         (error: DOMError) => {
 
           let message: string;

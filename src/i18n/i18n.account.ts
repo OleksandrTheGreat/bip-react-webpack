@@ -15,7 +15,7 @@ export interface Ii18nAccount {
 export class i18nAccountEN implements Ii18nAccount {
   editTitle = 'Edit accout';
   createTitle = 'Create account';
-  constraintErrorMessage = 'Account "{0} {1}" already exists';
+  constraintErrorMessage = 'Account "{0} {1}" already exists.';
   nameValidationMessage = 'Provide account name';
   currency = 'Currency';
   balance = 'Balance';
@@ -29,7 +29,7 @@ export class i18nAccountEN implements Ii18nAccount {
 export class i18nAccountUA implements Ii18nAccount {
   editTitle = 'Редагувати рахунок';
   createTitle = 'Створити рахунок';
-  constraintErrorMessage = 'Рахунок "{0} {1}" вже існує';
+  constraintErrorMessage = 'Рахунок "{0} {1}" вже існує.';
   nameValidationMessage = 'Вкажіть назву рахунку';
   currency = 'Валюта';
   balance = 'Залишок';

@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {CurrencyItem} from './CurrencyItem';
-import {GUID} from 'xtypescript';
 import {state} from '../../../shared';
 import {CurrencyModel} from '../../../models';
 

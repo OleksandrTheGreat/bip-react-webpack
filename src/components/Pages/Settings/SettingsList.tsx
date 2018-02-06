@@ -25,8 +25,7 @@ export class SettingsList extends React.Component {
         <SettingsItem 
           icon="fa fa-plus" 
           title={state.i18n.settings.incomes} 
-          onClick={() => this._bus.Send(new ChangePage(pages.IncomeListPage.name))
-          }
+          onClick={() => this._bus.Send(new ChangePage(pages.IncomeListPage.name))}
         />
         <SettingsItem 
           icon="fa fa-minus" 

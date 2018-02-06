@@ -4,6 +4,8 @@ import {state, ioc} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
+import {QueryIncomeList, RefreshIncomeListPage} from '../../../bus/commands/marker.commands';
+import { IncomeList } from './IncomeList';
 
 export class IncomeListPage extends React.Component < {}, {incomeList: MarkerModel[]} > {
 
@@ -16,7 +18,7 @@ export class IncomeListPage extends React.Component < {}, {incomeList: MarkerMod
       incomeList: []
     };
 
-    //this._bus.Handle(RefreshIncomeListPage, () => this._refresh());
+    this._bus.Handle(RefreshIncomeListPage, () => this._refresh());
 
     this._refresh();
   }
@@ -28,23 +30,22 @@ export class IncomeListPage extends React.Component < {}, {incomeList: MarkerMod
           <i className="fa header-icon fa-plus"></i>
           {state.i18n.incomeList.title}
         </Header>
+        <IncomeList list={this.state.incomeList} />
       </div>
     );
   }
 
   private _refresh() {
-    // this._bus.SendAsync(
-    //   new QueryCurrencyList(
-    //     (list: CurrencyModel[]) => {
-    //       this.setState((state) => {
-    //         return {
-    //           ...state,
-    //           currencyList: list
-    //         }
-    //       });
-    //     },
-    //     (error) => {
-    //       this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
-    //     }));
+    this._bus.SendAsync(
+      new QueryIncomeList(
+        (list: MarkerModel[]) => {
+          this.setState((state) => {
+            return {
+              ...state,
+              incomeList: list
+            }
+          });
+        },
+        error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
   }
 }

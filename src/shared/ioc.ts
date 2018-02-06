@@ -7,6 +7,7 @@ import {IAccountMapper, AccountMapper} from '../services/AccountMapper';
 import {ICurrencyService, CurrencyService} from '../services/CurrencyService';
 import {IAccountService, AccountService} from '../services/AccountService';
 import {IHomePageService, HomePageService} from '../services/HomePageService';
+import { IMarkerService, MarkerService } from '../services/MarkerService';
 
 
 const ioc = new IOCContainer();
@@ -19,5 +20,6 @@ ioc.register<IAccountMapper>(IAccountMapper, container => new AccountMapper(cont
 ioc.register<ICurrencyService>(ICurrencyService, container => new CurrencyService(container.resolve<IIDBRepository>(IIDBRepository)));
 ioc.register<IAccountService>(IAccountService, container => new AccountService(container.resolve<IIDBRepository>(IIDBRepository), container.resolve<IAccountMapper>(IAccountMapper)));
 ioc.register<IHomePageService>(IHomePageService, container => new HomePageService(container.resolve<IIDBRepository>(IIDBRepository), container.resolve<IAccountMapper>(IAccountMapper)));
+ioc.register<IMarkerService>(IMarkerService, container => new MarkerService(container.resolve<IIDBRepository>(IIDBRepository)));
 
 export {ioc}

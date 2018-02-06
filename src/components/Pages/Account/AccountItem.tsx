@@ -14,7 +14,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
 
     this._onEditClick = this._onEditClick.bind(this);
     this._onDeleteClick = this._onDeleteClick.bind(this);
-    this._onUnDeleteClick = this._onUnDeleteClick.bind(this);    
+    this._onRestoreClick = this._onRestoreClick.bind(this);    
   }
 
   render() {
@@ -91,7 +91,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           <button 
             type="button"
             className="btn btn-success"
-            onClick={this._onUnDeleteClick}
+            onClick={this._onRestoreClick}
             title={state.i18n.common.undelete}
           >
             <i className="fa fa-undo"></i>
@@ -123,32 +123,32 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
       new Ask(
         state.i18n.account.deleteQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
         (answer: boolean) => {
+
+          if (!answer)
+            return;
+
           this._bus.SendAsync(
             new DeleteAccount(
               this.props.account.id, 
-              () => {
-                this._bus.SendAsync(new RefreshAccountsListPage());
-              }, 
-              (error) => {
-                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
-              }));
+              () => this._bus.SendAsync(new RefreshAccountsListPage()), 
+              error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }
 
-  _onUnDeleteClick() {
+  _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
         state.i18n.account.restoreQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
         (answer: boolean) => {
+
+          if (!answer)
+            return;
+
           this._bus.SendAsync(
             new ResoreAccount(
               this.props.account.id, 
-              () => {
-                this._bus.SendAsync(new RefreshAccountsListPage());
-              }, 
-              (error) => {
-                this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage));
-              }));
+              () => this._bus.SendAsync(new RefreshAccountsListPage()), 
+              error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }
 }

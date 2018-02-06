@@ -35,7 +35,7 @@ let
   upgradeMarker = (db : IDBDatabase) => {
 
     let store = db.createObjectStore('Marker', {keyPath: "id"});
-    store.createIndex('name', 'name', {unique: true});
+    store.createIndex('name-category', ['name', 'category'], {unique: true});
   };
 
 export const idbAdapter: IIDBAdapter = new IDBAdapter(

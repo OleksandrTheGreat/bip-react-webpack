@@ -1,12 +1,12 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {ioc, state, pages} from '../../../shared';
-import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
-import {DeleteCurrency, RefreshCurrencyListPage, RestoreCurrency} from '../../../bus/commands/currency.commands';
-import {CurrencyModel} from '../../../models';
+import {MarkerModel} from '../../../models';
+import {ChangePage, Ask, ShowError} from '../../../bus/commands';
+import { RefreshIncomeListPage, DeleteMarker, RestoreMarker } from '../../../bus/commands/marker.commands';
 
-export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
-
+export class IncomeItem extends React.Component<{income: MarkerModel}> {
+  
   private _bus = ioc.resolve<ABus>(ABus);
 
   constructor() {
@@ -19,7 +19,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
 
   render() {
 
-    const editButtonContent = this.props.currency.id == null
+    const editButtonContent = this.props.income.id == null
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
@@ -33,7 +33,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         {editButtonContent}
       </button>);
 
-    const deleteButton = this.props.currency.id == null || this.props.currency.isDeleted
+    const deleteButton = this.props.income.id == null || this.props.income.isDeleted
       ? null
       : <div className="d-inline-block">
           &nbsp;
@@ -47,25 +47,15 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
           </button>
         </div>;
 
-    const info = this.props.currency.isDeleted
+    const info = this.props.income.isDeleted
       ? <div className="col">
-          <del><em>{this.props.currency.name || state.i18n.currency.createTitle}</em></del>
-          <div>
-            <small>
-              <del><em>{this.props.currency.description}</em></del>
-            </small>
-          </div>
+          <del><em>{this.props.income.name || state.i18n.currency.createTitle}</em></del>
         </div>
       : <div className="col">
-          {this.props.currency.name || state.i18n.currency.createTitle}
-          <div>
-            <small>
-              {this.props.currency.description}
-            </small>
-          </div>
+          {this.props.income.name || state.i18n.income.createTitle}
         </div>;
 
-    const restoreButton = this.props.currency.isDeleted
+    const restoreButton = this.props.income.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -92,22 +82,22 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, this.props.currency));
+    this._bus.SendAsync(new ChangePage(pages.IncomePage.name, this.props.income));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.currency.deleteQuestion.replace('{0}', this.props.currency.name), 
+        state.i18n.income.deleteQuestion.replace('{0}', this.props.income.name), 
         (answer: boolean) => {
 
           if (!answer)
             return;
 
           this._bus.SendAsync(
-            new DeleteCurrency(
-              this.props.currency.id, 
-              () => this._bus.SendAsync(new RefreshCurrencyListPage()), 
+            new DeleteMarker(
+              this.props.income.id, 
+              () => this._bus.SendAsync(new RefreshIncomeListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }
@@ -115,16 +105,16 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.currency.restoreQuestion.replace('{0}', this.props.currency.name), 
+        state.i18n.income.restoreQuestion.replace('{0}', this.props.income.name), 
         (answer: boolean) => {
 
           if (!answer)
             return;
 
           this._bus.SendAsync(
-            new RestoreCurrency(
-              this.props.currency.id, 
-              () => this._bus.SendAsync(new RefreshCurrencyListPage()), 
+            new RestoreMarker(
+              this.props.income.id, 
+              () => this._bus.SendAsync(new RefreshIncomeListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
   }

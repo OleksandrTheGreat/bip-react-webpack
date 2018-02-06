@@ -1,6 +1,5 @@
 import {ABus} from 'abus';
-import {state, ioc} from '../../shared';
-import {Account} from "../../domain/Account";
+import {ioc} from '../../shared';
 import {QueryDashboardAccounts, QueryAccountList, SaveAccount, DeleteAccount, ResoreAccount} from '../commands/account.commands';
 import {GUID} from 'xtypescript';
 import {IHomePageService} from '../../services/HomePageService';

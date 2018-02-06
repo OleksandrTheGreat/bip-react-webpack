@@ -8,6 +8,7 @@ import {TransactionListPage} from '../components/Pages/TransactionList/Transacti
 import {TransactionPage} from '../components/Pages/Transaction/TransactionPage';
 import {AboutPage} from '../components/Pages/About/AboutPage';
 import {IncomeListPage} from '../components/Pages/Income/IncomeListPage';
+import {IncomePage} from '../components/Pages/Income/IncomePage';
 import {ExpenseListPage} from '../components/Pages/Expenses/ExpenseListPage';
 
 export const pages = {
@@ -21,5 +22,6 @@ export const pages = {
   TransactionPage: TransactionPage,
   AboutPage: AboutPage,
   IncomeListPage: IncomeListPage,
-  ExpenseListPage: ExpenseListPage
+  IncomePage: IncomePage,
+  ExpenseListPage: ExpenseListPage,
 };
