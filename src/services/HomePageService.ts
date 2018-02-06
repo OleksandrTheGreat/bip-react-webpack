@@ -1,8 +1,8 @@
-import { Account } from "../domain";
-import { IIDBRepository } from "../IndexedDB/IDBRepository";
-import { GUID } from "xtypescript";
-import { IAccountMapper } from "./AccountMapper";
-import { AccountModel } from "../models/index";
+import {Account} from "../domain";
+import {IIDBRepository} from "xIndexedDB";
+import {GUID} from "xtypescript";
+import {IAccountMapper} from "./AccountMapper";
+import {AccountModel} from "../models";
 
 export abstract class IHomePageService {
   abstract getAccounts(): Promise<AccountModel[]>;

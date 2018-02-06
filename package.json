@@ -54,7 +54,8 @@
     "xjasmine": "https://github.com/OleksandrTheGreat/xjasmine.git",
     "xwebpack": "https://github.com/OleksandrTheGreat/xwebpack.git",
     "xtypescript": "../xtypescript/dist/bin",
-    "ioc": "../ioc/dist/bin"
+    "ioc": "../ioc/dist/bin",
+    "xIndexedDB": "../xIndexedDB/dist/bin"
   },
   "dependencies": {
     "@types/react": "^16.0.18",

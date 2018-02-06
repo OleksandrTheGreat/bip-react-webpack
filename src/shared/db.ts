@@ -1,5 +1,5 @@
 import {GUID} from 'xtypescript';
-import {IDBAdapter, IIDBAdapter} from '../IndexedDB/IDBAdapter';
+import {IDBAdapter, IIDBAdapter} from 'xIndexedDB';
 import {Account, Currency, Marker, Transaction} from '../domain';
 
 let uahId = GUID.New();
@@ -29,9 +29,13 @@ let upgradeAccount = (db : IDBDatabase) => {
   store.add(new Account(GUID.New(), 'Income', uahId));
 };
 
-export const idbAdapter: IIDBAdapter = new IDBAdapter('BiP2', 1, (db : IDBDatabase) => {
-  upgradeCurrency(db);
-  upgradeAccount(db);
-});
+export const idbAdapter: IIDBAdapter = new IDBAdapter(
+  'BiP2', 
+  1, 
+  (db : IDBDatabase) => {
+    upgradeCurrency(db);
+    upgradeAccount(db);
+  }
+);
 
 idbAdapter.get();

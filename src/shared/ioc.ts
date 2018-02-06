@@ -1,6 +1,5 @@
 import {IOCContainer} from 'ioc';
-import {IIDBAdapter} from '../IndexedDB/IDBAdapter';
-import {IIDBRepository, IDBRepository} from '../IndexedDB/IDBRepository';
+import {IIDBAdapter, IIDBRepository, IDBRepository} from 'xIndexedDB';
 
 import {idbAdapter} from './db';
 import {IAccountMapper, AccountMapper} from '../services/AccountMapper';

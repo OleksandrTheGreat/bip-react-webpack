@@ -1,7 +1,7 @@
-import { Currency } from "../domain";
-import { CurrencyModel } from "../models";
-import { IIDBRepository } from "../IndexedDB/IDBRepository";
-import { GUID } from "xtypescript";
+import {Currency} from "../domain";
+import {CurrencyModel} from "../models";
+import {IIDBRepository} from "xIndexedDB";
+import {GUID} from "xtypescript";
 
 export abstract class ICurrencyService {
   abstract getAll(): Promise<CurrencyModel[]>;

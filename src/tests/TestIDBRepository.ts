@@ -1,4 +1,4 @@
-import {IIDBRepository} from '../IndexedDB/IDBRepository';
+import {IIDBRepository} from 'xIndexedDB';
 
 export class TestIDBRepository implements IIDBRepository {
   

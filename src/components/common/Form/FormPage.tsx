@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state, bus} from '../../../shared';
-import {SaveState} from '../../../bus/commands/index';
+import {SaveState} from '../../../bus/commands';
 
 export abstract class FormPage<T> extends React.Component <{data: T}, {data: T}> {
 

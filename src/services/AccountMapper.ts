@@ -1,6 +1,6 @@
 import {Account} from './../domain';
 import {AccountModel} from '../models/AccountModel';
-import {IIDBRepository} from '../IndexedDB/IDBRepository';
+import {IIDBRepository} from 'xIndexedDB';
 import {Currency} from '../domain/Currency';
 import {state} from '../shared';
 

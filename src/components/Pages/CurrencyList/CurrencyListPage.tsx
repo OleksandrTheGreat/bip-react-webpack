@@ -3,7 +3,7 @@ import {state, ioc, bus} from '../../../shared';
 import {Header} from '../../common/Page/Header';
 import {CurrencyList} from './CurrencyList';
 import { QueryCurrencyList, RefreshCurrencyListPage } from '../../../bus/commands/currency.commands';
-import { ShowError } from '../../../bus/commands/index';
+import { ShowError } from '../../../bus/commands';
 import { CurrencyModel } from '../../../models';
 
 export class CurrencyListPage extends React.Component < {}, {currencyList: CurrencyModel[]} > {
