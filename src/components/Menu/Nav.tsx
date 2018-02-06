@@ -63,8 +63,8 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
         />
         <MenuItem
           title={transactionsTitle}
-          onClick={() => this._bus.Send(new ChangePage(pages.TransactionPage.name))}
-          isActive={this.state.currentPage === pages.TransactionPage.name}
+          onClick={() => this._bus.Send(new ChangePage(pages.TransactionListPage.name))}
+          isActive={this.state.currentPage === pages.TransactionListPage.name}
         />
         <MenuItem
           title={aboutTitle}

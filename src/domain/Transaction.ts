@@ -1,6 +1,7 @@
 import { Account } from './Account';
 import { Currency } from './Currency';
 import { Entity } from './Entity';
+import { Marker } from './Marker';
 
 export class Transaction  extends Entity {
   constructor(
@@ -11,6 +12,7 @@ export class Transaction  extends Entity {
     public sumTo: number,
     public rate: number = null,
     public description: string = null,
+    public markerId: AAGUID = null,
     isDeleted?: boolean,
     createdDateTime?: Date,
     modifiedDateTime?: Date

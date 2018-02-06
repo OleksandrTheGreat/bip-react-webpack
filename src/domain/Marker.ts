@@ -1,12 +1,12 @@
 import { Entity } from "./Entity";
 
 export enum MarkerCategory {
-  account = 0,
-  transaction,
-  currency
+  expense = 0,
+  income
 }
 
-export class Marker  extends Entity {
+export class Marker extends Entity {
+
   constructor(
     id: AAGUID,
     public category: MarkerCategory,
