@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {AccountModel} from '../../../models/AccountModel';
+import {AccountModel, AccountFormModel} from '../../../models';
 import {state, ioc, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
 import {DeleteAccount, RefreshAccountsListPage, ResoreAccount} from '../../../bus/commands/account.commands';
@@ -115,7 +115,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.AccountPage.name, {account: this.props.account}));
+    this._bus.SendAsync(new ChangePage(pages.AccountPage.name, new AccountFormModel(this.props.account, [])));
   }
 
   _onDeleteClick() {

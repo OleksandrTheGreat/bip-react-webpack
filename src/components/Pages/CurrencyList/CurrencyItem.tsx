@@ -92,7 +92,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, {currency: this.props.currency}));
+    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, this.props.currency));
   }
 
   _onDeleteClick() {

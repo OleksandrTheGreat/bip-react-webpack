@@ -1,7 +1,11 @@
 import * as React from 'react';
-import {state} from '../../../shared';
+import {ABus} from 'abus';
+import {state, ioc, pages} from '../../../shared';
+import {ChangePage} from '../../../bus/commands/index';
 
-export class TransactionPageHeader extends React.Component {
+export class TransactionListPageHeader extends React.Component {
+
+  private _bus = ioc.resolve<ABus>(ABus);
 
   render() {
     return (
@@ -15,7 +19,7 @@ export class TransactionPageHeader extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.transactions.create}
-              onClick={() => alert('Not implemented yet')}
+              onClick={() => this._bus.SendAsync(new ChangePage(pages.TransactionPage.name))}
             >
               <i className="fa fa-plus"></i>
             </button>
