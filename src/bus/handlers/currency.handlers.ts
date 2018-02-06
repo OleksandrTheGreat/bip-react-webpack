@@ -3,10 +3,11 @@ import {bus, state, ioc} from '../../shared';
 import {QueryCurrencyList, DeleteCurrency, SaveCurrency, RestoreCurrency} from '../commands/currency.commands';
 import {GUID} from 'xtypescript';
 import {CurrencyModel} from '../../models';
+import {ICurrencyService} from '../../services/CurrencyService';
 
 (() => {
 
-  let service = ioc.ICurrencyService.resolve();
+  let service = ioc.resolve<ICurrencyService>(ICurrencyService);
 
   bus.Handle(QueryCurrencyList, (command: QueryCurrencyList) => {
 

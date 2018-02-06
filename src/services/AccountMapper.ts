@@ -4,8 +4,8 @@ import {IIDBRepository} from '../IndexedDB/IDBRepository';
 import {Currency} from '../domain/Currency';
 import {state} from '../shared';
 
-export interface IAccountMapper {
-  toModelList(accounts : Account[]) : Promise < AccountModel[] >;
+export abstract class IAccountMapper {
+  abstract toModelList(accounts : Account[]) : Promise < AccountModel[] >;
 }
 
 export class AccountMapper implements IAccountMapper {

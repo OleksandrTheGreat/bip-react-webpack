@@ -1,12 +1,14 @@
 import {bus, state, ioc} from '../../shared';
 import {Account} from "../../domain/Account";
 import {QueryDashboardAccounts, QueryAccountList, SaveAccount, DeleteAccount, ResoreAccount} from '../commands/account.commands';
-import { GUID } from 'xtypescript';
+import {GUID} from 'xtypescript';
+import {IHomePageService} from '../../services/HomePageService';
+import {IAccountService} from '../../services/AccountService';
 
 (() => {
 
-  let _accountService = ioc.IAccountService.resolve();
-  let _homePagService = ioc.IHomePageService.resolve();
+  let _accountService = ioc.resolve<IAccountService>(IAccountService);
+  let _homePagService = ioc.resolve<IHomePageService>(IHomePageService);
 
   bus.Handle(QueryDashboardAccounts, (command: QueryDashboardAccounts) => {
 

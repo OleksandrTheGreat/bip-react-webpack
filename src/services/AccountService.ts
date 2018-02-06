@@ -4,11 +4,11 @@ import { GUID } from "xtypescript";
 import { IAccountMapper } from "./AccountMapper";
 import { AccountModel } from "../models/index";
 
-export interface IAccountService {
-  getAll(): Promise<AccountModel[]>;
-  save(account: AccountModel) : Promise<void>;
-  delete(id: AAGUID) : Promise<void>;
-  restore(id: AAGUID) : Promise<void>;
+export abstract class  IAccountService {
+  abstract getAll(): Promise<AccountModel[]>;
+  abstract save(account: AccountModel) : Promise<void>;
+  abstract delete(id: AAGUID) : Promise<void>;
+  abstract restore(id: AAGUID) : Promise<void>;
 }
 
 export class AccountService implements IAccountService {

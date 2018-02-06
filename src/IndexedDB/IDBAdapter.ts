@@ -1,5 +1,5 @@
-export interface IIDBAdapter {
-  get() : Promise < IDBDatabase >;
+export abstract class IIDBAdapter {
+  abstract get() : Promise < IDBDatabase >;
 }
 
 export class IDBAdapter implements IIDBAdapter {
@@ -50,7 +50,6 @@ export class IDBAdapter implements IIDBAdapter {
         this._db.onerror = this._errorHandler
           ? this._errorHandler
           : (e : Event) => {
-            //TODO: crashes on error
             reject('Database error: ' + e.target['error']['message']);
           };
 

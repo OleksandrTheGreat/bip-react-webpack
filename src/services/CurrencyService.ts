@@ -3,11 +3,11 @@ import { CurrencyModel } from "../models";
 import { IIDBRepository } from "../IndexedDB/IDBRepository";
 import { GUID } from "xtypescript";
 
-export interface ICurrencyService {
-  getAll(): Promise<CurrencyModel[]>;
-  save(currency: CurrencyModel) : Promise<void>;
-  delete(id: AAGUID) : Promise<void>;
-  restore(id: AAGUID) : Promise<void>;
+export abstract class ICurrencyService {
+  abstract getAll(): Promise<CurrencyModel[]>;
+  abstract save(currency: CurrencyModel) : Promise<void>;
+  abstract delete(id: AAGUID) : Promise<void>;
+  abstract restore(id: AAGUID) : Promise<void>;
 }
 
 export class CurrencyService implements ICurrencyService {

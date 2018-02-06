@@ -4,8 +4,8 @@ import { GUID } from "xtypescript";
 import { IAccountMapper } from "./AccountMapper";
 import { AccountModel } from "../models/index";
 
-export interface IHomePageService {
-  getAccounts(): Promise<AccountModel[]>;
+export abstract class IHomePageService {
+  abstract getAccounts(): Promise<AccountModel[]>;
 }
 
 export class HomePageService implements IHomePageService {
