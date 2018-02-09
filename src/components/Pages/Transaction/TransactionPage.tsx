@@ -140,7 +140,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
     return (
       <FormOptionsField 
-        title={state.i18n.transaction.fromAccount} 
+        title={state.i18n.transaction.toAccount} 
         values={options}
         selectedValue={accountId} 
       />
