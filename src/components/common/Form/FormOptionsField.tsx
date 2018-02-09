@@ -4,7 +4,7 @@ import { FormField } from './FormField';
 export class FormOptionValue {
   constructor(
     public value: any,
-    public display: string
+    public display: any
   ){ }
 }
 

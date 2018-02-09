@@ -54,7 +54,7 @@ import { MarkerCategory } from '../../domain/Marker';
   _bus.Handle(QueryMarkerList, (command: QueryMarkerList) => {
 
     _service
-      .get(MarkerCategory.Income | MarkerCategory.Expense)
+      .getAll()
       .then(list => command.onSuccess(list))
       .catch(e => command.onError(e));
   });

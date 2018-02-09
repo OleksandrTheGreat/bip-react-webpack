@@ -20,7 +20,7 @@ export class TransactionListPageHeader extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.transactions.create}
-              onClick={() => this._bus.SendAsync(new ChangePage(pages.TransactionPage.name, new TransactionFormModel()))}
+              onClick={() => this._bus.SendAsync(new ChangePage(pages.TransactionPage.name))}
             >
               <i className="fa fa-plus"></i>
             </button>

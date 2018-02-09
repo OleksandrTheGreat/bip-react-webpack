@@ -4,6 +4,7 @@ import {GUID} from "xtypescript";
 import {MarkerModel} from "../models";
 
 export abstract class  IMarkerService {
+  abstract getAll(): Promise<MarkerModel[]>;
   abstract get(category: MarkerCategory): Promise<MarkerModel[]>;
   abstract save(marker: MarkerModel) : Promise<void>;
   abstract delete(id: AAGUID) : Promise<void>;
@@ -17,6 +18,35 @@ export class MarkerService implements IMarkerService {
   constructor(
     private repository: IIDBRepository
   ) {}
+
+  getAll(): Promise<MarkerModel[]> {
+    return new Promise<MarkerModel[]>((resolve, reject)=> {
+
+      this
+        .repository
+        .query<Marker>(this.storageName)
+        .then(list => {
+
+          let result = list
+            .sort((a, b) => {
+              if(a.name > b.name)
+                return 1;
+              if(a.name < b.name)
+                return -1;
+              return 0;
+            })
+            .map(x => new MarkerModel(
+              x.id,
+              x.name,
+              x.category,
+              x.isDeleted
+            ));
+
+          resolve(result);
+        })
+        .catch(e => reject(e));
+    });
+  }
 
   get(category: MarkerCategory): Promise<MarkerModel[]> {
     return new Promise<MarkerModel[]>((resolve, reject)=> {
@@ -51,7 +81,6 @@ export class MarkerService implements IMarkerService {
     return new Promise<void>((resolve, reject)=> {
 
       if (marker.id) {
-
         this
           .repository
           .getById<Marker>(this.storageName, marker.id)
@@ -94,7 +123,6 @@ export class MarkerService implements IMarkerService {
 
   private _updateIsDeleted(id: AAGUID, isDeleted: boolean) :  Promise<void> {
     return new Promise<void>((resolve, reject)=> {
-
       this
         .repository
         .getById<Marker>(this.storageName, id)
@@ -110,6 +138,6 @@ export class MarkerService implements IMarkerService {
             .catch(e => reject(e));
         })
         .catch(e => reject(e));
-  });
+    });
   }
 }
