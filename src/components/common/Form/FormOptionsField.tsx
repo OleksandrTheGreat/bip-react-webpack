@@ -18,7 +18,7 @@ export class FormOptionsField extends React.Component < {
   className?: string
 } > {
 
-  render(){
+  render() {
 
     const Options = this.props.values.map(x => 
       <option value={x.value} selected={x.value == this.props.selectedValue}>{x.display}</option>);

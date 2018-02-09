@@ -2,6 +2,7 @@ import * as React from 'react';
 import {ABus} from 'abus';
 import {state, ioc, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands/index';
+import { TransactionFormModel } from '../../../models/TransactionFormModel';
 
 export class TransactionListPageHeader extends React.Component {
 
@@ -19,7 +20,7 @@ export class TransactionListPageHeader extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.transactions.create}
-              onClick={() => this._bus.SendAsync(new ChangePage(pages.TransactionPage.name))}
+              onClick={() => this._bus.SendAsync(new ChangePage(pages.TransactionPage.name, new TransactionFormModel()))}
             >
               <i className="fa fa-plus"></i>
             </button>

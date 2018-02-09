@@ -1,8 +1,8 @@
 import { Entity } from "./Entity";
 
 export enum MarkerCategory {
-  expense = 0,
-  income
+  Expense = 0,
+  Income
 }
 
 export class Marker extends Entity {

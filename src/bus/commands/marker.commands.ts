@@ -43,3 +43,10 @@ export class QueryExpenseList {
     public onError: (error: any) => void
   ){}
 }
+
+export class QueryMarkerList {
+  constructor(
+    public onSuccess: (list: MarkerModel[]) => void,
+    public onError: (error: any) => void
+  ){}
+}

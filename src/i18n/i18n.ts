@@ -6,11 +6,12 @@ import { Ii18nCommon, i18nCommonEN, i18nCommonUA } from './i18n.common';
 import { Ii18nCurrency, i18nCurrencyEN, i18nCurrencyUA } from './i18n.currency';
 import { Ii18nAccount, i18nAccountEN, i18nAccountUA } from './i18n.account';
 import { Ii18nAbout, i18nAboutEN, i18nAboutUA } from './i18n.about';
-import { Ii18nTransactions, i18nTransactionsEN, i18nTransactionsUA } from './i18n.transactions';
+import { Ii18nTransactionList, i18nTransactionListEN, i18nTransactionListUA } from './i18n.transaction.list';
 import { Ii18nIncomeList, i18nIncomeListEN, i18nIncomeListUA } from './i18n.income.list';
 import { Ii18nExpenseList, i18nExpenseListEN, i18nExpenseListUA } from './i18n.expense.list';
 import { Ii18nIncome, i18nIncomeEN, i18nIncomeUA } from './i18n.income';
 import { Ii18nExpense, i18nExpenseEN, i18nExpenseUA } from './i18n.expense';
+import { Ii18nTransaction, i18nTransactionEN, i18nTransactionUA } from './i18n.transaction';
 
 export interface Ii18n {
   locale: string;
@@ -22,11 +23,12 @@ export interface Ii18n {
   currency: Ii18nCurrency;
   account: Ii18nAccount;
   about: Ii18nAbout;
-  transactions: Ii18nTransactions;
+  transactions: Ii18nTransactionList;
   incomeList: Ii18nIncomeList;
   expenseList: Ii18nExpenseList;
   income: Ii18nIncome;
   expense: Ii18nExpense;
+  transaction: Ii18nTransaction;
 }
 
 export class i18nEN implements Ii18n {
@@ -39,11 +41,12 @@ export class i18nEN implements Ii18n {
   currency = new i18nCurrencyEN();
   account = new i18nAccountEN();
   about = new i18nAboutEN();
-  transactions = new i18nTransactionsEN();
+  transactions = new i18nTransactionListEN();
   incomeList = new i18nIncomeListEN();
   expenseList = new i18nExpenseListEN();
   income = new i18nIncomeEN();
   expense = new i18nExpenseEN();
+  transaction = new i18nTransactionEN();
 }
 
 export class i18nUA implements Ii18n {
@@ -56,11 +59,12 @@ export class i18nUA implements Ii18n {
   currency = new i18nCurrencyUA();
   account = new i18nAccountUA();
   about = new i18nAboutUA();
-  transactions = new i18nTransactionsUA();
+  transactions = new i18nTransactionListUA();
   incomeList = new i18nIncomeListUA();
   expenseList = new i18nExpenseListUA();
   income = new i18nIncomeUA();
   expense = new i18nExpenseUA();
+  transaction = new i18nTransactionUA();
 }
 
 export const i18n = {

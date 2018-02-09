@@ -4,7 +4,7 @@ import {CurrencyListPage} from '../components/Pages/Currency/CurrencyListPage';
 import {CurrencyPage} from '../components/Pages/Currency/CurrencyPage';
 import {AccountsListPage} from '../components/Pages/Account/AccountsListPage';
 import {AccountPage} from '../components/Pages/Account/AccountPage';
-import {TransactionListPage} from '../components/Pages/TransactionList/TransactionListPage';
+import {TransactionListPage} from '../components/Pages/Transaction/TransactionListPage';
 import {TransactionPage} from '../components/Pages/Transaction/TransactionPage';
 import {AboutPage} from '../components/Pages/About/AboutPage';
 import {IncomeListPage} from '../components/Pages/Income/IncomeListPage';

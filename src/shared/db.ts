@@ -88,13 +88,13 @@ let
       let store = db.createObjectStore(storeName, {keyPath: "id"});
       store.createIndex('name-category', ['name', 'category'], {unique: true});
 
-      store.add(new Marker(GUID.New(), MarkerCategory.income, 'Salary / Зарплата'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'Food / Їжа'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'Clothes / Одяг'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'House / Дім'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'Medicine / Медицина'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'Transport / Транстпорт'));
-      store.add(new Marker(GUID.New(), MarkerCategory.expense, 'Entertainment / Розваги'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Income, 'Salary / Зарплата'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'Food / Їжа'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'Clothes / Одяг'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'House / Дім'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'Medicine / Медицина'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'Transport / Транстпорт'));
+      store.add(new Marker(GUID.New(), MarkerCategory.Expense, 'Entertainment / Розваги'));
     }
     catch(ex)
     {

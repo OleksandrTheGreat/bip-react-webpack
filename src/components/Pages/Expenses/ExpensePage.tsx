@@ -43,7 +43,7 @@ export class ExpensePage extends FormPage<MarkerModel> {
   private _onSave() {
 
     let expense = this.state.data;
-    expense.category = MarkerCategory.expense;
+    expense.category = MarkerCategory.Expense;
 
     this._bus.SendAsync(
       new SaveMarker(
