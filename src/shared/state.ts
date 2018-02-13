@@ -25,7 +25,17 @@ let defaultState: IApplicationState = {
 defaultState.page.history.push(new ChangePage(pages.HomePage.name));
 
 if (localStorage.state) {
+
   savedState = JSON.parse(localStorage.state);
+
+  switch(savedState.i18n.locale) {
+    case i18n.EN.locale:
+      savedState.i18n = i18n.EN;
+      break;
+    case i18n.UA.locale:
+      savedState.i18n = i18n.UA;
+      break;
+  }
 }
 
 export const state = savedState === null ? defaultState : savedState;
