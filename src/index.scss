@@ -78,3 +78,8 @@ label {
 .error.modal-title {
   color: red;
 }
+
+textarea {
+  min-height: 3em;
+  max-height: 10em;
+}
