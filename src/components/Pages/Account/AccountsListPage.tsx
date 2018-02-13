@@ -1,21 +1,20 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc} from '../../../shared';
+import {state} from '../../../shared';
 import {Header} from '../../common/Page';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryAccountList, RefreshAccountsListPage} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
+import {IocComponent} from '../../common';
 
-export class AccountsListPage extends React.Component < {}, {accounts: AccountModel[]} > {
+export class AccountsListPage extends IocComponent <{}, AccountModel[]> {
 
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      accounts: []
+      data: null
     };
 
     this._bus.Handle(RefreshAccountsListPage, () => this._refreshAccount());
@@ -24,13 +23,17 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
   }
 
   render() {
+
+    if (!this.state.data)
+      return null;
+
     return (
       <div>
         <Header>
           <i className="fa header-icon fa-money"></i>
           {state.i18n.accountsList.title}
         </Header>
-        <AccountsList accounts={this.state.accounts}/>
+        <AccountsList ioc={this.props.ioc} data={this.state.data}/>
       </div>
     );
   }
@@ -40,8 +43,7 @@ export class AccountsListPage extends React.Component < {}, {accounts: AccountMo
       (accounts) => {
         this.setState((state) => {
           return {
-            ...state,
-            accounts: accounts
+            data: accounts
           }
         });
       },

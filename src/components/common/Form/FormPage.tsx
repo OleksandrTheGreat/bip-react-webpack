@@ -2,9 +2,9 @@ import * as React from 'react';
 import {ABus} from 'abus';
 import {state} from '../../../shared';
 import {SaveState} from '../../../bus/commands';
-import {IocPage} from '../Page';
+import {IocComponent} from '../';
 
-export abstract class FormPage<T> extends IocPage<T> {
+export abstract class FormPage<T> extends IocComponent<T, T> {
 
   constructor(props) {
     super(props);

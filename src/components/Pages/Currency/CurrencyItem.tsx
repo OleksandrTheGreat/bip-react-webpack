@@ -1,16 +1,15 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../../shared';
+import {state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
 import {DeleteCurrency, RefreshCurrencyListPage, RestoreCurrency} from '../../../bus/commands/currency.commands';
 import {CurrencyModel} from '../../../models';
+import {IocComponent} from '../../common';
 
-export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
+export class CurrencyItem extends IocComponent<CurrencyModel, {}> {
 
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this._onEditClick = this._onEditClick.bind(this);
     this._onDeleteClick = this._onDeleteClick.bind(this);
@@ -19,7 +18,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
 
   render() {
 
-    const editButtonContent = this.props.currency.id == null
+    const editButtonContent = this.props.data.id == null
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
@@ -33,7 +32,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
         {editButtonContent}
       </button>);
 
-    const deleteButton = this.props.currency.id == null || this.props.currency.isDeleted
+    const deleteButton = this.props.data.id == null || this.props.data.isDeleted
       ? null
       : <div className="d-inline-block">
           &nbsp;
@@ -47,25 +46,25 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
           </button>
         </div>;
 
-    const info = this.props.currency.isDeleted
+    const info = this.props.data.isDeleted
       ? <div className="col">
-          <del><em>{this.props.currency.name || state.i18n.currency.createTitle}</em></del>
+          <del><em>{this.props.data.name || state.i18n.currency.createTitle}</em></del>
           <div>
             <small>
-              <del><em>{this.props.currency.description}</em></del>
+              <del><em>{this.props.data.description}</em></del>
             </small>
           </div>
         </div>
       : <div className="col">
-          {this.props.currency.name || state.i18n.currency.createTitle}
+          {this.props.data.name || state.i18n.currency.createTitle}
           <div>
             <small>
-              {this.props.currency.description}
+              {this.props.data.description}
             </small>
           </div>
         </div>;
 
-    const restoreButton = this.props.currency.isDeleted
+    const restoreButton = this.props.data.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -92,13 +91,13 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, this.props.currency));
+    this._bus.SendAsync(new ChangePage(pages.CurrencyPage.name, this.props.data));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.currency.deleteQuestion.replace('{0}', this.props.currency.name), 
+        state.i18n.currency.deleteQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -106,7 +105,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
 
           this._bus.SendAsync(
             new DeleteCurrency(
-              this.props.currency.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshCurrencyListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
@@ -115,7 +114,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.currency.restoreQuestion.replace('{0}', this.props.currency.name), 
+        state.i18n.currency.restoreQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -123,7 +122,7 @@ export class CurrencyItem extends React.Component<{currency: CurrencyModel}> {
 
           this._bus.SendAsync(
             new RestoreCurrency(
-              this.props.currency.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshCurrencyListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));

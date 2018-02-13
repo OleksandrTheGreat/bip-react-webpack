@@ -1,21 +1,20 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc} from '../../../shared';
+import {state} from '../../../shared';
 import {Header} from '../../common/Page';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
-import { RefreshExpenseListPage, QueryExpenseList } from '../../../bus/commands/marker.commands';
-import { ExpenseList } from './ExpenseList';
+import {RefreshExpenseListPage, QueryExpenseList} from '../../../bus/commands/marker.commands';
+import {ExpenseList} from './ExpenseList';
+import {IocComponent} from '../../common';
 
-export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerModel[]} > {
+export class ExpenseListPage extends IocComponent<{}, MarkerModel[]> {
 
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      expenseList: []
+      data: null
     };
 
     this._bus.Handle(RefreshExpenseListPage, () => this._refresh());
@@ -24,13 +23,17 @@ export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerM
   }
 
   render() {
+
+    if (!this.state.data)
+      return null;
+
     return (
       <div>
         <Header>
           <i className="fa header-icon fa-minus"></i>
           {state.i18n.expenseList.title}
         </Header>
-        <ExpenseList list={this.state.expenseList} />
+        <ExpenseList ioc={this.props.ioc} data={this.state.data} />
       </div>
     );
   }
@@ -41,8 +44,7 @@ export class ExpenseListPage extends React.Component < {}, {expenseList: MarkerM
         (list: MarkerModel[]) => {
           this.setState((state) => {
             return {
-              ...state,
-              expenseList: list
+              data: list
             }
           });
         },

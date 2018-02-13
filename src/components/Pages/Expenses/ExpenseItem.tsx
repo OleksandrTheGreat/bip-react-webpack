@@ -1,17 +1,16 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../../shared';
+import {state, pages} from '../../../shared';
 import {MarkerModel} from '../../../models';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
 import {RefreshExpenseListPage, DeleteMarker, RestoreMarker } from '../../../bus/commands/marker.commands';
-import { RefreshAccountsListPage } from '../../../bus/commands/account.commands';
+import {RefreshAccountsListPage} from '../../../bus/commands/account.commands';
+import {IocComponent} from '../../common';
 
-export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
+export class ExpenseItem extends IocComponent<MarkerModel, {}> {
   
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this._onEditClick = this._onEditClick.bind(this);
     this._onDeleteClick = this._onDeleteClick.bind(this);
@@ -20,7 +19,7 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
 
   render() {
 
-    const editButtonContent = this.props.expense.id == null
+    const editButtonContent = this.props.data.id == null
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
@@ -34,7 +33,7 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
         {editButtonContent}
       </button>);
 
-    const deleteButton = this.props.expense.id == null || this.props.expense.isDeleted
+    const deleteButton = this.props.data.id == null || this.props.data.isDeleted
       ? null
       : <div className="d-inline-block">
           &nbsp;
@@ -48,15 +47,15 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
           </button>
         </div>;
 
-    const info = this.props.expense.isDeleted
+    const info = this.props.data.isDeleted
       ? <div className="col">
-          <del><em>{this.props.expense.name || state.i18n.expense.createTitle}</em></del>
+          <del><em>{this.props.data.name || state.i18n.expense.createTitle}</em></del>
         </div>
       : <div className="col">
-          {this.props.expense.name || state.i18n.expense.createTitle}
+          {this.props.data.name || state.i18n.expense.createTitle}
         </div>;
 
-    const restoreButton = this.props.expense.isDeleted
+    const restoreButton = this.props.data.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -83,13 +82,13 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.ExpensePage.name, this.props.expense));
+    this._bus.SendAsync(new ChangePage(pages.ExpensePage.name, this.props.data));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.expense.deleteQuestion.replace('{0}', this.props.expense.name), 
+        state.i18n.expense.deleteQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -97,7 +96,7 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
 
           this._bus.SendAsync(
             new DeleteMarker(
-              this.props.expense.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshExpenseListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
@@ -106,7 +105,7 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.expense.restoreQuestion.replace('{0}', this.props.expense.name), 
+        state.i18n.expense.restoreQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -114,7 +113,7 @@ export class ExpenseItem extends React.Component<{expense: MarkerModel}> {
 
           this._bus.SendAsync(
             new RestoreMarker(
-              this.props.expense.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshExpenseListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));

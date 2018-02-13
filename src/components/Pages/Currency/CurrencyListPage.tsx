@@ -1,21 +1,20 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc} from '../../../shared';
+import {state} from '../../../shared';
 import {Header} from '../../common/Page';
 import {CurrencyList} from './CurrencyList';
 import {QueryCurrencyList, RefreshCurrencyListPage} from '../../../bus/commands/currency.commands';
 import {ShowError} from '../../../bus/commands';
 import {CurrencyModel} from '../../../models';
+import {IocComponent} from '../../common';
 
-export class CurrencyListPage extends React.Component < {}, {currencyList: CurrencyModel[]} > {
+export class CurrencyListPage extends IocComponent<{}, CurrencyModel[]> {
 
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      currencyList: []
+      data: null
     };
 
     this._bus.Handle(RefreshCurrencyListPage, () => this._refreshCurrency());
@@ -24,13 +23,17 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
   }
 
   render() {
+
+    if (!this.state.data)
+      return null;
+
     return (
       <div>
         <Header>
           <i className="fa header-icon fa-usd"></i>
           {state.i18n.currencyList.title}
         </Header>
-        <CurrencyList list={this.state.currencyList}/>
+        <CurrencyList ioc={this.props.ioc} data={this.state.data}/>
       </div>
     );
   }
@@ -41,8 +44,7 @@ export class CurrencyListPage extends React.Component < {}, {currencyList: Curre
         (list: CurrencyModel[]) => {
           this.setState((state) => {
             return {
-              ...state,
-              currencyList: list
+              data: list
             }
           });
         },

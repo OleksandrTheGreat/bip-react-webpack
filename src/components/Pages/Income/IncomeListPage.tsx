@@ -5,17 +5,16 @@ import {Header} from '../../common/Page';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
 import {QueryIncomeList, RefreshIncomeListPage} from '../../../bus/commands/marker.commands';
-import { IncomeList } from './IncomeList';
+import {IncomeList} from './IncomeList';
+import {IocComponent} from '../../common';
 
-export class IncomeListPage extends React.Component < {}, {incomeList: MarkerModel[]} > {
+export class IncomeListPage extends IocComponent<{}, MarkerModel[]> {
 
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      incomeList: []
+      data: null
     };
 
     this._bus.Handle(RefreshIncomeListPage, () => this._refresh());
@@ -24,13 +23,17 @@ export class IncomeListPage extends React.Component < {}, {incomeList: MarkerMod
   }
 
   render() {
+
+    if (!this.state.data)
+      return null;
+
     return (
       <div>
         <Header>
           <i className="fa header-icon fa-plus"></i>
           {state.i18n.incomeList.title}
         </Header>
-        <IncomeList list={this.state.incomeList} />
+        <IncomeList ioc={this.props.ioc} data={this.state.data} />
       </div>
     );
   }
@@ -41,8 +44,7 @@ export class IncomeListPage extends React.Component < {}, {incomeList: MarkerMod
         (list: MarkerModel[]) => {
           this.setState((state) => {
             return {
-              ...state,
-              incomeList: list
+              data: list
             }
           });
         },

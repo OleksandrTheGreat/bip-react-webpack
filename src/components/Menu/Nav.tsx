@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../shared';
+import {state, pages} from '../../shared';
 import {MenuItem} from './MenuItem';
 import {ChangePage, ChangeLanguage} from '../../bus/commands';
 import {PageChanged} from '../../bus/events';
+import {IocComponent} from '../common';
 
-export class Nav extends React.Component < {}, {currentPage: any} > {
+export class Nav extends IocComponent < {}, {currentPage: any} > {
   
-  private _bus = ioc.resolve<ABus>(ABus);
-
   constructor(props) {
     super(props);
 
@@ -19,11 +18,13 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
       : state.page.history[i];
 
     this.state = {
-      currentPage: current === null ? null : current.page
+      data: {
+        currentPage: current === null ? null : current.page
+      }
     };
 
     this._bus.Handle(PageChanged, (message : PageChanged) => {
-      this.setState({currentPage: message.page});
+      this.setState({data: {currentPage: message.page}});
     });
   }
 
@@ -54,22 +55,22 @@ export class Nav extends React.Component < {}, {currentPage: any} > {
         <MenuItem
           title={homeTitle}
           onClick={() => this._bus.Send(new ChangePage(pages.HomePage.name))}
-          isActive={this.state.currentPage === pages.HomePage.name}
+          isActive={this.state.data.currentPage === pages.HomePage.name}
         />
         <MenuItem
           title={settingsTitle}
           onClick={() => this._bus.Send(new ChangePage(pages.SettingsPage.name))}
-          isActive={this.state.currentPage === pages.SettingsPage.name}
+          isActive={this.state.data.currentPage === pages.SettingsPage.name}
         />
         <MenuItem
           title={transactionsTitle}
           onClick={() => this._bus.Send(new ChangePage(pages.TransactionListPage.name))}
-          isActive={this.state.currentPage === pages.TransactionListPage.name}
+          isActive={this.state.data.currentPage === pages.TransactionListPage.name}
         />
         <MenuItem
           title={aboutTitle}
           onClick={() => this._bus.Send(new ChangePage(pages.AboutPage.name))}
-          isActive={this.state.currentPage === pages.AboutPage.name}
+          isActive={this.state.data.currentPage === pages.AboutPage.name}
         />
       </ul>
     );

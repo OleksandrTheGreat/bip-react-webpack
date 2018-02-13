@@ -1,21 +1,23 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc} from '../../shared';
+import {state} from '../../shared';
 import {Ask} from '../../bus/commands';
 import * as $ from 'jquery';
+import { IocComponent } from '../common';
 
-export class AskModal extends React.Component < {}, {command: Ask} > {
+export class AskModal extends IocComponent<{}, {command: Ask} > {
 
   private _id = "AskModal";
-  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
 
     this.state = {
-      command: {
-        callback: null,
-        question: null
+      data:{
+        command: {
+          callback: null,
+          question: null
+        }
       }
     };
 
@@ -24,7 +26,7 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
 
     this._bus.Handle(Ask, (message : Ask) => {
 
-      this.setState({command: message});
+      this.setState({data: {command: message}});
 
       $('#' + this._id).modal('show');
     });
@@ -46,7 +48,7 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
               </h5>
             </div>
             <div className="modal-body">
-              <p>{this.state.command.question}</p>
+              <p>{this.state.data.command.question}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-primary" onClick={this._onYes}>{state.i18n.common.yes}</button>
@@ -74,7 +76,7 @@ export class AskModal extends React.Component < {}, {command: Ask} > {
 
     $('#' + this._id).modal('hide');
 
-    if (this.state.command.callback !== undefined || this.state.command.callback !== null) 
-      this.state.command.callback(answer);
+    if (this.state.data.command.callback !== undefined || this.state.data.command.callback !== null) 
+      this.state.data.command.callback(answer);
     }
   }

@@ -1,13 +1,12 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {AccountModel, AccountFormModel} from '../../../models';
-import {state, ioc, pages} from '../../../shared';
+import {state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
 import {DeleteAccount, RefreshAccountsListPage, ResoreAccount} from '../../../bus/commands/account.commands';
+import {IocComponent} from '../../common';
 
-export class AccountItem extends React.Component<{account: AccountModel}> {
-
-  private _bus = ioc.resolve<ABus>(ABus);
+export class AccountItem extends IocComponent<AccountModel, {}> {
 
   constructor(props){
     super(props);
@@ -19,7 +18,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
 
   render() {
 
-    const editButton = this.props.account.id == null
+    const editButton = this.props.data.id == null
       ? <button 
           type="button"
           className="btn btn-primary"
@@ -37,7 +36,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
           <i className="fa fa-pencil"></i>
         </button>;
 
-      const deleteButton = this.props.account.id == null || this.props.account.isDeleted
+      const deleteButton = this.props.data.id == null || this.props.data.isDeleted
         ? null
         : <div className="d-inline-block">
             &nbsp;
@@ -51,33 +50,33 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
             </button>
           </div>;
 
-    const info = this.props.account.isDeleted
+    const info = this.props.data.isDeleted
       ? <div className="col">
           <del>
             <em>
-              {this.props.account.name || state.i18n.account.createTitle}
+              {this.props.data.name || state.i18n.account.createTitle}
               <div>
                 <small>
-                  {this.props.account.description}
+                  {this.props.data.description}
                 </small>
               </div>
             </em>
           </del>
         </div>
       : <div className="col">
-          {this.props.account.name || state.i18n.account.createTitle}
+          {this.props.data.name || state.i18n.account.createTitle}
           <div>
             <small>
-              {this.props.account.description}
+              {this.props.data.description}
             </small>
           </div>
         </div>;
 
-    const balance = this.props.account.id
-      ? this.props.account.balanceView + ' ' + this.props.account.currencyName
+    const balance = this.props.data.id
+      ? this.props.data.balanceView + ' ' + this.props.data.currencyName
       : '';
       
-    const balanceElement = this.props.account.isDeleted
+    const balanceElement = this.props.data.isDeleted
       ? <del>
           <em>
             {balance}
@@ -85,7 +84,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
         </del>
       : balance;
 
-    const restoreButton = this.props.account.isDeleted
+    const restoreButton = this.props.data.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -115,13 +114,13 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.AccountPage.name, new AccountFormModel(this.props.account, [])));
+    this._bus.SendAsync(new ChangePage(pages.AccountPage.name, new AccountFormModel(this.props.data, [])));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.account.deleteQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
+        state.i18n.account.deleteQuestion.replace('{0}', this.props.data.name).replace('{1}', this.props.data.currencyName), 
         (answer: boolean) => {
 
           if (!answer)
@@ -129,7 +128,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
 
           this._bus.SendAsync(
             new DeleteAccount(
-              this.props.account.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshAccountsListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
@@ -138,7 +137,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.account.restoreQuestion.replace('{0}', this.props.account.name).replace('{1}', this.props.account.currencyName), 
+        state.i18n.account.restoreQuestion.replace('{0}', this.props.data.name).replace('{1}', this.props.data.currencyName), 
         (answer: boolean) => {
 
           if (!answer)
@@ -146,7 +145,7 @@ export class AccountItem extends React.Component<{account: AccountModel}> {
 
           this._bus.SendAsync(
             new ResoreAccount(
-              this.props.account.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshAccountsListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));

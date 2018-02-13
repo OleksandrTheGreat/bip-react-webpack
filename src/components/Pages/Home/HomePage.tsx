@@ -5,28 +5,26 @@ import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryDashboardAccounts} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
-import {IocPage} from '../../common/Page';
+import {IocComponent} from '../../common';
 
-class HomePageModel {
-  public accounts: AccountModel[];
-}
-
-export class HomePage extends IocPage<HomePageModel> {
+export class HomePage extends IocComponent<any, AccountModel[]> {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      data: {
-        accounts: []
-      }
+      data: null
     };
 
     this._refreshAccounts();
   }
 
   render() {
-    return (<AccountList list={this.state.data.accounts}/>);
+
+    if (!this.state.data)
+      return null;
+
+    return (<AccountList list={this.state.data}/>);
   }
 
   private _refreshAccounts() {
@@ -36,7 +34,7 @@ export class HomePage extends IocPage<HomePageModel> {
         (accounts : AccountModel[]) => {
           this.setState((state) => {
             return {
-              data: {accounts: accounts}
+              data: accounts
             }
           });
         },

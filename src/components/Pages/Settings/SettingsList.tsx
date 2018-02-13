@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, i18n, ioc, pages} from '../../../shared';
+import {state, i18n, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands';
 import {SettingsItem} from './SettingsItem';
+import { IocComponent } from '../../common';
 
-export class SettingsList extends React.Component {
-
-  private _bus = ioc.resolve<ABus>(ABus);
+export class SettingsList extends IocComponent<{}, {}> {
 
   render() {
 

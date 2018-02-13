@@ -221,8 +221,6 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _DescriptionField() {
 
-    //TODO: add condition
-    
     return (
       <FormTextAreaField
         title={state.i18n.transaction.descriction}

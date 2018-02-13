@@ -1,16 +1,15 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../../shared';
+import {state, pages} from '../../../shared';
 import {MarkerModel} from '../../../models';
 import {ChangePage, Ask, ShowError} from '../../../bus/commands';
-import { RefreshIncomeListPage, DeleteMarker, RestoreMarker } from '../../../bus/commands/marker.commands';
+import {RefreshIncomeListPage, DeleteMarker, RestoreMarker} from '../../../bus/commands/marker.commands';
+import {IocComponent} from '../../common';
 
-export class IncomeItem extends React.Component<{income: MarkerModel}> {
+export class IncomeItem extends IocComponent<MarkerModel, {}> {
   
-  private _bus = ioc.resolve<ABus>(ABus);
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this._onEditClick = this._onEditClick.bind(this);
     this._onDeleteClick = this._onDeleteClick.bind(this);
@@ -19,7 +18,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
   render() {
 
-    const editButtonContent = this.props.income.id == null
+    const editButtonContent = this.props.data.id == null
       ? <i className="fa fa-plus"></i>
       : <i className="fa fa-pencil"></i>;
 
@@ -33,7 +32,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
         {editButtonContent}
       </button>);
 
-    const deleteButton = this.props.income.id == null || this.props.income.isDeleted
+    const deleteButton = this.props.data.id == null || this.props.data.isDeleted
       ? null
       : <div className="d-inline-block">
           &nbsp;
@@ -47,15 +46,15 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
           </button>
         </div>;
 
-    const info = this.props.income.isDeleted
+    const info = this.props.data.isDeleted
       ? <div className="col">
-          <del><em>{this.props.income.name || state.i18n.income.createTitle}</em></del>
+          <del><em>{this.props.data.name || state.i18n.income.createTitle}</em></del>
         </div>
       : <div className="col">
-          {this.props.income.name || state.i18n.income.createTitle}
+          {this.props.data.name || state.i18n.income.createTitle}
         </div>;
 
-    const restoreButton = this.props.income.isDeleted
+    const restoreButton = this.props.data.isDeleted
       ? <div className="d-inline-block">
           &nbsp;
           <button 
@@ -82,13 +81,13 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
   }
 
   _onEditClick() {
-    this._bus.SendAsync(new ChangePage(pages.IncomePage.name, this.props.income));
+    this._bus.SendAsync(new ChangePage(pages.IncomePage.name, this.props.data));
   }
 
   _onDeleteClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.income.deleteQuestion.replace('{0}', this.props.income.name), 
+        state.i18n.income.deleteQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -96,7 +95,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
           this._bus.SendAsync(
             new DeleteMarker(
-              this.props.income.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshIncomeListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));
@@ -105,7 +104,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
   _onRestoreClick() {
     this._bus.SendAsync(
       new Ask(
-        state.i18n.income.restoreQuestion.replace('{0}', this.props.income.name), 
+        state.i18n.income.restoreQuestion.replace('{0}', this.props.data.name), 
         (answer: boolean) => {
 
           if (!answer)
@@ -113,7 +112,7 @@ export class IncomeItem extends React.Component<{income: MarkerModel}> {
 
           this._bus.SendAsync(
             new RestoreMarker(
-              this.props.income.id, 
+              this.props.data.id, 
               () => this._bus.SendAsync(new RefreshIncomeListPage()), 
               error => this._bus.SendAsync(new ShowError(state.i18n.common.defaulErrorMessage))));
        }));

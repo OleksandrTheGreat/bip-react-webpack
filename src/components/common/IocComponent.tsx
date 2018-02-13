@@ -2,8 +2,10 @@ import * as React from 'react';
 import {IOCContainer} from 'ioc';
 import {ABus} from 'abus';
 
-export abstract class IocPage<T> extends React.Component<{ioc: IOCContainer, data?: T}, {data?: T}> {
-
+export abstract class IocComponent<TProps, TState> extends React.Component <
+  {ioc: IOCContainer, data?: TProps}, {data: TState}
+> {
+  
   protected _bus: ABus;
 
   constructor(props){

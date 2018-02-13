@@ -3,22 +3,24 @@ import {ABus} from 'abus';
 import {state, ioc} from '../../shared';
 import {ShowError} from '../../bus/commands';
 import * as $ from 'jquery';
+import { IocComponent } from '../common';
 
-export class ErrorModal extends React.Component < {}, {error: string} > {
+export class ErrorModal extends IocComponent < {}, {error: string} > {
 
   private _id = "ErrorModal";
-  private _bus = ioc.resolve<ABus>(ABus);
 
   constructor(props) {
     super(props);
 
     this.state = {
-      error: null
+      data: {
+        error: null
+      }
     };
 
     this._bus.Handle(ShowError, (message : ShowError) => {
 
-      this.setState({error: message.error});
+      this.setState({data: {error: message.error}});
 
       $('#' + this._id).modal('show');
     });
@@ -40,7 +42,7 @@ export class ErrorModal extends React.Component < {}, {error: string} > {
               </h5>
             </div>
             <div className="modal-body">
-              <p>{this.state.error}</p>
+              <p>{this.state.data.error}</p>
             </div>
             <div className="modal-footer">
               <button type="button" className="btn btn-secondary" data-dismiss="modal">{state.i18n.common.ok}</button>

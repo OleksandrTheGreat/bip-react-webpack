@@ -4,10 +4,9 @@ import {ioc, i18n} from '../../shared';
 import {MenuItem} from './MenuItem';
 import {LanguageItem} from './LanguageItem';
 import {ChangeLanguage} from '../../bus/commands';
+import { IocComponent } from '../common';
 
-export class LanguageBar extends React.Component {
-
-  private _bus = ioc.resolve<ABus>(ABus);
+export class LanguageBar extends IocComponent<any, any> {
 
   constructor(props) {
     super(props);

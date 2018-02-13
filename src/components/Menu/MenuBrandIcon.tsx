@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../shared';
+import {state, pages} from '../../shared';
 import {ChangePage} from '../../bus/commands';
+import {IocComponent} from '../common';
 
-export class MenuBrandIcon extends React.Component {
-
-  private _bus = ioc.resolve<ABus>(ABus);
+export class MenuBrandIcon extends IocComponent<any, any> {
 
   render() {
     return (

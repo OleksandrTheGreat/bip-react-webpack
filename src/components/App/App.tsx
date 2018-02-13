@@ -31,9 +31,9 @@ export class App extends React.Component < {}, {
     return (
       <div className="app">
         <Error error={this.state.error} info={this.state.info}/>
-        <AskModal/>
-        <ErrorModal/>
-        <Menu/>
+        <AskModal ioc={ioc}/>
+        <ErrorModal ioc={ioc}/>
+        <Menu ioc={ioc}/>
         <View ioc={ioc}/>
       </div>
     );

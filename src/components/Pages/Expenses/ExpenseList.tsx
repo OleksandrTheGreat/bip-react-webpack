@@ -3,10 +3,9 @@ import {GUID} from 'xtypescript';
 import {state} from '../../../shared';
 import {MarkerModel} from '../../../models';
 import {ExpenseItem} from './ExpenseItem';
+import {IocComponent} from '../../common';
 
-export class ExpenseList extends React.Component < {
-  list : MarkerModel[]
-} > {
+export class ExpenseList extends IocComponent<MarkerModel[], {}> {
 
   render() {
 
@@ -16,7 +15,7 @@ export class ExpenseList extends React.Component < {
 
     this
       .props
-      .list
+      .data
       .forEach(x => {
         if (x.isDeleted) 
           deletedList.push(x);
@@ -25,8 +24,8 @@ export class ExpenseList extends React.Component < {
         }
       );
 
-    let availableItems = availableList.map(x => <ExpenseItem expense={x} key={x.id}/>);
-    let deletedItems = deletedList.map(x => <ExpenseItem expense={x} key={x.id}/>);
+    let availableItems = availableList.map(x => <ExpenseItem ioc={this.props.ioc} data={x} key={x.id}/>);
+    let deletedItems = deletedList.map(x => <ExpenseItem ioc={this.props.ioc} data={x} key={x.id}/>);
 
     return (
       <div className="container-fluid row-list">

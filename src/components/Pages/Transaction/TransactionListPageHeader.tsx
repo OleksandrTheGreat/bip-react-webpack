@@ -1,12 +1,11 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc, pages} from '../../../shared';
+import {state, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands/index';
-import { TransactionFormModel } from '../../../models/TransactionFormModel';
+import {TransactionFormModel} from '../../../models/TransactionFormModel';
+import {IocComponent} from '../../common';
 
-export class TransactionListPageHeader extends React.Component {
-
-  private _bus = ioc.resolve<ABus>(ABus);
+export class TransactionListPageHeader extends IocComponent<{}, {}> {
 
   render() {
     return (
