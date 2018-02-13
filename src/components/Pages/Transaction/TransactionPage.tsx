@@ -35,9 +35,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   render() {
 
-    if(this.state.data.accountList == null || this.state.data.accountList.length == 0)
-      return null;
-    if(this.state.data.incomeList == null || this.state.data.incomeList.length == 0)
+    if(!this._FormIsReady())
       return null;
 
     return (
@@ -45,6 +43,14 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
         {this._Header}
         {this._Form}        
       </div>
+    );
+  }
+
+  private _FormIsReady(): boolean {
+    return (
+         this.state.data.accountList != null
+      && this.state.data.incomeList != null
+      && this.state.data.expenseList != null
     );
   }
 
@@ -129,10 +135,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _ToAccountField() {
     
-    //TODO: add condition
-
-    //if (!(this.state.data.transactiontype === TransactionType.FromAccountToAccount || this.state.data.transactiontype === TransactionType.Expense))
-    //  return null;
+    if (!this.state.data.transaction.toAccountId)
+      return null;
 
     const accountId = '';
     const options = this.state.data.accountList.map(
@@ -149,7 +153,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _IncomeField() {
 
-    //TODO: add condition
+    if (!this.state.data.transaction.toAccountId)
+      return null;
 
     const options = this.state.data.incomeList.map(
       x => new FormOptionValue(x.id, x.name));
@@ -191,7 +196,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _SumToField() {
 
-    //TODO: add condition
+    if (!this.state.data.transaction.toAccountId)
+      return null;
     
     return (
       <FormNumberField
@@ -203,7 +209,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _RateField() {
 
-    //TODO: add condition
+    if (!this.state.data.transaction.fromAccountId || !this.state.data.transaction.toAccountId)
+      return null;
     
     return (
       <FormNumberField
