@@ -1,19 +1,25 @@
 import * as React from 'react';
-import * as $ from 'jquery';
+import {IOCContainer} from 'ioc';
 import {ABus} from 'abus';
-import {ioc, state, pages} from '../../shared';
+import {state, pages} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
 import {PageChanged} from '../../bus/events';
 
-export class View extends React.Component < {}, {
+export class View extends React.Component < 
+{
+  ioc: IOCContainer
+}, 
+{
   page: any,
   data: any
 } > {
 
-  private _bus = ioc.resolve<ABus>(ABus);
+  private _bus: ABus;
 
   constructor(props) {
     super(props);
+
+    this._bus = this.props.ioc.resolve<ABus>(ABus);
 
     //TODO: remove and add ApplicationStarted event
     let i = state.page.history.length - 1;
@@ -41,7 +47,9 @@ export class View extends React.Component < {}, {
 
     return (
       <div className="page container">
-        <Page data={this.state.data}/>
+        <Page 
+          ioc={this.props.ioc} 
+          data={this.state.data} />
       </div>
     );
   }

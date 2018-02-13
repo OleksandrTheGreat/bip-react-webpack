@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state, ioc} from '../../../shared';
-import {Header} from '../../common/Page/Header';
+import {Header} from '../../common/Page';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
 import {QueryIncomeList, RefreshIncomeListPage} from '../../../bus/commands/marker.commands';

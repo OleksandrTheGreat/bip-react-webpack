@@ -1,21 +1,21 @@
-import {state} from '../shared';
+import {MarkerModel, AccountModel} from "../models";
 import {TransactionFormModel} from '../models/TransactionFormModel';
 import {TransactionModel} from '../models/TransactionModel';
-import {AccountModel, MarkerModel} from '../models';
-import {itShouldRender, itShouldNotRender} from './TransactionPage.Common.Form.spec';
+import {state} from '../shared';
+import {itShouldRender, itShouldNotRender} from './TransactionPage.Form.Common.spec';
 
-describe('Transaction Income Page', () => {
+describe('Transaction Expense Page', () => {
 
   let data: TransactionFormModel = {
     transaction: new TransactionModel(
-      null,
       null,
       '0',
       null,
       null,
       null,
       null,
-      '0'
+      null,
+      '1'
     ),
     accountList: [
       new AccountModel('0', '1', 0, '0', '0', 0, '', 0, false, false)
@@ -28,42 +28,42 @@ describe('Transaction Income Page', () => {
     ]
   };
 
-  itShouldNotRender(
+  itShouldRender(
     data,
-    'shoud not render From Account field',
+    'should render From Account field',
     state.i18n.transaction.fromAccount
   );
 
-  itShouldRender(
+  itShouldNotRender(
     data,
-    'shoud not render To Account field',
+    'should not render To Account field',
     state.i18n.transaction.toAccount
   );
 
   itShouldRender(
     data,
-    'shoud not render Income field',
-    state.i18n.transaction.income
-  );
-
-  itShouldNotRender(
-    data,
-    'shoud not render Expense field',
+    'should render Expense field',
     state.i18n.transaction.expense
   );
 
   itShouldNotRender(
     data,
-    'shoud not render Sum of expense field',
-    state.i18n.transaction.sumFrom
+    'should not render Income field',
+    state.i18n.transaction.income
   );
 
   itShouldRender(
     data,
-    'shoud not render Sum of Income field',
-    state.i18n.transaction.income
+    'should render Sum of expense field',
+    state.i18n.transaction.sumFrom
   );
 
+  itShouldNotRender(
+    data,
+    'should not render Sum of income field',
+    state.i18n.transaction.sumTo
+  );
+  
   itShouldNotRender(
     data,
     'should not render Rate field',

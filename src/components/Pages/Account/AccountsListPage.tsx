@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state, ioc} from '../../../shared';
-import {Header} from '../../common/Page/Header';
+import {Header} from '../../common/Page';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryAccountList, RefreshAccountsListPage} from '../../../bus/commands/account.commands';

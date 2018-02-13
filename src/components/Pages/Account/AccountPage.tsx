@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state} from '../../../shared';
-import {Header} from '../../common/Page/Header';
+import {Header} from '../../common/Page';
 import {Account} from '../../../domain';
 import {AccountModel, AccountFormModel} from '../../../models';
 import {

@@ -1,27 +1,32 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {ioc, state} from '../../../shared';
+import {state} from '../../../shared';
 import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryDashboardAccounts} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
+import {IocPage} from '../../common/Page';
 
-export class HomePage extends React.Component < {}, {accounts: AccountModel[]} > {
+class HomePageModel {
+  public accounts: AccountModel[];
+}
 
-  private _bus = ioc.resolve<ABus>(ABus);
+export class HomePage extends IocPage<HomePageModel> {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
-      accounts: []
+      data: {
+        accounts: []
+      }
     };
 
     this._refreshAccounts();
   }
 
   render() {
-    return (<AccountList list={this.state.accounts}/>);
+    return (<AccountList list={this.state.data.accounts}/>);
   }
 
   private _refreshAccounts() {
@@ -31,8 +36,7 @@ export class HomePage extends React.Component < {}, {accounts: AccountModel[]} >
         (accounts : AccountModel[]) => {
           this.setState((state) => {
             return {
-              ...state,
-              accounts: accounts
+              data: {accounts: accounts}
             }
           });
         },

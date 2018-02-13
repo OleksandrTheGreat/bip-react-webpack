@@ -3,7 +3,7 @@ import {ABus} from 'abus';
 import { MarkerModel } from "../../../models";
 import { FormPage, Form, FormTextField } from "../../common/Form";
 import { state } from '../../../shared';
-import { Header } from "../../common/Page/Header";
+import { Header } from "../../common/Page";
 import { SaveMarker } from "../../../bus/commands/marker.commands";
 import { GoBack, ShowError } from "../../../bus/commands/index";
 import { MarkerCategory } from "../../../domain";

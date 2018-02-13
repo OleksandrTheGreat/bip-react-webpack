@@ -1,7 +1,5 @@
 import * as React from 'react';
-
-import {state} from '../../shared';
-
+import {state, ioc} from '../../shared';
 import {Error} from './Error';
 import {Menu} from '../Menu/Menu';
 import {View} from '../Pages/View';
@@ -27,7 +25,7 @@ export class App extends React.Component < {}, {
 
   render() {
 
-    if (state === null)
+    if (!state || !ioc)
       return null;
 
     return (
@@ -36,7 +34,7 @@ export class App extends React.Component < {}, {
         <AskModal/>
         <ErrorModal/>
         <Menu/>
-        <View/>
+        <View ioc={ioc}/>
       </div>
     );
   }

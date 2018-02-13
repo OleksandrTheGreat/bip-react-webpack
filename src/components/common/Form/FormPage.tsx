@@ -1,11 +1,10 @@
 import * as React from 'react';
 import {ABus} from 'abus';
-import {state, ioc} from '../../../shared';
+import {state} from '../../../shared';
 import {SaveState} from '../../../bus/commands';
+import {IocPage} from '../Page';
 
-export abstract class FormPage<T> extends React.Component <{data: T}, {data: T}> {
-
-  protected _bus = ioc.resolve<ABus>(ABus);
+export abstract class FormPage<T> extends IocPage<T> {
 
   constructor(props) {
     super(props);

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state, ioc} from '../../../shared';
-import {Header} from '../../common/Page/Header';
+import {Header} from '../../common/Page';
 import {CurrencyList} from './CurrencyList';
 import {QueryCurrencyList, RefreshCurrencyListPage} from '../../../bus/commands/currency.commands';
 import {ShowError} from '../../../bus/commands';

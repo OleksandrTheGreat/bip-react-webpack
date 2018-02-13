@@ -1,7 +1,7 @@
 const common = require('./webpack.config.common.js');
 
 module.exports = {
-    entry: common.folders.src + '/index.tsx',
+    entry: common.folders.src + '/index.test.tsx',
     output: common.getOutput(),
     module: common.getModule({
         tsconfig: "tsconfig.test.json",

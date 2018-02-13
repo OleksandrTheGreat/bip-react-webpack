@@ -4,12 +4,11 @@ import {FormPage, Form, FormOptionValue, FormOptionsField, FormNumberField, Form
 import {TransactionFormModel} from '../../../models/TransactionFormModel';
 import {QueryAccountList} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
-import { QueryMarkerList } from '../../../bus/commands/marker.commands';
-import { MarkerCategory } from '../../../domain';
-import { TransactionModel } from '../../../models/TransactionModel';
-import { Header } from '../../common/Page/Header';
-import "xtypescript";
-import { AccountModel } from '../../../models';
+import {QueryMarkerList} from '../../../bus/commands/marker.commands';
+import {MarkerCategory} from '../../../domain';
+import {TransactionModel} from '../../../models/TransactionModel';
+import {Header} from '../../common/Page';
+import {AccountModel} from '../../../models';
 
 export enum TransactionType {
   FromAccountToAccount = 0,
@@ -249,7 +248,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
           return {
             data: {
               ...state.data,
-              accountList: accounts
+              accountList: accounts.filter(x => !x.isDeleted)
             }
           }
         });
@@ -262,8 +261,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     this._bus.SendAsync(new QueryMarkerList(
       (markers) => {
 
-        let incomeList = markers.filter(x => x.category === MarkerCategory.Income);
-        let expenseList = markers.filter(x => x.category === MarkerCategory.Expense);
+        let incomeList = markers.filter(x => x.category === MarkerCategory.Income && !x.isDeleted);
+        let expenseList = markers.filter(x => x.category === MarkerCategory.Expense && !x.isDeleted);
 
         this.setState((state) => {
           return {

@@ -7,7 +7,7 @@ export const itShouldRender = (data: TransactionFormModel, should: string, findT
   it(should, () => {
 
     const renderer = TestRenderer.create(
-      <TransactionPage data={data} />
+      <TransactionPage ioc={null} data={data} />
     );
 
     const root = renderer.root;
@@ -21,7 +21,7 @@ export const itShouldNotRender = (data: TransactionFormModel, shouldNot: string,
   it(shouldNot, () => {
 
     const renderer = TestRenderer.create(
-      <TransactionPage data={data} />
+      <TransactionPage ioc={null} data={data} />
     );
 
     const root = renderer.root;

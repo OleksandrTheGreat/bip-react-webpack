@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {state} from '../../../shared';
-import {Header} from '../../common/Page/Header';
+import {Header} from '../../common/Page';
 import {CurrencyModel} from '../../../models';
 import {SaveCurrency} from '../../../bus/commands/currency.commands';
 import {GoBack, ShowError} from '../../../bus/commands';
