@@ -115,10 +115,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _FromAccountField() {
 
-    //TODO: add condition
-
-    //if (!(this.state.data.transactiontype === TransactionType.FromAccountToAccount || this.state.data.transactiontype === TransactionType.Expense))
-    //  return null;
+    if (!this.state.data.transaction.fromAccountId)
+      return null;
 
     const accountId = '';
     const options = this.state.data.accountList.map(
@@ -169,7 +167,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _ExpenseField() {
 
-    //TODO: add condition
+    if (!this.state.data.transaction.fromAccountId)
+      return null;
 
     const options = this.state.data.expenseList.map(
       x => new FormOptionValue(x.id, x.name));
@@ -184,7 +183,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _SumFromField() {
 
-    //TODO: add condition
+    if (!this.state.data.transaction.fromAccountId)
+      return null;
     
     return (
       <FormNumberField
