@@ -83,3 +83,7 @@ textarea {
   min-height: 3em;
   max-height: 10em;
 }
+
+button:disabled {
+  cursor: no-drop;
+}
