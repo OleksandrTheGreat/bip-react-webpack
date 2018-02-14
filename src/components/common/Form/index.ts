@@ -2,7 +2,7 @@ import {FormNumberField} from './FormNumberField';
 import {FormTextAreaField} from './FormTextAreaField';
 import {FormTextField} from './FormTextField';
 import {FormOptionsField, FormOptionValue} from './FormOptionsField';
-import {FormReadOnlyField} from './FormReadOnlyField';
+import {FormStringField} from './FormStringField';
 import {Form} from './Form';
 import {FormPage} from './FormPage';
 
@@ -12,7 +12,7 @@ export {
   FormTextField,
   FormOptionsField,
   FormOptionValue,
-  FormReadOnlyField,
+  FormStringField,
   Form,
   FormPage
 }

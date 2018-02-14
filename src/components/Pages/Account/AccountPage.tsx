@@ -7,7 +7,7 @@ import {
   FormPage,
   FormOptionValue,
   FormOptionsField,
-  FormReadOnlyField,
+  FormStringField,
   Form,
   FormTextField,
   FormTextAreaField,
@@ -44,7 +44,7 @@ export class AccountPage extends FormPage <AccountFormModel> {
           model.account.currencyId = e.target.value;
           model.account.currencyName = this.state.data.currencyList.filter(x => x.value == e.target.value)[0].display;
         })}/>
-      : <FormReadOnlyField
+      : <FormStringField
         title={state.i18n.account.currency}
         value={this.props.data.account.currencyName}/>;
 

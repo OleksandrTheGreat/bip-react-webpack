@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { FormField } from './FormField';
 
-export class FormReadOnlyField extends React.Component < {
+export class FormStringField extends React.Component < {
   title : string,
   value : string,
   className?: string

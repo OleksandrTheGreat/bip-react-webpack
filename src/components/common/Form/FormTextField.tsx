@@ -13,25 +13,24 @@ export class FormTextField extends React.Component < {
 
   render() {
 
-    const Input = this.props.isRequired
-    ? <div>
+    const InputValidation = this.props.isRequired
+      ? <div className="invalid-feedback">
+          {this.props.validationMessage 
+            ? this.props.validationMessage 
+            : state.i18n.common.defaultValidationMessage}
+        </div>
+      : null;
+
+    const Input =(
         <input 
           type="text" 
           className="form-control" 
           value={this.props.value} 
           onChange={this.props.onChange} 
-          required />
-        <div className="invalid-feedback">
-            {this.props.validationMessage 
-              ? this.props.validationMessage 
-              : state.i18n.common.defaultValidationMessage}
-          </div>
-      </div>
-    : <input 
-        type="text" 
-        className="form-control" 
-        value={this.props.value} 
-        onChange={this.props.onChange} />;
+        />
+    );
+
+    Input.props.required = this.props.isRequired ? 'required' : null;
 
     return (
       <FormField 
@@ -39,6 +38,7 @@ export class FormTextField extends React.Component < {
         className={this.props.className}
       >
         {Input}
+        {InputValidation}
       </FormField>
     );
   }

@@ -9,9 +9,8 @@ export class FormCheckBoxField extends React.Component < {
 } > {
   render() {
 
-    const Checkbox = this.props.value
-      ? <input type="checkbox" onChange={this.props.onChange} checked/>
-      : <input type="checkbox" onChange={this.props.onChange} />
+    const Checkbox = <input type="checkbox" onChange={this.props.onChange} />;
+    Checkbox.props.checked = this.props.value ? 'checked' : null;
 
     return (
       <FormField 

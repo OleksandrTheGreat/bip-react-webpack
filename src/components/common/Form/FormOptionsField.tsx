@@ -24,20 +24,16 @@ export class FormOptionsField extends React.Component < {
     const Options = this.props.values.map(x => 
       <option value={x.value} selected={x.value == this.props.selectedValue} key={x.value}>{x.display}</option>);
 
-    const Input = this.props.id
-      ? <select
-          id={this.props.id}
+    const Input = (
+      <select
           className="form-control"
           onChange={this.props.onChange}
         >
           {Options}
-        </select>
-      : <select
-          className="form-control"
-          onChange={this.props.onChange}
-        >
-          {Options}
-        </select>;
+      </select>
+    );
+
+    Input.props.id = this.props.id;
 
     return (
       <FormField 

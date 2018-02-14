@@ -13,32 +13,32 @@ export class FormTextAreaField extends React.Component < {
 
   render() {
 
-    const TextArea = this.props.isRequired
-      ? <div>
-          <textarea
-            className="form-control"
-            value={this.props.value}
-            onChange={this.props.onChange}
-            required
-          ></textarea>
-          <div className="invalid-feedback">
-            {this.props.validationMessage 
-              ? this.props.validationMessage 
-              : state.i18n.common.defaultValidationMessage}
-          </div>
+    const InputValidation = this.props.isRequired
+      ? <div className="invalid-feedback">
+          {this.props.validationMessage 
+            ? this.props.validationMessage 
+            : state.i18n.common.defaultValidationMessage}
         </div>
-      : <textarea
-          className="form-control"
-          value={this.props.value}
-          onChange={this.props.onChange}
-        ></textarea>;
+      : null;
+
+    const Input = (
+      <textarea
+        className="form-control"
+        value={this.props.value}
+        onChange={this.props.onChange}
+      >
+      </textarea>
+    );
+  
+    Input.props.required = this.props.isRequired ? 'required' : null;
 
     return (
       <FormField 
         title={this.props.title}
         className={this.props.className}
       >
-        {TextArea}
+        {Input}
+        {InputValidation}
       </FormField>
     );
   }

@@ -11,6 +11,7 @@ export class FormNumberField extends React.Component < {
   min? : number,
   max? : number,
   className?: string
+  isReadonly?: boolean
 } > {
 
   constructor(props) {
@@ -21,38 +22,34 @@ export class FormNumberField extends React.Component < {
 
   render() {
 
-    const Input = this.props.isRequired
-      ? <div>
-          <input
-            type="number"
-            className="form-control text-right"
-            value={this.props.value}
-            onChange={this._onChange}
-            min={this.props.min}
-            max={this.props.max}
-            required 
-          />
-          <div className="invalid-feedback">
-            {this.props.validationMessage 
-              ? this.props.validationMessage 
-              : state.i18n.common.defaultValidationMessage}
-          </div>
+    const InputValidation = this.props.isRequired
+      ? <div className="invalid-feedback">
+          {this.props.validationMessage 
+            ? this.props.validationMessage 
+            : state.i18n.common.defaultValidationMessage}
         </div>
-      : <input
-          type="number"
-          className="form-control text-right"
-          value={this.props.value}
-          onChange={this._onChange}
-          min={this.props.min}
-          max={this.props.max}
-        />;
+      : null;
 
+    const Input = (
+      <input
+        type="number"
+        className="form-control text-right"
+        value={this.props.value}
+        onChange={this._onChange}
+        min={this.props.min}
+        max={this.props.max}
+      />
+    );
+    Input.props.required = this.props.isRequired ? 'required' : null;
+    Input.props.readonly = this.props.isReadonly ? 'readonly' : null;
+    
     return (
       <FormField 
         title={this.props.title}
         className={this.props.className}
       >
         {Input}
+        {InputValidation}
       </FormField>
     );
   }
@@ -73,8 +70,7 @@ export class FormNumberField extends React.Component < {
       }
     }
 
-    if (this.props.onChange !== (undefined || null)) {
+    if (this.props.onChange)
       this.props.onChange(e);
-    }
   }
 }
