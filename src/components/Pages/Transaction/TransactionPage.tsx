@@ -36,8 +36,10 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   render() {
 
-    if(!this._FormIsReady())
+    if(!this._isFormReady())
       return null;
+
+    this._adjustTransaction();
 
     return (
       <div>
@@ -47,12 +49,28 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     );
   }
 
-  private _FormIsReady(): boolean {
+  private _isFormReady(): boolean {
     return (
          this.state.data.accountList != null
       && this.state.data.incomeList != null
       && this.state.data.expenseList != null
     );
+  }
+  
+  private _adjustTransaction() {
+
+    if(this._TransactionType !== null)
+      return;
+
+    if(this.state.data.accountList.length === 0)
+      return;
+
+    this.state.data.transaction.fromAccountId = this.state.data.accountList[0].id;
+
+    let toAccountResult = this.state.data.accountList.filter(x => x.id !== this.state.data.transaction.fromAccountId);
+
+    if(toAccountResult.length > 0)
+      this.state.data.transaction.toAccountId = toAccountResult[0].id;
   }
 
   private get _Form() {
@@ -93,7 +111,10 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (this.state.data.transaction.fromAccountId === null && this.state.data.transaction.toAccountId !== null)
       return TransactionType.Income;
     
-    return TransactionType.FromAccountToAccount;
+    if (this.state.data.transaction.fromAccountId !== null && this.state.data.transaction.toAccountId !== null)
+      return TransactionType.FromAccountToAccount;
+
+    return null;
   }
 
   private get _TransactionTypeField() {
@@ -196,7 +217,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.sumFrom}
         value={this.state.data.transaction.sumFrom}
-        min={0}
+        min={1}
       />
     );
   }
@@ -213,7 +234,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.sumTo}
         value={this.state.data.transaction.sumTo}
-        min={0}
+        min={1}
       />
     );
   }
@@ -230,6 +251,8 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.rate}
         value={this.state.data.transaction.rate}
+        min={1}
+        isReadonly={true}
       />
     );
   }
@@ -257,7 +280,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
   private _refreshAccountList() {
     this._bus.SendAsync(new QueryAccountList(
       (accounts) => {
-        this.setState((state) => {
+        this.setState(state => {
           return {
             data: {
               ...state.data,
@@ -277,7 +300,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
         let incomeList = markers.filter(x => x.category === MarkerCategory.Income && !x.isDeleted);
         let expenseList = markers.filter(x => x.category === MarkerCategory.Expense && !x.isDeleted);
 
-        this.setState((state) => {
+        this.setState(state => {
           return {
             data: {
               ...state.data,
