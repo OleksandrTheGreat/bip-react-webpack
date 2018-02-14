@@ -1,7 +1,7 @@
 import {MarkerModel, AccountModel} from "../models";
 import {TransactionFormModel} from '../models/TransactionFormModel';
 import {TransactionModel} from '../models/TransactionModel';
-import {state} from '../shared';
+import {state} from '../shared/state';
 import {itShouldRender, itShouldNotRender} from './TransactionPage.Form.Common.spec';
 
 describe('Transaction Expense Page', () => {

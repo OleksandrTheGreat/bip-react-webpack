@@ -2,12 +2,18 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import {TransactionPage} from "../components/Pages/Transaction/TransactionPage";
 import {TransactionFormModel} from '../models/TransactionFormModel';
+import {IOCContainer} from 'ioc';
+import {ABus} from 'abus';
+
+const ioc = new IOCContainer();
+const bus = new ABus();
+ioc.register<ABus>(ABus, () => bus);
 
 export const itShouldRender = (data: TransactionFormModel, should: string, findTitle: string) => {
   it(should, () => {
 
     const renderer = TestRenderer.create(
-      <TransactionPage ioc={null} data={data} />
+      <TransactionPage ioc={ioc} data={data} />
     );
 
     const root = renderer.root;
@@ -21,7 +27,7 @@ export const itShouldNotRender = (data: TransactionFormModel, shouldNot: string,
   it(shouldNot, () => {
 
     const renderer = TestRenderer.create(
-      <TransactionPage ioc={null} data={data} />
+      <TransactionPage ioc={ioc} data={data} />
     );
 
     const root = renderer.root;

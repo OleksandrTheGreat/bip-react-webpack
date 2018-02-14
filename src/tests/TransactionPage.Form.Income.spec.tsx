@@ -1,4 +1,4 @@
-import {state} from '../shared';
+import {state} from '../shared/state';
 import {TransactionFormModel} from '../models/TransactionFormModel';
 import {TransactionModel} from '../models/TransactionModel';
 import {AccountModel, MarkerModel} from '../models';

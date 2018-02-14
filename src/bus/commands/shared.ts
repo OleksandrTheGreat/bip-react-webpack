@@ -6,6 +6,7 @@ export class SharedCommands {
 
   public static goBack() {
 
+    //TODO: remove ALL ioc references!
     let bus = ioc.resolve<ABus>(ABus);
 
     if (state.page.isDirty)
