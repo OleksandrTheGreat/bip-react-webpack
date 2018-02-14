@@ -50,11 +50,11 @@ export class AccountPage extends FormPage <AccountFormModel> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-money"></i>
           {title}
         </Header>
-        <Form onSave={this._onSave}>
+        <Form onSave={this._onSave} onCancel={this.onCancel}>
           <FormTextField
             title={state.i18n.common.name}
             value={this.state.data.account.name}
@@ -90,33 +90,31 @@ export class AccountPage extends FormPage <AccountFormModel> {
   }
 
   private _onSave() {
-    this
-      ._bus
-      .SendAsync(new SaveAccount(this.state.data.account, () => {
-        this
-          ._bus
-          .SendAsync(new GoBack());
-      }, (error : DOMError) => {
+    this._bus.SendAsync(
+      new SaveAccount(
+        this.state.data.account, 
+        () => this._bus.SendAsync(new GoBack(true)), 
+        (error : DOMError) => {
 
-        let message : string;
+          let message : string;
 
-        switch (error.name) {
-          case 'ConstraintError':
-            message = state
-              .i18n
-              .account
-              .constraintErrorMessage
-              .replace('{0}', this.state.data.account.name)
-              .replace('{1}', this.state.data.account.currencyName);
-            break;
-          case 'CurrencyIsMissing':
-            message = state.i18n.account.currencyIsMissingError;
-            break;
-          default:
-            message = state.i18n.common.defaulErrorMessage;
-        }
+          switch (error.name) {
+            case 'ConstraintError':
+              message = state
+                .i18n
+                .account
+                .constraintErrorMessage
+                .replace('{0}', this.state.data.account.name)
+                .replace('{1}', this.state.data.account.currencyName);
+              break;
+            case 'CurrencyIsMissing':
+              message = state.i18n.account.currencyIsMissingError;
+              break;
+            default:
+              message = state.i18n.common.defaulErrorMessage;
+          }
 
-        this._bus.SendAsync(new ShowError(message));
+          this._bus.SendAsync(new ShowError(message));
       }));
   }
 

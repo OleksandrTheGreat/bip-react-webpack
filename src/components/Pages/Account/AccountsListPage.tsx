@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state} from '../../../shared';
-import {Header} from '../../common/Page';
+import {Header, IocPage} from '../../common/Page';
 import {AccountsList} from './AccountsList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryAccountList, RefreshAccountsListPage} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
-import {IocComponent} from '../../common';
 
-export class AccountsListPage extends IocComponent <{}, AccountModel[]> {
+export class AccountsListPage extends IocPage <{}, AccountModel[]> {
 
   constructor(props) {
     super(props);
@@ -29,7 +28,7 @@ export class AccountsListPage extends IocComponent <{}, AccountModel[]> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-money"></i>
           {state.i18n.accountsList.title}
         </Header>

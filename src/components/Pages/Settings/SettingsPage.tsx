@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { SettingsList } from './SettingsList';
-import { IocComponent } from '../../common';
+import { IocPage } from '../../common/Page';
 
-export class SettingsPage extends IocComponent<{}, {}> {
+export class SettingsPage extends IocPage<{}, {}> {
 
   render() {
     return (

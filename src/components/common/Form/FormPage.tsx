@@ -1,10 +1,10 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state} from '../../../shared';
-import {SaveState} from '../../../bus/commands';
-import {IocComponent} from '../';
+import {SaveState, GoBack} from '../../../bus/commands';
+import {IocPage} from '../Page';
 
-export abstract class FormPage<T> extends IocComponent<T, T> {
+export abstract class FormPage<T> extends IocPage<T, T> {
 
   constructor(props) {
     super(props);
@@ -14,9 +14,10 @@ export abstract class FormPage<T> extends IocComponent<T, T> {
     };
 
     this.onChange = this.onChange.bind(this);
+    this.onCancel = this.onCancel.bind(this);
   }
 
-  public onChange(delegate: (data: T) => void) {
+  protected onChange(delegate: (data: T) => void) {
 
     state.page.isDirty = true;
 
@@ -28,5 +29,9 @@ export abstract class FormPage<T> extends IocComponent<T, T> {
     this._bus.SendAsync(new SaveState());
 
     this.setState({data: data});
+  }
+
+  protected onCancel() {
+    this.onBack();
   }
 }

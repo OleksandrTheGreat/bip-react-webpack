@@ -5,9 +5,9 @@ import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
 import {QueryDashboardAccounts} from '../../../bus/commands/account.commands';
 import {ShowError} from '../../../bus/commands';
-import {IocComponent} from '../../common';
+import {IocPage} from '../../common/Page';
 
-export class HomePage extends IocComponent<any, AccountModel[]> {
+export class HomePage extends IocPage<any, AccountModel[]> {
 
   constructor(props) {
     super(props);

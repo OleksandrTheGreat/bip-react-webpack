@@ -1,9 +1,8 @@
 import * as React from 'react';
 import {state} from '../../../shared';
 import {Ask} from '../../../bus/commands';
-import {SharedCommands} from '../../../bus/commands/shared';
 
-export class Header extends React.Component {
+export class Header extends React.Component<{onBack: () => void}> {
 
   render() {
     return (
@@ -17,7 +16,7 @@ export class Header extends React.Component {
               type="button" 
               className="btn btn-primary"
               title={state.i18n.common.back}
-              onClick={SharedCommands.goBack}
+              onClick={this.props.onBack}
             >
               <i className="fa fa-arrow-left"></i>
             </button>

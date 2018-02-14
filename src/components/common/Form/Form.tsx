@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { GUID } from 'xtypescript';
-import { SharedCommands } from '../../../bus/commands/shared';
 import {state} from '../../../shared';
 
 export class Form extends React.Component <
 {
-  onSave: () => void
+  onSave: () => void,
+  onCancel: () => void
 }
 > {
 
@@ -23,7 +23,7 @@ export class Form extends React.Component <
       <button 
         type="button"
         className="btn"
-        onClick={SharedCommands.goBack}
+        onClick={this.props.onCancel}
         title={state.i18n.common.cancel}
       >
         <i className="fa fa-ban"></i>

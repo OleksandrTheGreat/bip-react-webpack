@@ -55,7 +55,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
   private get _Form() {
     return (
-      <Form onSave={this._onSave}>
+      <Form onSave={this._onSave} onCancel={this.onCancel}>
         {this._TransactionTypeField}
         {this._FromAccountField}
         {this._ToAccountField}
@@ -76,7 +76,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       : state.i18n.transaction.title;
 
     return (
-      <Header>
+      <Header onBack={this.onBack}>
         <i className="fa header-icon fa-exchange"></i>
         {title}
       </Header>

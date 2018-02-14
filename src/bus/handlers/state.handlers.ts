@@ -1,6 +1,6 @@
 import {ABus} from 'abus';
 import {state, ioc, pages} from '../../shared';
-import {ChangePage, GoBack, ChangeLanguage, SaveState} from '../commands';
+import {ChangePage, GoBack, ChangeLanguage, SaveState, Ask} from '../commands';
 import {PageChanged, LanguageChanged} from '../events';
 import {renderApp} from '../../index';
 
@@ -38,27 +38,27 @@ import {renderApp} from '../../index';
     _bus.SendAsync(new LanguageChanged());
   });
 
-  _bus.Handle(GoBack, () => {
+  _bus.Handle(GoBack, (command: GoBack) => {
 
-    let i = state.page.history
-      ? state.page.history.length
-      : 0;
-
-    if (i === 0 || i === 1) 
+    if (command.force) {
+      _GoBack();
       return;
-    
-    let prev = state.page.history[i - 2];
+    }
 
-    state.page.history = state
-      .page
-      .history
-      .slice(0, i - 1);
+    if (state.page.isDirty)
+    {
+      _bus.SendAsync(new Ask(
+        state.i18n.common.goBackQuestion,
+        (answer) => {
+          if (answer)
+            _GoBack();
+        }
+      ));
 
-    state.page.data = null;
-    state.page.isDirty = false;
+      return;
+    }
 
-    //TODO: possible old entity display
-    _bus.SendAsync(new PageChanged(prev.page, prev.data));
+    _GoBack();
   });
 
   _bus.Handle(PageChanged, (event : PageChanged) => {
@@ -78,4 +78,25 @@ import {renderApp} from '../../index';
     localStorage.state = JSON.stringify(state);
   }
 
+  function _GoBack() {
+    let i = state.page.history
+      ? state.page.history.length
+      : 0;
+
+    if (i === 0 || i === 1) 
+      return;
+    
+    let prev = state.page.history[i - 2];
+
+    state.page.history = state
+      .page
+      .history
+      .slice(0, i - 1);
+
+    state.page.data = null;
+    state.page.isDirty = false;
+
+    //TODO: possible old entity display
+    _bus.SendAsync(new PageChanged(prev.page, prev.data));
+  }
 })();

@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state} from '../../../shared';
-import {Header} from '../../common/Page';
+import {Header, IocPage} from '../../common/Page';
 import {ShowError} from '../../../bus/commands';
 import {MarkerModel} from '../../../models';
 import {RefreshExpenseListPage, QueryExpenseList} from '../../../bus/commands/marker.commands';
 import {ExpenseList} from './ExpenseList';
-import {IocComponent} from '../../common';
 
-export class ExpenseListPage extends IocComponent<{}, MarkerModel[]> {
+export class ExpenseListPage extends IocPage<{}, MarkerModel[]> {
 
   constructor(props) {
     super(props);
@@ -29,7 +28,7 @@ export class ExpenseListPage extends IocComponent<{}, MarkerModel[]> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-minus"></i>
           {state.i18n.expenseList.title}
         </Header>

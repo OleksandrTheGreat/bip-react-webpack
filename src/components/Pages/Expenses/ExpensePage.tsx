@@ -24,11 +24,11 @@ export class ExpensePage extends FormPage<MarkerModel> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-minus"></i>
           {title}
         </Header>
-        <Form onSave={this._onSave}>
+        <Form onSave={this._onSave} onCancel={this.onCancel}>
           <FormTextField
             title={state.i18n.common.name}
             value={this.state.data.name}
@@ -48,7 +48,7 @@ export class ExpensePage extends FormPage<MarkerModel> {
     this._bus.SendAsync(
       new SaveMarker(
         expense, 
-        () => this._bus.SendAsync(new GoBack()), 
+        () => this._bus.SendAsync(new GoBack(true)), 
         (error: DOMError) => {
 
           let message: string;

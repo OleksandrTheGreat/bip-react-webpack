@@ -22,11 +22,11 @@ export class CurrencyPage extends FormPage<CurrencyModel> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-usd"></i>
           {title}
         </Header>
-        <Form onSave={this._onSave}>
+        <Form onSave={this._onSave} onCancel={this.onCancel}>
           <FormTextField
             title={state.i18n.common.name}
             value={this.state.data.name}
@@ -54,7 +54,7 @@ export class CurrencyPage extends FormPage<CurrencyModel> {
     this._bus.SendAsync(
       new SaveCurrency(
         this.state.data, 
-        () => this._bus.SendAsync(new GoBack()), 
+        () => this._bus.SendAsync(new GoBack(true)), 
         (error: DOMError) => {
 
           let message: string;

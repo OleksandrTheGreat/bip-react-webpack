@@ -1,14 +1,13 @@
 import * as React from 'react';
 import {ABus} from 'abus';
 import {state} from '../../../shared';
-import {Header} from '../../common/Page';
+import {Header, IocPage} from '../../common/Page';
 import {CurrencyList} from './CurrencyList';
 import {QueryCurrencyList, RefreshCurrencyListPage} from '../../../bus/commands/currency.commands';
 import {ShowError} from '../../../bus/commands';
 import {CurrencyModel} from '../../../models';
-import {IocComponent} from '../../common';
 
-export class CurrencyListPage extends IocComponent<{}, CurrencyModel[]> {
+export class CurrencyListPage extends IocPage<{}, CurrencyModel[]> {
 
   constructor(props) {
     super(props);
@@ -29,7 +28,7 @@ export class CurrencyListPage extends IocComponent<{}, CurrencyModel[]> {
 
     return (
       <div>
-        <Header>
+        <Header onBack={this.onBack}>
           <i className="fa header-icon fa-usd"></i>
           {state.i18n.currencyList.title}
         </Header>
