@@ -25,8 +25,10 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       data: this.state.data || new TransactionFormModel()
     };
 
-    this._onTransactionTypeChange = this._onTransactionTypeChange.bind(this);
     this._onSave = this._onSave.bind(this);
+    this._onTransactionTypeChange = this._onTransactionTypeChange.bind(this);
+    this._onFromAccountChange = this._onFromAccountChange.bind(this);
+    this._onToAccountChange = this._onToAccountChange.bind(this);
 
     this._refreshAccountList();
     this._refreshMarkerList();
@@ -118,14 +120,16 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (!this.state.data.transaction.fromAccountId)
       return null;
 
-    const options = this.state.data.accountList.map(
-      x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
+    const options = this.state.data.accountList
+      .filter(x => x.id != this.state.data.transaction.toAccountId)
+      .map(x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
 
     return (
       <FormOptionsField 
         title={state.i18n.transaction.fromAccount} 
         values={options}
-        selectedValue={this.state.data.transaction.fromAccountId} 
+        selectedValue={this.state.data.transaction.fromAccountId}
+        onChange={this._onFromAccountChange}
       />
     );
   }
@@ -135,14 +139,16 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (!this.state.data.transaction.toAccountId)
       return null;
 
-    const options = this.state.data.accountList.map(
-      x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
+    const options = this.state.data.accountList
+      .filter(x => x.id != this.state.data.transaction.fromAccountId)
+      .map(x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
 
     return (
       <FormOptionsField 
         title={state.i18n.transaction.toAccount} 
         values={options}
         selectedValue={this.state.data.transaction.toAccountId} 
+        onChange={this._onToAccountChange}
       />
     );
   }
@@ -190,6 +196,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.sumFrom}
         value={this.state.data.transaction.sumFrom}
+        min={0}
       />
     );
   }
@@ -198,11 +205,15 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
     if (!this.state.data.transaction.toAccountId)
       return null;
-    
+      
+    if(this._isSameAccountsCurrency())
+      return null;
+
     return (
       <FormNumberField
         title={state.i18n.transaction.sumTo}
         value={this.state.data.transaction.sumTo}
+        min={0}
       />
     );
   }
@@ -212,6 +223,9 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (!this.state.data.transaction.fromAccountId || !this.state.data.transaction.toAccountId)
       return null;
     
+    if(this._isSameAccountsCurrency())
+      return null;
+
     return (
       <FormNumberField
         title={state.i18n.transaction.rate}
@@ -322,5 +336,50 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
         });
         break;
    }
+  }
+
+  private _onFromAccountChange(e) {
+
+    let value = e.target.value
+
+    this.setState((state: {data: TransactionFormModel}) => {
+
+      let newState = {...state};
+
+      newState.data.transaction.fromAccountId = value;
+
+      return newState;
+    });
+  }
+
+  private _onToAccountChange(e) {
+    
+    let value = e.target.value
+
+    this.setState((state: {data: TransactionFormModel}) => {
+
+      let newState = {...state};
+
+      newState.data.transaction.toAccountId = value;
+
+      return newState;
+    });
+  }
+
+  private _isSameAccountsCurrency(): boolean {
+
+    if (!this.state.data.accountList)
+      return false;
+
+    let fromAccountResult = this.state.data.accountList.filter(x => x.id === this.state.data.transaction.fromAccountId);
+    let toAccountResult = this.state.data.accountList.filter(x => x.id === this.state.data.transaction.toAccountId);
+
+    if (fromAccountResult.length === 0 || toAccountResult.length === 0)
+      return false;
+    
+    let fromAccount = fromAccountResult[0];
+    let toAccount = toAccountResult[0];
+
+    return fromAccount.currencyId === toAccount.currencyId;
   }
 }
