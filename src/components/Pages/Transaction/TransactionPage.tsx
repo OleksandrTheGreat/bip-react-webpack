@@ -104,6 +104,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
 
     return (
       <FormOptionsField 
+        id={'TransactionType'}
         title={state.i18n.transaction.type} 
         values={transactionTypeList} 
         selectedValue={this._TransactionType}
@@ -117,7 +118,6 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (!this.state.data.transaction.fromAccountId)
       return null;
 
-    const accountId = '';
     const options = this.state.data.accountList.map(
       x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
 
@@ -125,7 +125,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormOptionsField 
         title={state.i18n.transaction.fromAccount} 
         values={options}
-        selectedValue={accountId} 
+        selectedValue={this.state.data.transaction.fromAccountId} 
       />
     );
   }
@@ -135,7 +135,6 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     if (!this.state.data.transaction.toAccountId)
       return null;
 
-    const accountId = '';
     const options = this.state.data.accountList.map(
       x => new FormOptionValue(x.id, this._AccountFieldOptionDisplay(x)));
 
@@ -143,14 +142,14 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormOptionsField 
         title={state.i18n.transaction.toAccount} 
         values={options}
-        selectedValue={accountId} 
+        selectedValue={this.state.data.transaction.toAccountId} 
       />
     );
   }
 
   private get _IncomeField() {
 
-    if (!this.state.data.transaction.toAccountId)
+    if (!this.state.data.transaction.toAccountId || !this.state.data.transaction.markerId)
       return null;
 
     const options = this.state.data.incomeList.map(
@@ -160,13 +159,14 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormOptionsField
         title={state.i18n.transaction.income}
         values={options}
+        selectedValue={this.state.data.transaction.markerId}
       />
     );
   }
 
   private get _ExpenseField() {
 
-    if (!this.state.data.transaction.fromAccountId)
+    if (!this.state.data.transaction.fromAccountId || !this.state.data.transaction.markerId)
       return null;
 
     const options = this.state.data.expenseList.map(
@@ -176,6 +176,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormOptionsField
         title={state.i18n.transaction.expense}
         values={options}
+        selectedValue={this.state.data.transaction.markerId}
       />
     );
   }
@@ -283,12 +284,42 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
     switch(value) {
 
       case TransactionType.FromAccountToAccount:
+        this.setState((state: {data: TransactionFormModel}) => {
+
+          let newState = {...state};
+
+          newState.data.transaction.fromAccountId = newState.data.accountList[0].id;
+          newState.data.transaction.toAccountId = newState.data.accountList[1].id;
+          newState.data.transaction.markerId = null;
+
+          return newState;
+        });
         break;
 
       case TransactionType.Income:
+        this.setState((state: {data: TransactionFormModel}) => {
+
+          let newState = {...state};
+
+          newState.data.transaction.fromAccountId = null;
+          newState.data.transaction.toAccountId = newState.data.accountList[0].id;
+          newState.data.transaction.markerId = newState.data.incomeList[0].id;
+
+          return newState;
+        });
         break;
 
-      case TransactionType.Income:
+      case TransactionType.Expense:
+        this.setState((state: {data: TransactionFormModel}) => {
+
+          let newState = {...state};
+
+          newState.data.transaction.fromAccountId = newState.data.accountList[0].id;
+          newState.data.transaction.toAccountId = null;
+          newState.data.transaction.markerId = newState.data.expenseList[0].id;
+
+          return newState;
+        });
         break;
    }
   }

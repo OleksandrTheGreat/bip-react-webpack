@@ -9,6 +9,7 @@ export class FormOptionValue {
 }
 
 export class FormOptionsField extends React.Component < {
+  id?: string,
   title : string,
   values : FormOptionValue[],
   selectedValue?: any,
@@ -21,16 +22,22 @@ export class FormOptionsField extends React.Component < {
   render() {
 
     const Options = this.props.values.map(x => 
-      <option value={x.value} selected={x.value == this.props.selectedValue}>{x.display}</option>);
+      <option value={x.value} selected={x.value == this.props.selectedValue} key={x.value}>{x.display}</option>);
 
-    const Input = <div>
-      <select
-        className="form-control"
-        onChange={this.props.onChange}
-      >
-        {Options}
-      </select>
-    </div>;
+    const Input = this.props.id
+      ? <select
+          id={this.props.id}
+          className="form-control"
+          onChange={this.props.onChange}
+        >
+          {Options}
+        </select>
+      : <select
+          className="form-control"
+          onChange={this.props.onChange}
+        >
+          {Options}
+        </select>;
 
     return (
       <FormField 
