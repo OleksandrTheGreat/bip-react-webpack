@@ -23,7 +23,7 @@ export class Nav extends IocComponent < {}, {currentPage: any} > {
       }
     };
 
-    this._bus.Handle(PageChanged, (message : PageChanged) => {
+    this._bus.HandleLatest(PageChanged, (message : PageChanged) => {
       this.setState({data: {currentPage: message.page}});
     });
   }

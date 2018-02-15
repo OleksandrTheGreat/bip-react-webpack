@@ -16,7 +16,7 @@ export class CurrencyListPage extends IocPage<{}, CurrencyModel[]> {
       data: null
     };
 
-    this._bus.Handle(RefreshCurrencyListPage, () => this._refreshCurrency());
+    this._bus.HandleLatest(RefreshCurrencyListPage, () => this._refreshCurrency());
 
     this._refreshCurrency();
   }

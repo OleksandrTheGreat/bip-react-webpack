@@ -24,7 +24,7 @@ export class AskModal extends IocComponent<{}, {command: Ask} > {
     this._onYes = this._onYes.bind(this);
     this._onNo = this._onNo.bind(this);
 
-    this._bus.Handle(Ask, (message : Ask) => {
+    this._bus.HandleLatest(Ask, (message : Ask) => {
 
       this.setState({data: {command: message}});
 

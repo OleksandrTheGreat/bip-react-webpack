@@ -16,7 +16,7 @@ export class ExpenseListPage extends IocPage<{}, MarkerModel[]> {
       data: null
     };
 
-    this._bus.Handle(RefreshExpenseListPage, () => this._refresh());
+    this._bus.HandleLatest(RefreshExpenseListPage, () => this._refresh());
 
     this._refresh();
   }

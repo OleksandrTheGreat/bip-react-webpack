@@ -16,7 +16,7 @@ export class AccountsListPage extends IocPage <{}, AccountModel[]> {
       data: null
     };
 
-    this._bus.Handle(RefreshAccountsListPage, () => this._refreshAccount());
+    this._bus.HandleLatest(RefreshAccountsListPage, () => this._refreshAccount());
 
     this._refreshAccount();
   }
@@ -38,6 +38,9 @@ export class AccountsListPage extends IocPage <{}, AccountModel[]> {
   }
 
   private _refreshAccount() {
+
+  console.log('_refreshAccount called')
+
     this._bus.SendAsync(new QueryAccountList(
       (accounts) => {
         this.setState((state) => {

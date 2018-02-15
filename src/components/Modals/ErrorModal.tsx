@@ -18,7 +18,7 @@ export class ErrorModal extends IocComponent < {}, {error: string} > {
       }
     };
 
-    this._bus.Handle(ShowError, (message : ShowError) => {
+    this._bus.HandleLatest(ShowError, (message : ShowError) => {
 
       this.setState({data: {error: message.error}});
 

@@ -16,7 +16,7 @@ export class IncomeListPage extends IocPage<{}, MarkerModel[]> {
       data: null
     };
 
-    this._bus.Handle(RefreshIncomeListPage, () => this._refresh());
+    this._bus.HandleLatest(RefreshIncomeListPage, () => this._refresh());
 
     this._refresh();
   }

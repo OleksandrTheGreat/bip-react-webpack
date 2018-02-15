@@ -217,7 +217,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.sumFrom}
         value={this.state.data.transaction.sumFrom}
-        min={1}
+        min={0}
       />
     );
   }
@@ -234,7 +234,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.sumTo}
         value={this.state.data.transaction.sumTo}
-        min={1}
+        min={0}
       />
     );
   }
@@ -251,7 +251,7 @@ export class TransactionPage extends FormPage<TransactionFormModel> {
       <FormNumberField
         title={state.i18n.transaction.rate}
         value={this.state.data.transaction.rate}
-        min={1}
+        min={0}
         isReadonly={true}
       />
     );
