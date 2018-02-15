@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state, pages} from '../../../shared';
 import {ChangePage} from '../../../bus/commands/index';
 import {TransactionFormModel} from '../../../models/TransactionFormModel';

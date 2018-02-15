@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state} from '../../../shared';
 import {Header, IocPage} from '../../common/Page';
 import {AccountsList} from './AccountsList';
@@ -16,7 +15,11 @@ export class AccountsListPage extends IocPage <{}, AccountModel[]> {
       data: null
     };
 
-    this._bus.HandleLatest(RefreshAccountsListPage, () => this._refreshAccount());
+    this._bus.Handle(
+      RefreshAccountsListPage, 
+      () => this._refreshAccount(),
+      'AccountsListPage.RefreshAccountsListPage'
+    );
 
     this._refreshAccount();
   }

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state, pages} from '../../shared';
 import {MenuItem} from './MenuItem';
 import {ChangePage, ChangeLanguage} from '../../bus/commands';

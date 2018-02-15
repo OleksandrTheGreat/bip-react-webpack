@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state, ioc} from '../../../shared';
 import {Header, IocPage} from '../../common/Page';
 import {ShowError} from '../../../bus/commands';
@@ -16,7 +15,11 @@ export class IncomeListPage extends IocPage<{}, MarkerModel[]> {
       data: null
     };
 
-    this._bus.HandleLatest(RefreshIncomeListPage, () => this._refresh());
+    this._bus.Handle(
+      RefreshIncomeListPage, 
+      () => this._refresh(),
+      'IncomeListPage.RefreshIncomeListPage'
+    );
 
     this._refresh();
   }

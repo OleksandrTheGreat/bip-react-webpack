@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {ioc, i18n} from '../../shared';
 import {MenuItem} from './MenuItem';
 import {LanguageItem} from './LanguageItem';

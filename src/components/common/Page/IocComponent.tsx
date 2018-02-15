@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {IOCContainer} from 'ioc';
-import {ABus} from 'abus';
 import {IocComponent} from '..';
 import {GoBack} from '../../../bus/commands';
 

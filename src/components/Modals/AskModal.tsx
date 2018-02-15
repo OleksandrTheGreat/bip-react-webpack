@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state} from '../../shared';
 import {Ask} from '../../bus/commands';
 import * as $ from 'jquery';
@@ -24,12 +23,14 @@ export class AskModal extends IocComponent<{}, {command: Ask} > {
     this._onYes = this._onYes.bind(this);
     this._onNo = this._onNo.bind(this);
 
-    this._bus.HandleLatest(Ask, (message : Ask) => {
-
-      this.setState({data: {command: message}});
-
-      $('#' + this._id).modal('show');
-    });
+    this._bus.Handle(
+      Ask, 
+      (message : Ask) => {
+        this.setState({data: {command: message}});
+        $('#' + this._id).modal('show');
+      },
+      'AskModal.Ask'
+    );
   }
 
   render() {

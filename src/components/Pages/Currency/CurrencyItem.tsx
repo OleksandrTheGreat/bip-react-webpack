@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state, pages} from '../../../shared';
 import {ChangePage, Ask, ShowError, ChangeLanguage} from '../../../bus/commands';
 import {DeleteCurrency, RefreshCurrencyListPage, RestoreCurrency} from '../../../bus/commands/currency.commands';

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state, ioc} from '../../shared';
 import {ShowError} from '../../bus/commands';
 import * as $ from 'jquery';
@@ -18,12 +17,14 @@ export class ErrorModal extends IocComponent < {}, {error: string} > {
       }
     };
 
-    this._bus.HandleLatest(ShowError, (message : ShowError) => {
-
-      this.setState({data: {error: message.error}});
-
-      $('#' + this._id).modal('show');
-    });
+    this._bus.Handle(
+      ShowError, 
+      (message : ShowError) => {
+        this.setState({data: {error: message.error}});
+        $('#' + this._id).modal('show');
+      },
+      'ErrorModal.ShowError'
+    );
   }
 
   render() {

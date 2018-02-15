@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state} from '../../../shared';
 import {Header, IocPage} from '../../common/Page';
 import {CurrencyList} from './CurrencyList';
@@ -16,7 +15,11 @@ export class CurrencyListPage extends IocPage<{}, CurrencyModel[]> {
       data: null
     };
 
-    this._bus.HandleLatest(RefreshCurrencyListPage, () => this._refreshCurrency());
+    this._bus.Handle(
+      RefreshCurrencyListPage, 
+      () => this._refreshCurrency(),
+      'CurrencyListPage.RefreshCurrencyListPage'
+    );
 
     this._refreshCurrency();
   }

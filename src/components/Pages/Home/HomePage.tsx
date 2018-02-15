@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {ABus} from 'abus';
 import {state} from '../../../shared';
 import {AccountList} from './AccountList';
 import {AccountModel} from '../../../models/AccountModel';
