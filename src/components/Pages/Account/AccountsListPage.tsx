@@ -39,8 +39,6 @@ export class AccountsListPage extends IocPage <{}, AccountModel[]> {
 
   private _refreshAccount() {
 
-  console.log('_refreshAccount called')
-
     this._bus.SendAsync(new QueryAccountList(
       (accounts) => {
         this.setState((state) => {

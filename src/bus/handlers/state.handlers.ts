@@ -41,7 +41,9 @@ import {renderApp} from '../../index';
   _bus.Handle(GoBack, (command: GoBack) => {
 
     if (command.force) {
+      
       _GoBack();
+
       return;
     }
 
@@ -50,6 +52,7 @@ import {renderApp} from '../../index';
       _bus.SendAsync(new Ask(
         state.i18n.common.goBackQuestion,
         (answer) => {
+
           if (answer)
             _GoBack();
         }
@@ -79,6 +82,7 @@ import {renderApp} from '../../index';
   }
 
   function _GoBack() {
+
     let i = state.page.history
       ? state.page.history.length
       : 0;
@@ -95,6 +99,8 @@ import {renderApp} from '../../index';
 
     state.page.data = null;
     state.page.isDirty = false;
+
+    _saveApplicationState();
 
     //TODO: possible old entity display
     _bus.SendAsync(new PageChanged(prev.page, prev.data));

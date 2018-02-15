@@ -33,9 +33,11 @@ export class View extends React.Component <
       data: current === null ? null : current.data
     };
 
-    this._bus.HandleLatest(
+    this._bus.Handle(
       PageChanged, 
-      (event: PageChanged) => this.setState({page: event.page, data: event.data}));
+      (event: PageChanged) => this.setState({page: event.page, data: event.data}),
+      'View.PageChanged'
+    );
   }
 
   render() {
