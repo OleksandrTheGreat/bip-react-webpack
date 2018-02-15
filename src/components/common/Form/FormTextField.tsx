@@ -8,7 +8,8 @@ export class FormTextField extends React.Component < {
   isRequired?: boolean,
   validationMessage?: string,
   onChange? : any,
-  className?: string
+  className?: string,
+  isReadonly?: boolean
 } > {
 
   render() {
@@ -31,12 +32,13 @@ export class FormTextField extends React.Component < {
     );
 
     Input.props.required = this.props.isRequired ? 'required' : null;
+    Input.props.readonly = this.props.isReadonly ? 'readonly' : null;
+    
+    if (this.props.className)
+      Input.props.className = Input.props.className + ' ' + this.props.className;
 
     return (
-      <FormField 
-        title={this.props.title}
-        className={this.props.className}
-      >
+      <FormField title={this.props.title} className={this.props.className}>
         {Input}
         {InputValidation}
       </FormField>

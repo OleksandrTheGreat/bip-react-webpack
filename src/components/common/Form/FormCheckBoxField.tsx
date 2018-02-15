@@ -9,15 +9,16 @@ export class FormCheckBoxField extends React.Component < {
 } > {
   render() {
 
-    const Checkbox = <input type="checkbox" onChange={this.props.onChange} />;
-    Checkbox.props.checked = this.props.value ? 'checked' : null;
+    const Input = <input type="checkbox" onChange={this.props.onChange} />;
+
+    Input.props.checked = this.props.value ? 'checked' : null;
+
+    if (this.props.className)
+      Input.props.className = Input.props.className + ' ' + this.props.className;
 
     return (
-      <FormField 
-        title={this.props.title}
-        className={this.props.className}
-      >
-        {Checkbox}
+      <FormField title={this.props.title} className={this.props.className}>
+        {Input}
       </FormField>
     );
   }

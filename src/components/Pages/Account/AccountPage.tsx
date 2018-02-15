@@ -40,13 +40,18 @@ export class AccountPage extends FormPage <AccountFormModel> {
           title={state.i18n.account.currency}
           values={this.state.data.currencyList}
           selectedValue={this.state.data.account.currencyId}
-          onChange={(e) => this.onChange(model => {
-          model.account.currencyId = e.target.value;
-          model.account.currencyName = this.state.data.currencyList.filter(x => x.value == e.target.value)[0].display;
-        })}/>
-      : <FormStringField
-        title={state.i18n.account.currency}
-        value={this.props.data.account.currencyName}/>;
+          onChange={e => this.onChange(
+            model => {
+              model.account.currencyId = e.target.value;
+              model.account.currencyName = this.state.data.currencyList.filter(x => x.value == e.target.value)[0].display;
+            })}
+        />
+      : <FormTextField
+          title={state.i18n.account.currency}
+          value={this.props.data.account.currencyName}
+          isReadonly={true}
+          className={'text-center'}
+        />;
 
     return (
       <div>
@@ -83,6 +88,7 @@ export class AccountPage extends FormPage <AccountFormModel> {
           <FormCheckBoxField
             title={state.i18n.account.showOnHomePage}
             value={this.state.data.account.showOnHomePage}
+            className='text-center large'
             onChange={e => this.onChange(model => model.account.showOnHomePage = e.target.checked)}/>
         </Form>
       </div>

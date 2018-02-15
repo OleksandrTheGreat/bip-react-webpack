@@ -34,12 +34,12 @@ export class FormOptionsField extends React.Component < {
     );
 
     Input.props.id = this.props.id;
-
+    
+    if (this.props.className)
+      Input.props.className = Input.props.className + ' ' + this.props.className;
+      
     return (
-      <FormField 
-        title={this.props.title}
-        className={this.props.className}
-      >
+      <FormField title={this.props.title} className={this.props.className}>
         {Input}
       </FormField>
     );

@@ -1,25 +1,13 @@
 import * as React from 'react';
-import {IOCContainer} from 'ioc';
-import {ABus} from 'abus';
 import {state, pages} from '../../shared';
 import {ChangePage, GoBack} from '../../bus/commands';
 import {PageChanged} from '../../bus/events';
+import {IocComponent} from '../common';
 
-export class View extends React.Component < 
-{
-  ioc: IOCContainer
-}, 
-{
-  page: any,
-  data: any
-} > {
-
-  private _bus: ABus;
+export class View extends IocComponent<{}, {page: any, data: any}> {
 
   constructor(props) {
     super(props);
-
-    this._bus = this.props.ioc.resolve<ABus>(ABus);
 
     //TODO: remove and add ApplicationStarted event
     let i = state.page.history.length - 1;
@@ -27,31 +15,36 @@ export class View extends React.Component <
       ? null
       : state.page.history[i];
 
-    this.state = 
-    {
-      page: current === null ? null : current.page,
-      data: current === null ? null : current.data
+    this.state = {
+      data: {
+        page: current === null ? null : current.page,
+        data: current === null ? null : current.data
+      }
     };
 
     this._bus.Handle(
       PageChanged, 
-      (event: PageChanged) => this.setState({page: event.page, data: event.data}),
+      (event: PageChanged) => this.setState({
+        data: {
+          page: event.page, 
+          data: event.data
+        }}),
       'View.PageChanged'
     );
   }
 
   render() {
 
-    if (this.state.page === null)
+    if (this.state.data.page === null)
       return null;
 
-    const Page = pages[this.state.page];
+    const Page = pages[this.state.data.page];
 
     return (
       <div className="page container">
         <Page 
           ioc={this.props.ioc} 
-          data={this.state.data} />
+          data={this.state.data.data} />
       </div>
     );
   }

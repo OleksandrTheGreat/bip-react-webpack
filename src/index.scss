@@ -87,3 +87,7 @@ textarea {
 button:disabled {
   cursor: no-drop;
 }
+
+input[type=checkbox].large {
+  transform: scale(2);
+}

@@ -40,14 +40,15 @@ export class FormNumberField extends React.Component < {
         max={this.props.max}
       />
     );
+    
     Input.props.required = this.props.isRequired ? 'required' : null;
     Input.props.readonly = this.props.isReadonly ? 'readonly' : null;
     
+    if (this.props.className)
+      Input.props.className = Input.props.className + ' ' + this.props.className;
+
     return (
-      <FormField 
-        title={this.props.title}
-        className={this.props.className}
-      >
+      <FormField title={this.props.title} className={this.props.className}>
         {Input}
         {InputValidation}
       </FormField>

@@ -31,12 +31,12 @@ export class FormTextAreaField extends React.Component < {
     );
   
     Input.props.required = this.props.isRequired ? 'required' : null;
+    
+    if (this.props.className)
+      Input.props.className = Input.props.className + ' ' + this.props.className;
 
     return (
-      <FormField 
-        title={this.props.title}
-        className={this.props.className}
-      >
+      <FormField title={this.props.title} className={this.props.className}>
         {Input}
         {InputValidation}
       </FormField>
